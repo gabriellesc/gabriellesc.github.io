@@ -338,7 +338,7 @@ function resizeGrid(height, width) {
 resizeGrid(DEF_HEIGHT, DEF_WIDTH);
 
 // listen for resize button click to resize grid
-$("#resize-btn").click(function() {
+$("#resize-btn").click(function() {console.log("click handler called");
     resizeGrid($("#grid-height").value, $("#grid-width").value);
 });
 
