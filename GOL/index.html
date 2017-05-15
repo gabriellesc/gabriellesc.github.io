@@ -17,14 +17,20 @@
     <main class="container-fluid"> 
      <div class="page-header"><h2>Game of Life</h2></div>
       
-     <div class="input-group">
-       <label for="grid-height">Height</label>
-       <input type="number" id="grid-height" name="height" class="form-control" required />
-       
-       <label for="grid-width">Height</label>
-       <input type="number" id="grid-width" name="width" class="form-control" required />
-       
-       <input type="button" id="resize-btn" value="Resize" />
+     <div class="row">
+       <div class="input-group">
+         <div class="col-xs-3">
+          <label for="grid-height">Height</label>
+          <input type="number" id="grid-height" name="height" size="3" class="form-control" required />
+         </div>
+         <div class="col-xs-3">
+          <label for="grid-width">Width</label>
+          <input type="number" id="grid-width" name="width" size="3" class="form-control" required />
+         </div>
+         <div class="col-xs-6">
+          <input type="button" id="resize-btn" class="btn btn-primary" value="Resize" />
+         </div>
+        </div> 
       </div>
       
       <!-- placeholder for grid -->
