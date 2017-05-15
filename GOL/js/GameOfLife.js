@@ -140,7 +140,7 @@ function Environment(height, width, c) {
      * the population grid of this Environment.
      */
     function isWithinBoundsV(coord) {
-	return coord < len(this.population) and coord > -1;
+	return coord < this.population.length && coord > -1;
     }
 
     /* Return true if the int coord is a valid horixontal coordinate in 
@@ -148,7 +148,7 @@ function Environment(height, width, c) {
      */
     function isWithinBoundsH(coord) {
 	if (this.population.length > 0)
-	    return coord < len(this.population[0]) && coord > -1;
+	    return coord < this.population[0].length && coord > -1;
 	return false;
     }
 
@@ -339,3 +339,4 @@ $("#grid-width").max = MAX_WIDTH;
 $("#resize-btn").click(function() {
     resizeGrid($("#grid-height").value, $("#grid-width").value);
 });
+
