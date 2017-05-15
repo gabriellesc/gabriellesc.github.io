@@ -319,7 +319,7 @@ $("#grid-width").max = MAX_WIDTH;
 
 // set grid of default size
 
-(function resizeGrid(height, width) {    
+function resizeGrid(height, width) {
     let rows = "";
 
     var i, j;
@@ -333,7 +333,9 @@ $("#grid-width").max = MAX_WIDTH;
     
     $("#grid").html(rows);
     
-})(DEF_HEIGHT, DEF_WIDTH);
+}
+
+resizeGrid(DEF_HEIGHT, DEF_WIDTH);
 
 // listen for resize button click to resize grid
 $("#resize-btn").click(function() {
