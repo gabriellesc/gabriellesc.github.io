@@ -16,12 +16,19 @@
     <!-- full-width content container, spanning entire viewport -->
     <main class="container-fluid"> 
      <div class="page-header"><h2>Game of Life</h2></div>
- 
-      <!-- row for use in Bootstrap grid layout -->
-      <div class="row" id="mainrow">
-          <div id="content">  <!-- implicitly a single column within row -->
-          </div>
-      </div>  <!-- row -->
+      
+     <div class="input-group">
+       <label for="grid-height">Height</label>
+       <input type="number" id="grid-height" name="height" class="form-control" required>
+       
+       <label for="grid-width">Height</label>
+       <input type="number" id="grid-width" name="width" class="form-control" required>
+      </div>
+      
+      <!-- placeholder for grid -->
+      <table id="grid">  
+      </table>
+      
     </main>  <!-- container-fluid -->
 
     <footer class="footer"></footer>
