@@ -326,7 +326,7 @@ $("#grid-width").max = MAX_WIDTH;
     for (i = 0; i < height; i++){
 	rows += "<tr>\n";
 	for (j = 0; j < width; j++){
-	    rows += "<td>" + LIVE_CELL + "<\td>\n";
+	    rows += "<td>" + LIVE_CELL + "</td>\n";
 	}
 	rows += "</tr>\n";
     }
