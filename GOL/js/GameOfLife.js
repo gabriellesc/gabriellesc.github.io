@@ -339,9 +339,9 @@ resizeGrid(DEF_HEIGHT, DEF_WIDTH);
 
 // listen for resize button click to resize grid
 $("#resize-btn").click(function() {
-    let x = $("#grid-height").value;
-    let y = $("#grid-width").value;
+    let x = $("#grid-height").val();
+    let y = $("#grid-width").val();
     console.debug("click handler called: " + x + y);
-    resizeGrid();
+    resizeGrid(x, y);
 });
 
