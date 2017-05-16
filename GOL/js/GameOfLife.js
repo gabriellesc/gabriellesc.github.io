@@ -309,13 +309,13 @@ function makePattern(environment, vcoord, hcoord, pattern) {
 
 // set the min/max/default values for the grid size inputs
 
-$("#grid-height").value = DEF_HEIGHT;
-$("#grid-height").min = MIN_HEIGHT;
-$("#grid-height").max = MAX_HEIGHT;
+$("#grid-height").val(DEF_HEIGHT);
+$("#grid-height").prop("min", MIN_HEIGHT);
+$("#grid-height").prop("max", MAX_HEIGHT);
 
-$("#grid-width").value = DEF_WIDTH;
-$("#grid-width").min = MIN_WIDTH;
-$("#grid-width").max = MAX_WIDTH;
+$("#grid-width").val(DEF_WIDTH);
+$("#grid-width").prop("min", MIN_WIDTH);
+$("#grid-width").prop("max", MAX_WIDTH);
 
 // set grid of default size
 
@@ -326,22 +326,18 @@ function resizeGrid(height, width) {
     for (i = 0; i < height; i++){
 	rows += "<tr>\n";
 	for (j = 0; j < width; j++){
-	    rows += "<td>" + LIVE_CELL + "</td>\n";
+	    rows += "<td>" + DEAD_CELL + "</td>\n";
 	}
 	rows += "</tr>\n";
     }
     
     $("#grid").html(rows);
-    
 }
 
 resizeGrid(DEF_HEIGHT, DEF_WIDTH);
 
 // listen for resize button click to resize grid
 $("#resize-btn").click(function() {
-    let x = $("#grid-height").val();
-    let y = $("#grid-width").val();
-    console.debug("click handler called: " + x + y);
-    resizeGrid(x, y);
+    resizeGrid($("#grid-height").value, $("#grid-width").value);
 });
 
