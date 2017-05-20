@@ -18,3 +18,43 @@ body {
     background-color: #f5f5f5;
 }
 
+table {
+    width: 90%;
+}
+
+td {
+    width: 10px;
+    position: relative;
+}
+
+td:after {
+    content: '';
+    display: block;
+    margin-top: 100%;
+}
+
+td .cell {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: black;
+    opacity: 1;
+}
+
+.grid {
+    border: medium solid Gray;
+}
+
+label[for="steps"],label[for="speed"] {
+    margin-left: 2vw;
+}
+
+label[for="speed"] {
+    margin-right: 0.5vw;
+}
+
+#run-btn {
+    margin-left: 2vw;
+}

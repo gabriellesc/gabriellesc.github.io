@@ -10,315 +10,127 @@
 // catch simple errors
 "use strict";
 
-const FUNCTIONAULTSPEED = 5;
-const FUNCTIONAULTLENGTH = 1000;
-const SLEEP_TIME = 0.04; 	// Sleep time (in s) between displaying each state
-					// May need to be adjusted for each system! 
-					// Used because states were being printed too rapidly 
-					// to appreciate the evolution (can also compensate  
-					// for this issue by increasing the number of times a 
-					// state is displayed, but sleeping seems to work better)
+// running parameters
+const DEF_STEPS = 100;
+
+const DEF_DURATION = 2000; // duration (ms) of each state
+const MIN_DURATION = 100;
+const MAX_DURATION = 5000;
+const STEP_DURATION = 100;
 
 // world heights and widths
 const DEF_HEIGHT = 24;
-const DEF_WIDTH = 80;
+const DEF_WIDTH = 60;
 
 const MIN_HEIGHT = 1;
 const MAX_HEIGHT = 50;
 
 const MIN_WIDTH = 1;
-const MAX_WIDTH = 150;
+const MAX_WIDTH = 100;
 
-// cell representations
-const LIVE_CELL = 'o';
-const DEAD_CELL = '.';
-
-const ALIVE = true;
-const DEAD = false;
-
-function Cell(status, environment, vcoord, hcoord) {
-    /* Initialize all the attributes of this Cell with the values of 
-     * the four parameters: a boolean status, an Environment environment, 
-     * an int vertical coordinate, an int horizontal coordinate.
-     */
-    this.status = status;
-    this.home = environment;
-    this.vcoord = vcoord;
-    this.hcoord = hcoord;
-
-    // Return a boolean indicating the status of this Cell.
-    function isAlive() {
-	return this.status;
-    }
-
-    // Accept a boolean newStatus and update the status of this Cell accordingly.
-    function setStatus(newStatus) {
-	this.status = newStatus;
-    }
-
-    // Return a String representation of this Cell.
-    function toStr() {
-	if (this.status == ALIVE)
-	    return LIVE_CELL;
-	return DEAD_CELL;
-    }
-
-    // Return an int that represents the number of live neighbours around this Cell.
-    function getNumLiveNeighbours() {
-		
-	let total = 0;
-		
-	if (this.home.isWithinBoundsV(this.vcoord - 1)) {
-	    total += this.home.getCell(this.vcoord - 1, this.hcoord).isAlive(); //T
-			
-	    if (this.home.isWithinBoundsH(this.hcoord - 1))
-		total += this.home.getCell(this.vcoord - 1, this.hcoord - 1).isAlive(); //TL
-	    
-	    if (this.home.isWithinBoundsH(this.hcoord + 1))
-		total += this.home.getCell(this.vcoord - 1, this.hcoord + 1).isAlive(); //TR
-	}
-	
-	if (this.home.isWithinBoundsV(this.vcoord + 1)) {
-	    total += this.home.getCell(this.vcoord + 1, this.hcoord).isAlive(); //B
-	    
-	    if (this.home.isWithinBoundsH(this.hcoord - 1))
-		total += this.home.getCell(this.vcoord + 1, this.hcoord - 1).isAlive(); //BL
-	    
-	    if (this.home.isWithinBoundsH(this.hcoord + 1))
-		total += this.home.getCell(this.vcoord + 1, this.hcoord + 1).isAlive(); //BR
-	}
-		
-	if (this.home.isWithinBoundsH(this.hcoord - 1))
-	    total += this.home.getCell(this.vcoord, this.hcoord - 1).isAlive(); //L
-	
-	if (this.home.isWithinBoundsH(this.hcoord + 1))
-	    total += this.home.getCell(this.vcoord, this.hcoord + 1).isAlive(); //R		
-		
-	return total;
-    }
-
-    /* Return a new Cell with the same attributes as this Cell, except 
-     * that its home attribute is set to Environment e.
-     */
-    function getCellCopy(e) {
-	return new Cell(this.status, e, this.vcoord, this.hcoord);
-    }
-}
+// jQuery selectors
+const world = "#world";
 
 
-function Environment(height, width, c) {
-    /* Accept an int height and width and use these to initialize a 
-     * population of Cell objects that are all dead.
-     * Or accept c, a 2D iterable of Cell objects, and assign a copy of c to the 
-     * population attribute of this Environment.
-     */
-    if (c != undefined) {
-	this.population = [];
-	
-	var i, j;
-	for (i in c) {
-	    let newRow = [];
-	    for (j in i) {
-		newRow.push(j.getCellCopy(this));
-	    }
-	    this.population.push(newRow);
-	}
-
-    } else {
-	this.population = new Array(height).fill(new Array(width).fill(DEAD));
-    }
-
-    /* Accept two int parameters, a vertical coordinate and a horizontal 
-     * coordinate, and return the Cell that resides at those coordinates 
-     * in the population grid.
-     */    
-    function getCell(vcoord, hcoord) {
-	return this.population[vcoord][hcoord];
-    }
-
-    /* Return true if the int coord is a valid vertical coordinate in 
-     * the population grid of this Environment.
-     */
-    function isWithinBoundsV(coord) {
-	return coord < this.population.length && coord > -1;
-    }
-
-    /* Return true if the int coord is a valid horixontal coordinate in 
-     * the population grid of this Environment.
-     */
-    function isWithinBoundsH(coord) {
-	if (this.population.length > 0)
-	    return coord < this.population[0].length && coord > -1;
-	return false;
-    }
-
-    /* Return one String that represents the current state of the 
-     * population of this Environment.
-     */
-    function toStr() {
-	let rep = "";
-	
-	var i, j;
-	for (i in this.population) {
-	    for (j in i) {
-		rep += j.toStr();
-	    } 
-	    rep += "\n";
-	}
-	
-	return rep;
-    }
-
-    /* Update the status of the Cell that appears at the coordinates 
-     * (vcoord,hcoord) according to the following rules:
-     * -Any live cell with fewer than two live neighbours in the most 
-     * recent environment state dies, as if caused by under-population
-     * -Any live cell with two or three live neighbours in the most recent 
-     * environment state lives on to the next generation
-     * -Any live cell with more than three live neighbours in the most 
-     * recent environment state dies, as if by overcrowding
-     * -Any dead cell with exactly three live neighbours in the most 
-     * recent environment state becomes a live cell, as if by reproduction.
-     */
-    function updateCellStatus(vcoord, hcoord) {
-	let numLiveNeighbours = this.population.getCell(vcoord, hcoord).getNumLiveNeighbours();
-		
-	if (numLiveNeighbours < 2 || numLiveNeighbours > 3)
-	    this.population.getCell(vcoord, hcoord).setStatus(DEAD);
-	
-	else if (numLiveNeighbours == 3)
-	    this.population.getCell(vcoord, hcoord).setStatus(ALIVE);
-    }
-
-    /* Save a copy of this Environment in a local variable named snapshot 
-     * and then update the status of each Cell in this Environment with 
-     * the help of the snapshot.
-     */
-    function updatePopulation() {
-	let snapshot = new Environment(-1, -1, this);
-
-	var i, j;
-	for (i = 0; i < this.population.length; i++) {
-	    for (j = 0; j < this.population[0].length; j++) {
-		snapshot.updateCellStatus(i, j);
-	    }
-	}
-    }    
-}
-
-
-/* Update the Environment environment to contain the pattern of 
- * live Cell objects at the coordinates (vcoord,hcoord). The given
- * coordinates correspond to the location of the top-left corner of 
- * the pattern in the Environment.
- * If the given coordinates are invalid for the given Environment, 
- * return false. Otherwise, once a pattern is successfully added to
- * the given Environment, return true.
+/* Return true if the coord is a valid vertical coordinate in 
+ * the population grid of this environment.
  */
-function makePattern(environment, vcoord, hcoord, pattern) {
-    if (!environment.isWithinBoundsV(vcoord) ||
-	!environment.isWithinBoundsH(hcoord) ||
-	!environment.isWithinBoundsV(vcoord + pattern.length - 1) ||
-	!environment.isWithinBoundsH(hcoord + pattern[0].length - 1))
-	return false;
+function isWithinBoundsV(coord) {
+    return coord < height && coord > -1;
+}
 
-    var v, h;
-    for (v = 0; v < pattern.length; v++) {
-	for (h = 0; h < pattern[0].length; h++) {
-	    environment.population[vcoord + v][hcoord + h].setStatus(pattern[v][h]);
-	}
-    }
+/* Return true if the coord is a valid horizontal coordinate in 
+ * the population grid of this environment.
+ */
+function isWithinBoundsH(coord) {
+    return coord < width && coord > -1;
+}
+
+/* Return the jQuery object representing the cell that resides 
+ * at these coordinates in the population grid env.
+ */    
+function getCell(vcoord, hcoord, env) {
+    return env.find("#cell-" + vcoord + "-" + hcoord);
+}
+
+/* Return 0 if the cell at these coordinates is dead (or does not exist), or 1 otherwise.
+*/
+function isAlive(vcoord, hcoord, env) {
+    if (isWithinBoundsV(vcoord) && isWithinBoundsH(hcoord) &&
+	getCell(vcoord, hcoord, env).children(".cell").css("opacity") != "0")
+	return 1;
+    return 0;
+}
+
+// Return an int that represents the number of live neighbours around this Cell.
+function getNumLiveNeighbours(vcoord, hcoord, env) {
+    vcoord = Number(vcoord);
+    hcoord = Number(hcoord);
+
+    let total = 0;
+
+    // cell has neighbour(s) below
+    total += isAlive(vcoord - 1, hcoord, env); //T
+
+    // cell has neighbour below left
+    total += isAlive(vcoord - 1, hcoord - 1, env); //TL
     
-    return true;
+    // cell has neighbour below right
+    total += isAlive(vcoord - 1, hcoord + 1, env); //TR
+
+    // cell has neighbour(s) above
+    total += isAlive(vcoord + 1, hcoord, env); //B
+
+    // cell has neighbour above left
+    total += isAlive(vcoord + 1, hcoord - 1, env); //BL
+
+    // cell has neighbour above right
+    total += isAlive(vcoord + 1, hcoord + 1, env); //BR
+
+    // cell has neighbour(s) left
+    total += isAlive(vcoord, hcoord - 1, env); //L
+
+    // cell has neighbour(s) right
+    total += isAlive(vcoord, hcoord + 1, env); //R		
+
+    return total;
 }
 
-/* Given steps and speed, successively print the first steps states 
-   of the Environment saved in world, repeating each state speed 
-   times, with an empty line in between each displayed state.
-   Given speed but not steps, successively print the states saved in
-   history, repeating each state speed times, with an empty line in 
-   between each displayed state.
-*/
-/*function displayWorld(steps=None, speed=None) {
-    if speed != None {
-	// first displayWorld() method, successively prints the first 
-	// steps states of the Environment saved in world
-	if steps != None {
-	    for i in range(steps) {
-		for j in range(speed) {
-		    print(this.world, "\n")
-		    time.sleep(SLEEPTIME)
-		    this.world.updatePopulation()
-		    
-		    // second displayWorld() method, successively print the states 
-		    // saved in history
-		    else {
-			for state in this.history {
-			    for j in range(speed) {
-				print(state, "\n")
-				time.sleep(SLEEPTIME)
-			    }}}}}}}}
-*/
-/* Print in reverse order the states saved in history, repeating 
- * each state speed times, with an empty line in between each 
- * displayed state.
+/* Update the status of the cell according to the following rules:
+ * - Any live cell with fewer than two live neighbours in the most 
+ * recent environment state dies, as if caused by under-population
+ * - Any live cell with two or three live neighbours in the most recent 
+ * environment state lives on to the next generation
+ * - Any live cell with more than three live neighbours in the most 
+ * recent environment state dies, as if by overcrowding
+ * - Any dead cell with exactly three live neighbours in the most 
+ * recent environment state becomes a live cell, as if by reproduction
  */
-/*function displayWorldReverse(speed) {
-    for state in this.history[ ::-1] {
-	for j in range(speed) {
-	    print(state, "\n")
-	    time.sleep(SLEEPTIME)
-	}}}
-*/
-/* If patternName matches (in a case-insensitive fashion) the name 
- * of a pattern declared as a constant in the Patterns class, add 
- * that pattern at the coordinates (vcoord,hcoord) to the Environment 
- * stored in world and return true. If the coordinates are invalid 
- * or if patternName doesn't match any pattern names in Patterns, 
- * return false.
- */
-/*function parsePatterns(patternName, vcoord, hcoord) {
-    vcoordInt = int(vcoord)
-    hcoordInt = int(hcoord)
+function updateCellStatus(cell, env) {
+    // extract position of cell in grid from its id
+    let loc = cell.prop("id").match(/-[0-9]+/g);
+
+    let numLiveNeighbours = getNumLiveNeighbours(loc[0].substring(1),
+						 loc[1].substring(1), env);
+
+    if (numLiveNeighbours < 2 || numLiveNeighbours > 3)
+	cell.children(".cell").animate({opacity: "0"}, duration);
     
-    // assumes that the all patterns (and only patterns) are stored in
-    // PatternsDict.py
-    if patternName.upper() in dir(PatternsDict) \
-    and isinstance(getattr(PatternsDict,patternName.upper()),tuple) {
-	return Patterns.makePattern(this.world, vcoordInt, hcoordInt, 
-				    getattr(PatternsDict,patternName.upper()))
-	return false
-    }}
-*/
-/* Store each state of Environment evolution as a String in history 
- * until either the states no longer change (the system is no longer 
- * evolving) or the maximum number of states is reached, whichever 
- * comes first.
+    else if (numLiveNeighbours == 3)
+	cell.children(".cell").animate({opacity: "1"}, duration);
+}
+
+/* Update the status of all cells based on the previous state of the world.
  */
-/*function recordSimulation(maxStates) {
-    this.history = []
-    while len(this.history) < maxStates {
-	this.world.updatePopulation()
-	this.history += [str(this.world)]
-	
-	if (len(this.history) > 1) \
-	and (this.history[-1] == this.history[-2]) {
-	    break
-	}}}		
-*/
-
-// set the min/max/default values for the grid size inputs
-
-$("#grid-height").val(DEF_HEIGHT);
-$("#grid-height").prop("min", MIN_HEIGHT);
-$("#grid-height").prop("max", MAX_HEIGHT);
-
-$("#grid-width").val(DEF_WIDTH);
-$("#grid-width").prop("min", MIN_WIDTH);
-$("#grid-width").prop("max", MAX_WIDTH);
-
-// set grid of default size
-
+function updateWorld(snapshot) {
+    $(world + " td").each(function() {
+	updateCellStatus($(this), snapshot);
+    });
+}
+    
+/* Create the HTML "world" grid of the specified dimensions, with all cells dead.
+ * Each "cell" has a unique id of the form "cell-<rowIndex>-<colIndex>".
+ */
 function resizeGrid(height, width) {
     let rows = "";
 
@@ -326,18 +138,132 @@ function resizeGrid(height, width) {
     for (i = 0; i < height; i++){
 	rows += "<tr>\n";
 	for (j = 0; j < width; j++){
-	    rows += "<td>" + DEAD_CELL + "</td>\n";
+	    rows += "<td id=\"cell-" + i + "-" + j +
+		"\"><div class=\"cell\" style=\"opacity:0;\"></div></td>\n";
 	}
 	rows += "</tr>\n";
     }
     
-    $("#grid").html(rows);
+    $(world).html(rows);
 }
 
-resizeGrid(DEF_HEIGHT, DEF_WIDTH);
+/* Convert a pattern (2D array of booleans) into an HTML table representation.
+ * Not currently used because patterns are pre-converted to HTML tables.
+ */
+/*function parsePattern(pattern) {
+    let table = "";
+    
+    rowlen += Math.round(pattern[0].length / 12 + 1);
+    if (rowlen > 12){
+	table += "</div><div class=\"row\">";
+	rowlen = Math.round(pattern[0].length / 12 + 1);
+    }
+    
+    table += "<div class=\"col-xs-" + Math.round(pattern[0].length / 12 + 1) + "\">" +
+	"<table class=\"table-bordered grid\">";
+
+    var i, j;
+    for (i = 0; i < pattern.length; i++){
+	table += "<tr>\n";
+	for (j = 0; j < pattern[0].length; j++){
+	    table += "<td><div class=\"cell\" style=\"opacity:";
+	    table += pattern[i][j] ? "1" : "0";	    
+	    table += ";\"></div></td>\n";
+	}
+	table += "</tr>\n";
+    }
+    table += "</table></div>\n";
+
+    return table;
+}*/
+
+
+// set the min/max/default values for the grid size inputs
+$("#grid-height").val(DEF_HEIGHT);
+$("#grid-height").prop("min", String(MIN_HEIGHT));
+$("#grid-height").prop("max", String(MAX_HEIGHT));
+
+$("#grid-width").val(DEF_WIDTH);
+$("#grid-width").prop("min", String(MIN_WIDTH));
+$("#grid-width").prop("max", String(MAX_WIDTH));
+
+// create grid of default size
+let height = DEF_HEIGHT, width = DEF_WIDTH;
+resizeGrid(height, width);
 
 // listen for resize button click to resize grid
 $("#resize-btn").click(function() {
-    resizeGrid($("#grid-height").value, $("#grid-width").value);
+    // validate size inputs ?
+    height = $("#grid-height").val();
+    width = $("#grid-width").val();
+    resizeGrid(height, width);
 });
 
+// set the default value for the number of steps
+let steps = DEF_STEPS;
+$("#steps").val(DEF_STEPS);
+
+// listen for change in number of steps
+$("#steps").change(function() {
+    // validate steps input ?
+    steps = $("#steps").val();
+});
+
+// set the min/max/step/default values for the duration of each step
+$("#speed").prop("min", String(MIN_DURATION));
+$("#speed").prop("max", String(MAX_DURATION));
+$("#speed").prop("step", String(STEP_DURATION));
+
+let duration = DEF_DURATION;
+$("#speed").val(duration);
+
+// listen for change in duration
+$("#speed").change(function() {
+    duration = $("#speed").val();
+});
+
+// create a drop-down menu of known patterns
+var pattern;
+for (pattern in patternsHTML)
+    $("#pattern-menu").append("<option>" + pattern + "</option>");
+
+// listen for table cell clicks to toggle cell state
+$(world).on("click", "td", function() {
+    $(this).children(".cell").css("opacity", function(index, value) {
+	return value == "0" ? "1" : "0";
+    });
+});
+
+// listen for a hover over the grid to preview pattern
+$(world).on("mouseenter", "td", function() {
+    // check that a pattern is selected
+    let pattern = $("#pattern-menu").val();
+    if (pattern != "-"){
+
+	// find position of current cell in order to calculate offset
+	let loc = $(this).prop("id").match(/-[0-9]+/g);
+	let h = loc[0].substring(1), v = loc[1].substring(1);
+	
+	var i, j;
+	for (i = 0; i < patterns[pattern].length; i++){
+	    for (j = 0; j < patterns[pattern][0].length; j++){
+		$("#pattern-preview").html(patternsHTML[pattern]);
+		/*$(world + ".cell-" + (h+i) + "-" + (v+j)).children(".cell")
+		    .prop("opacity", patterns[pattern][i][j]*0.5);*/
+	    }
+	}
+    }
+    
+}).on("mouseleave", "td", function() {
+    $("#pattern-preview").html("");
+});
+
+// listen for step button click to step through simulation
+$("#step-btn").click(function() {
+    updateWorld($(world).clone());
+});
+
+// listen for run button click to start simulation
+$("#run-btn").click(function() {
+    updateWorld($(world).clone());
+});
