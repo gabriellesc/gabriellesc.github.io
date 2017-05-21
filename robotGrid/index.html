@@ -21,13 +21,57 @@
     
     <!-- full-width content container, spanning entire viewport -->
     <main class="container-fluid"> 
-     <div class="page-header"><h2>Robot Grid Navigation</h2></div>
+      <div class="page-header"><h2>Robot Grid Navigation</h2>
+	<p>Select a robot and its goal and place them on the grid.
+	  Click on a cell to toggle it from empty floorspace to a rack.</br>
+	  Then click run...
+	</p>
+	<p>For inspiration, take a look at <a href="https://youtu.be/ZkT9iIaquNE?t=8s">Amazon's warehouse robots</a>.
+      </div>
  
-      <!-- row for use in Bootstrap grid layout -->
-      <div class="row" id="mainrow">
-          <div id="content">  <!-- implicitly a single column within row -->
-          </div>
-      </div>  <!-- row -->
+      <!-- controls -->
+      <div class="content row">
+	<form class="form-inline col-lg-12">
+	  <div class="form-group" id="grid-height-group">
+            <label class="control-label" for="grid-height">Height</label>
+            <input type="number" id="grid-height" name="height" class="form-control"
+		   required />
+	  </div>
+	  <div class="form-group" id="grid-width-group">
+            <label class="control-label" for="grid-width">Width</label>
+            <input type="number" id="grid-width" name="width" class="form-control" required />
+	  </div>	    
+          <input type="button" id="resize-btn" class="btn btn-default" value="Resize / Clear" />
+	  
+	  <div class="form-group">
+	    <label for="speed">Animation speed</label>
+	    <small>faster</small>
+	    <input type="range" id="speed" name="speed" class="form-control" required />
+	    <small>slower</small>
+	  </div>
+
+          <input type="button" id="step-btn" class="btn btn-success" value="Step" />
+
+	  <input type="button" id="run-btn" class="btn btn-primary" value="Run" />
+	</form>
+      </div>
+
+      <!-- placeholder for robot/goal selection -->
+      <div class="row" id="robots">
+	<div class="col-xs-12">
+	</div>
+      </div>
+
+      <!-- placeholder for rack image (used by canvas, not otherwise visible) -->
+      <img id="rack-placeholder" />
+
+      <!-- placeholder for grid -->
+      <div class="row" id="warehouse-placeholder">
+	<div class="col-xs-12">
+	  <canvas id="warehouse"></canvas>
+	</div>
+      </div>
+
     </main>  <!-- container-fluid -->
 
     <footer class="footer">
@@ -36,11 +80,12 @@
       </div>
     </footer>
 
-    <!-- load scripts last for better UI performance -->
-
     <!-- library scripts -->
-    <script src="../js/lib/bootstrap-min.js"></script>
     <script src="../js/lib/jquery-min.js"></script>
+    <script src="../js/lib/bootstrap-min.js"></script>
+
+    <script src="js/robotMotion.js"></script>
+    <script src="js/main.js"></script>
     
   </body>
 </html>

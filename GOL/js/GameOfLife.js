@@ -195,6 +195,9 @@ function toggleCell(coords) {
     ctx.fillRect(dims.x, dims.y, cellDim - BORDER*2, cellDim - BORDER*2);
 }
 
+/* Restore the previously-saved states of a group of cells (after previewing a pattern in this
+ * group of cells).
+ */
 function restorePrevState() {
     let cell;
     while (prevState.length > 0) {
