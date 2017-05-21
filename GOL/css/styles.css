@@ -18,36 +18,21 @@ body {
 }
 /**/
 
-table {
-    width: 90%;
-}
-
-td {
-    width: 10px;
+#placeholders {
     position: relative;
 }
 
-td:after {
-    content: '';
-    display: block;
-    margin-top: 100%;
-}
-
-td .cell {
+#world {
+/*    top: 0;
+    left: 0;*/
+    margin: 1vw;
+/*    overflow: auto;
+    resize: both;
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: black;
-    opacity: 1;
+    z-index: 1;*/
 }
 
-.grid {
-    border: medium solid Gray;
-}
-
-label[for="steps"],label[for="speed"],label[for="pattern"] {
+label[for="steps"],label[for="speed"],label[for="pattern-menu"] {
     margin-left: 2vw;
 }
 
@@ -55,8 +40,8 @@ label[for="speed"] {
     margin-right: 0.5vw;
 }
 
-#run-btn {
-    margin-left: 4vw;
+#step-btn,#run-btn {
+    margin-left: 1vw;
     width: 5vw;
 }
 
@@ -66,14 +51,4 @@ label[for="speed"] {
 
 .form-inline {
     margin-bottom: 1vh;
-}
-
-div > #world {
-    position: absolute;
-    z-index: 1;
-}
-
-#pattern-preview {
-    position: relative;
-    z-index: 5;
 }

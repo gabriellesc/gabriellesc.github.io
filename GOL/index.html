@@ -20,7 +20,7 @@
     </ul>
     
     <!-- full-width content container, spanning entire viewport -->
-    <main class="container-fluid"> 
+    <div class="container-fluid"> 
       <div class="page-header">
 	<h2>Game of Life</h2>
 	<p><strong>Conway's Game of Life: create a universe and watch it grow!</strong></p>
@@ -32,58 +32,51 @@
       <!-- controls -->
       <div class="content row">
 	<form class="form-inline col-xs-12">
-	  <div class="form-group">
-            <label for="grid-height">Height</label>
+	  <div class="form-group" id="grid-height-group">
+            <label class="control-label" for="grid-height">Height</label>
             <input type="number" id="grid-height" name="height" class="form-control"
 		   required />
 	  </div>
-	  <div class="form-group">
-            <label for="grid-width">Width</label>
+	  <div class="form-group" id="grid-width-group">
+            <label class="control-label" for="grid-width">Width</label>
             <input type="number" id="grid-width" name="width" class="form-control" required />
 	  </div>	    
           <input type="button" id="resize-btn" class="btn btn-default" value="Resize / Clear" />
 
 	  <div class="form-group">
-            <label for="steps">Steps</label>
-            <input type="number" id="steps" name="steps" min="0" class="form-control"
-		   required />
-	  </div>
-          <input type="button" id="step-btn" class="btn btn-success" value="Step" />
-
-	  <div class="form-group">
-	    <label for="speed">Animation speed</label>
-	    <small>faster</small>
-	    <input type="range" id="duration" name="speed" class="form-control" required />
-	    <small>slower</small>
-	  </div>
-
-	  <div class="form-group">
-	    <label for="pattern">Pattern</label>
+	    <label for="pattern-menu">Pattern</label>
 	    <select id="pattern-menu" name="pattern" class="form-control">
 	      <option>-</option>
 	    </select>
 	  </div>
 
+	  <div class="form-group">
+	    <label for="speed">Animation speed</label>
+	    <small>faster</small>
+	    <input type="range" id="speed" name="speed" class="form-control" required />
+	    <small>slower</small>
+	  </div>
+
+	  <div class="form-group" id="steps-group">
+            <label class="control-label" for="steps">Steps</label>
+            <input type="number" id="steps" name="steps" min="0" class="form-control"
+		   required />
+	  </div>
+          <input type="button" id="step-btn" class="btn btn-success" value="Step" />
+
 	  <input type="button" id="run-btn" class="btn btn-primary" value="Run" />
 	</form>
       </div>
      
-      <!-- placeholder for grid -->
-      <div class="row">
-	<div class="col-xs-12">
-	  <table id="world" class="table table-bordered grid">  
-	  </table>
-	</div>
+      <div class="row" id="placeholders">
+	<!-- placeholder for grid -->
+	<canvas id="world"></canvas>
       </div>
 
-      <!-- placeholder for pattern preview -->
-      <div id="pattern-preview">
-      </div>
-
-    </main>  <!-- container-fluid -->
-
+    </div>  <!-- container-fluid -->
+    
     <footer class="footer">
-      <div class="col-xs-12">
+      <div class="container col-xs-12">
 	<span class="text-muted">Gabrielle Singh Cadieux, 2017.</span>
       </div>
     </footer>
