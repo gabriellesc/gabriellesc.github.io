@@ -289,8 +289,10 @@ $("#resize-btn").click(function() {
 });
 
 // set the min/max/step/default values for the duration of each step
-$("#speed").prop("min", String(MIN_DURATION));
-$("#speed").prop("max", String(MAX_DURATION));
+// subtract the value from the max duration so that the slider is more intuitive
+// (as the slider value increases, duration decreases, i.e. simulation gets faster)
+$("#speed").prop("min", "0");
+$("#speed").prop("max", String(MAX_DURATION-MIN_DURATION));
 $("#speed").prop("step", String(STEP_DURATION));
 
 let duration = DEF_DURATION;
@@ -298,7 +300,7 @@ $("#speed").val(duration);
 
 // listen for change in duration
 $("#speed").change(function() {
-    duration = $("#speed").val();
+    duration = MAX_DURATION - $("#speed").val();
 });
 
 // create a drop-down menu of known patterns
@@ -346,7 +348,7 @@ $("#step-btn").click(function() {
 
 let intervalID;
 // listen for button click to stop animation in progress
-$('input[type="button"]').click(function() {
+$(world + ',input[type="button"]').click(function() {
     if (intervalID)
 	clearTimeout(intervalID);
 });

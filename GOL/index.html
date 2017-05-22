@@ -31,18 +31,18 @@
       </div>
 
       <!-- controls -->
-      <div class="content row">
-	<form class="form-inline col-lg-12">
+      <div class="row" id="inputs">
+	<form class="form-inline col-md-12">
 	  <div class="form-group" id="grid-height-group">
-            <label class="control-label" for="grid-height">Height</label>
-            <input type="number" id="grid-height" name="height" class="form-control"
+	    <label class="control-label" for="grid-height">Height</label>
+	    <input type="number" id="grid-height" name="height" class="form-control"
 		   required />
 	  </div>
 	  <div class="form-group" id="grid-width-group">
-            <label class="control-label" for="grid-width">Width</label>
-            <input type="number" id="grid-width" name="width" class="form-control" required />
-	  </div>	    
-          <input type="button" id="resize-btn" class="btn btn-default" value="Resize / Clear" />
+	    <label class="control-label" for="grid-width">Width</label>
+	    <input type="number" id="grid-width" name="width" class="form-control" required />
+	  </div>
+	  <input type="button" id="resize-btn" class="btn btn-default" value="Resize / Clear" />
 
 	  <div class="form-group">
 	    <label for="pattern-menu">Pattern</label>
@@ -53,19 +53,20 @@
 
 	  <div class="form-group">
 	    <label for="speed">Animation speed</label>
-	    <small>faster</small>
+	    <!--small>faster</small-->
 	    <input type="range" id="speed" name="speed" class="form-control" required />
-	    <small>slower</small>
+	    <!--small>slower</small-->
 	  </div>
 
 	  <div class="form-group" id="steps-group">
-            <label class="control-label" for="steps">Steps</label>
-            <input type="number" id="steps" name="steps" min="0" class="form-control"
+	    <label class="control-label" for="steps">Steps</label>
+	    <input type="number" id="steps" name="steps" min="0" class="form-control"
 		   required />
 	  </div>
-          <input type="button" id="step-btn" class="btn btn-success" value="Step" />
+	  <input type="button" id="step-btn" class="btn btn-success" value="Step" />
 
 	  <input type="button" id="run-btn" class="btn btn-primary" value="Run" />
+
 	</form>
       </div>
      

@@ -40,6 +40,6 @@ label[for="speed"] {
     width: 5vw;
 }
 
-.form-inline {
-    margin-bottom: 1vh;
+#inputs div.col-xs-12 {
+    margin-top: 2vh;
 }
