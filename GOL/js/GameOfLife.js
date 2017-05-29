@@ -36,7 +36,7 @@ const MAX_WIDTH = 100;
 const BORDER = 1;
 
 /* selectors */
-const world = "#world";
+const worldSel = "#world";
 
 /* display */
 const alive = "black";
@@ -152,16 +152,16 @@ function updateWorld(snapshot) {
 /* Draw the canvas "world" grid of the specified dimensions, with all cells dead.
  */
 function resizeGrid(height, width) {
-    ctx.clearRect(0, 0, $(world).width(), $(world).height()); // clear canvas
+    ctx.clearRect(0, 0, $(worldSel).width(), $(worldSel).height()); // clear canvas
 
     cellDim = Math.round(Math.min((screen.height * 0.9)/height, (screen.width * 0.9)/width));
     
     // resize canvas
-    $(world).prop("height", cellDim * height);
-    $(world).prop("width", cellDim * width);
+    $(worldSel).prop("height", cellDim * height);
+    $(worldSel).prop("width", cellDim * width);
     
     ctx.fillStyle = 'Grey';
-    ctx.fillRect(0, 0, $(world).width(), $(world).height());
+    ctx.fillRect(0, 0, $(worldSel).width(), $(worldSel).height());
     
     ctx.fillStyle = dead;
 
@@ -309,7 +309,7 @@ for (pattern in patterns)
     $("#pattern-menu").append("<option>" + pattern + "</option>");
 
 // listen for cell clicks to toggle cell state
-$(world).click(function(e) {
+$(worldSel).click(function(e) {
     // check whether a pattern is selected
     let patternName = $("#pattern-menu").val();
     
@@ -324,7 +324,7 @@ $(world).click(function(e) {
 
 let prevState = [];
 // listen for a hover over the grid to preview pattern
-$(world).on("mousemove", function(e) {
+$(worldSel).on("mousemove", function(e) {
     // restore the state before the previous preview
     restorePrevState();
     
@@ -336,7 +336,7 @@ $(world).on("mousemove", function(e) {
 });
 
 // listen for the mouse leaving the grid to remove pattern preview
-$(world).on("mouseleave", function() {
+$(worldSel).on("mouseleave", function() {
     // restore the state before the previous preview
     restorePrevState();
 });
@@ -348,7 +348,7 @@ $("#step-btn").click(function() {
 
 let intervalID;
 // listen for button click to stop animation in progress
-$(world + ',input[type="button"]').click(function() {
+$(worldSel + ',input[type="button"]').click(function() {
     if (intervalID)
 	clearTimeout(intervalID);
 });
