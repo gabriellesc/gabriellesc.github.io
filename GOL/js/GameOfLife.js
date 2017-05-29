@@ -46,8 +46,8 @@ const dead = "white";
 /* Convert DOM coordinates to canvas coordinates
  * From: http://www.informit.com/articles/article.aspx?p=1903884&seqNum=6
  */
-function windowToCanvas(canvas, x, y) {
-    let bbox = canvas.getBoundingClientRect();
+function windowToCanvas(canvas, x, y) { 
+   let bbox = canvas.getBoundingClientRect();
 
     return { x: x - bbox.left * (c.width  / bbox.width),
 	     y: y - bbox.top  * (c.height / bbox.height)
@@ -354,7 +354,7 @@ $(world + ',input[type="button"]').click(function() {
 });
 
 // set the default/min value for the number of steps
-let steps = DEF_STEPS;
+let stepTotal = DEF_STEPS;
 $("#steps").val(DEF_STEPS);
 $("#steps").prop("min", String(MIN_STEPS));
 
@@ -369,7 +369,7 @@ $("#run-btn").click(function() {
 
     } else {
 	$("#steps-group").removeClass("has-error");
-	steps = stepsIn;
+	stepTotal = stepsIn;
  
 	stepCount = 0;
 
@@ -377,7 +377,7 @@ $("#run-btn").click(function() {
 	    updateWorld(JSON.parse(JSON.stringify(env)));
 	    stepCount += 1;
 
-	    if (stepCount < steps) {
+	    if (stepCount < stepTotal) {
 		intervalID = setTimeout(timedUpdate, duration);
 	    }
 	}, duration);
