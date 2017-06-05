@@ -27,6 +27,9 @@ const MAX_HEIGHT = 25;
 const MIN_WIDTH = 1;
 const MAX_WIDTH = 50;
 
+// minimum cell dimension to avoid cells getting too small in large grids
+const MIN_DIM = 70;
+
 /* selectors */
 const world = "#warehouse";
 const icons = "#robots img";
@@ -179,7 +182,9 @@ function removeGoal(x, y, goalID) {
 /* Draw the canvas "warehouse" grid of the specified dimensions, with all cells empty. */
 function resizeGrid(height, width) {
     // calculate new cell dimension
-    cellDim = Math.round(Math.min((screen.height * 0.6)/height, (screen.width * 0.8)/width));
+    cellDim = Math.max(
+	Math.round(Math.min((screen.height * 0.6)/height, (screen.width * 0.8)/width)),
+	MIN_DIM);
 
     // re-define the number/size of the grid columns and rows
     $(world).css("grid-template-columns", (cellDim + "px ").repeat(width));
