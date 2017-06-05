@@ -27,23 +27,19 @@ const MAX_HEIGHT = 25;
 const MIN_WIDTH = 1;
 const MAX_WIDTH = 50;
 
-// cell border thickness
-const BORDER = 2;
-
 /* selectors */
 const world = "#warehouse";
+const icons = "#robots img";
 const goal = '#robots img[id^="g"]';
 const robot = '#robots img[id^="r"]';
-const rack = "#rack-placeholder";
 
 /* image files */
 const robotImgs = ["img/r1.jpg","img/r2.jpg","img/r3.jpg","img/r4.jpg"];
 const goalImgs = ["img/g1.jpg","img/g2.jpg","img/g3.jpg","img/g4.jpg"];
-const rackImg = "img/rack.png";
+const rackImg = 'img/rack.png';
 
-/* possible cell states and corresponding functions
+/* functions corresponding to cell states (needs to be in the same order as STATE array)
  */
-const STATE = ["empty", "robot", "rack", "goal"];
 const STATE_FUNC = [[clearCell, unclearCell], [addRobot, removeRobot], [addRack, removeRack],
 		    [addGoal, removeGoal]];
 
@@ -53,40 +49,35 @@ const FREE_GOALS = [];
 const FIXED_GOALS = [];
 
 
-/* Convert DOM coordinates to canvas coordinates
- * From: http://www.informit.com/articles/article.aspx?p=1903884&seqNum=6
- */
-function windowToCanvas(canvas, x, y) {
-    let bbox = canvas.getBoundingClientRect();
-
-    return { x: x - bbox.left * (c.width  / bbox.width),
-	     y: y - bbox.top  * (c.height / bbox.height)
-	   };
+/* Convert grid coordinates to a DOM selector for corresponding grid cell. */
+function c2s(x, y) {
+    return '.grid-cell[x="' + x + '"][y="' + y + '"]';
 }
 
-/* Return the top-left coordinates/dimensions {x, y, width, height} of the cell that contains 
- * these coordinates, or null if they are on a border between two cells.
- */    
-function getCellCoords(x, y) {
-    if (x % cellDim == 0 || y % cellDim == 0)  // (x,y) is on the border between two cells
-	return null;
+/* Convert grid coordinates to HTML for corresponding grid cell with state. */
+function c2html(x, y, state, ID) {
+    let cell = 'class="grid-cell';
+    if (y == 0)
+	cell += ' top-row';
+    if (x == 0)
+	cell += ' left-col';
     
-    return { x: Math.floor(x / cellDim) * cellDim + BORDER,
-	     y: Math.floor(y / cellDim) * cellDim + BORDER };
-}
+    cell += '" x="' + x + '" y="' + y + '">';
 
-/* Return the indices {x, y} of the cell that contains these coordinates, or null if they are on
- * a border between two cells.
- */    
-function getCellInds(x, y) {
-    if (x % cellDim == 0 || y % cellDim == 0)  // (x,y) is on the border between two cells
-	return null;
+    if (state == "empty")
+	cell = '<div ' + cell + '</div>';
+
+    else if (state == "robot" || state == "goal")
+	cell = '<img src="' + $(icons + '[id="' + ID + '"]').prop("src") + '" ' + cell;
     
-    return { x: Math.floor(x / cellDim), y: Math.floor(y / cellDim) };
+    else if (state == "rack")
+	cell = '<img src="' + rackImg + '" ' + cell;
+
+    return cell;
 }
 
 function clearCell(x, y) {
-    ctx.clearRect(x*cellDim + BORDER, y*cellDim + BORDER, cellDim - BORDER*2, cellDim - BORDER*2);
+    $(c2s(x, y)).replaceWith(c2html(x, y, "empty"));
 }
 
 function unclearCell() {};
@@ -104,13 +95,15 @@ function addRobot(x, y, robotID) {
 
 	// update wh array with robot ID
 	wh[y][x][1] = robotID;
-	
-	ctx.drawImage(document.getElementById(robotID),
-		      x*cellDim + BORDER*2, y*cellDim + BORDER*2,
-		      cellDim - BORDER*4, cellDim - BORDER*4);
 
-	$(robot + '[id="' + robotID + '"]').prop("draggable", false);
-	$(robot + '[id="' + robotID + '"]').css("opacity", 0.5);
+	// create HTML for new robot element
+	$(c2s(x, y)).replaceWith(c2html(x, y, "robot", robotID));
+	
+	$(c2s(x, y)).css({justifySelf: "center", alignSelf: "center",
+		    height: cellDim, width: cellDim});
+
+	$(icons + '[id="' + robotID + '"]').prop("draggable", false);
+	$(icons + '[id="' + robotID + '"]').css("opacity", 0.5);
     }
 }
 
@@ -125,19 +118,21 @@ function removeRobot(x, y, robotID) {
 	// update wh array
 	wh[y][x][1] = undefined;
 
-	$(robot + '[id="' + robotID + '"]').prop("draggable", true);
-	$(robot + '[id="' + robotID + '"]').css("opacity", 1);
+	$(icons + '[id="' + robotID + '"]').prop("draggable", true);
+	$(icons + '[id="' + robotID + '"]').css("opacity", 1);
     }
 }
 
 function addRack(x, y) {
-    ctx.drawImage(document.getElementById("rack-placeholder"),
-		  x*cellDim + BORDER*2, y*cellDim + BORDER*2,
-		  cellDim - BORDER*4, cellDim - BORDER*4);
+    // create HTML for new rack element
+    $(c2s(x, y)).replaceWith(c2html(x, y, "rack"));
+
+    $(c2s(x, y)).css({justifySelf: "center", alignSelf: "center",
+		      height: cellDim, width: cellDim});
 }
 
 function removeRack(x, y) {
-    clearCell(x,y);
+    clearCell(x, y);
 }
 
 function addGoal(x, y, goalID) {
@@ -153,13 +148,15 @@ function addGoal(x, y, goalID) {
 
 	// update wh array with goal ID
 	wh[y][x][1] = goalID;
-	
-	ctx.drawImage(document.getElementById(goalID),
-		      x*cellDim + BORDER*2, y*cellDim + BORDER*2,
-		      cellDim - BORDER*4, cellDim - BORDER*4);
 
-	$(goal + '[id="' + goalID + '"]').prop("draggable", false);
-	$(goal + '[id="' + goalID + '"]').css("opacity", 0.5);
+	// create HTML for new goal element
+	$(c2s(x, y)).replaceWith(c2html(x, y, "goal", goalID));
+	
+	$(c2s(x, y)).css({justifySelf: "center", alignSelf: "center",
+		    height: cellDim, width: cellDim});
+	
+	$(icons + '[id="' + goalID + '"]').prop("draggable", false);
+	$(icons + '[id="' + goalID + '"]').css("opacity", 0.5);
     }    
 }
 
@@ -174,35 +171,35 @@ function removeGoal(x, y, goalID) {
 	// update wh array
 	wh[y][x][1] = undefined;
 
-	$(goal + '[id="' + goalID + '"]').prop("draggable", true);
-	$(goal + '[id="' + goalID + '"]').css("opacity", 1);
+	$(icons + '[id="' + goalID + '"]').prop("draggable", true);
+	$(icons + '[id="' + goalID + '"]').css("opacity", 1);
     }
 }
 
 /* Draw the canvas "warehouse" grid of the specified dimensions, with all cells empty. */
 function resizeGrid(height, width) {
-    ctx.clearRect(0, 0, $(world).width(), $(world).height()); // clear canvas
-
+    // calculate new cell dimension
     cellDim = Math.round(Math.min((screen.height * 0.6)/height, (screen.width * 0.8)/width));
-    
-    // resize canvas
-    $(world).prop("height", cellDim * height);
-    $(world).prop("width", cellDim * width);
 
-    ctx.lineWidth = BORDER;
-    ctx.strokeStyle = 'Grey';
+    // re-define the number/size of the grid columns and rows
+    $(world).css("grid-template-columns", (cellDim + "px ").repeat(width));
+    $(world).css("grid-template-rows", (cellDim + "px ").repeat(height));
 
     wh = [];
-    let i, j, row;
+    let i, j, row, cells = "";
     for (i = 0; i < height; i++){
 	row = [];
+	
 	for (j = 0; j < width; j++){
-	    ctx.strokeRect(j*cellDim, i*cellDim, cellDim, cellDim);
+	    cells += c2html(j, i, "empty");
+
 	    row.push([STATE.indexOf("empty"), undefined]);
 	}
 	wh.push(row);
     }
-
+    
+    $(world).html(cells);
+    
     // also resize robot and grid icons
     $(robot).width(cellDim * 0.75);
     $(goal).width(cellDim * 0.75);
@@ -212,50 +209,68 @@ function resizeGrid(height, width) {
  * - if the cell contains a robot, goal, or rack, make it empty
  * - if the cell is empty, create a rack
  */
-function toggleCell(coords) {
-    let x = Math.round(coords.x);
-    let y = Math.round(coords.y);
-
-    let inds = getCellInds(x, y);
-    if (inds == null) // (x,y) is on the border between two cells
-	return;
-
-    let prevState = wh[inds.y][inds.x][0];
+function toggleCell(x, y) {
+    let prevState = wh[y][x][0];
     // cell is empty, so create a rack
     if (STATE[prevState] == "empty") {
-	setCell(coords, "rack");
+	setCell(x, y, "rack");
 	
     } else {
 	// otherwise, make cell empty
-	setCell(coords, "empty");
+	setCell(x, y, "empty");
     }
 }
 
 /* Set the state of the cell that contains these coordinates, with the robotID if necessary. */
-function setCell(coords, newState, robotID) {
-    let x = Math.round(coords.x);
-    let y = Math.round(coords.y);
-
-    let inds = getCellInds(x, y);
-    if (inds == null) // (x,y) is on the border between two cells
-	return;
-
+function setCell(x, y, newState, robotID) {
     // call cell remove state function of previous state
-    let prevState = wh[inds.y][inds.x][0];
-    let prevRobotID = wh[inds.y][inds.x][1];
-    STATE_FUNC[prevState][1](inds.x, inds.y, prevRobotID);
+    let prevState = wh[y][x][0];
+    let prevRobotID = wh[y][x][1];
+    STATE_FUNC[prevState][1](x, y, prevRobotID);
 
     // update state in wh array					     
-    wh[inds.y][inds.x][0] = STATE.indexOf(newState);
+    wh[y][x][0] = STATE.indexOf(newState);
     
     // call cell state function of new state, to update canvas
-    STATE_FUNC[STATE.indexOf(newState)][0](inds.x, inds.y, robotID);
+    STATE_FUNC[STATE.indexOf(newState)][0](x, y, robotID);
+}
+
+/* Simulate a robot's motion from source to target cell. */
+function moveRobot(source, target, robotID) {
+    window.requestAnimationFrame();
+    /*source.x target.x
+
+    if () {
+	window.requestAnimationFrame(draw);
+    }*/
 }
 
 
-// canvas-related variables
-let c = document.getElementById("warehouse");
-let ctx = c.getContext("2d");
+function simulate() {
+    // Web worker supported by browser
+    if (typeof(Worker) !== "undefined") {
+
+	var worker = new Worker('robotMotion.js');
+
+/*	worker.onmessage = function(e) {
+	    document.getElementById("PiValue").innerHTML = e.data.PiValue;
+	};
+	worker.onerror = function(e) {
+	    alert('Error: Line ' + e.lineno + ' in ' + e.filename + ': ' + e.message);
+	};
+
+	//start the worker
+	worker.postMessage({'cmd':   'CalculatePi',
+			    'value': document.getElementById("loop").value
+			   });
+    }
+	
+    } else {
+	
+    } */
+    }
+}
+
 
 // add robot/goal images to placeholder
 let i;
@@ -272,9 +287,6 @@ $(goal).each(function() {
     FREE_GOALS.push($(this).prop("id"));
 });
 
-// add rack image to placeholder
-$(rack).prop("src", rackImg);
-
 // set the min/max/default values for the grid size inputs
 $("#grid-height").val(DEF_HEIGHT);
 $("#grid-height").prop("min", String(MIN_HEIGHT));
@@ -287,8 +299,6 @@ $("#grid-width").prop("max", String(MAX_WIDTH));
 // create grid of default size
 let height = DEF_HEIGHT, width = DEF_WIDTH, cellDim;
 
-// keep track of state as array of [state index, robot ID]
-let wh;
 resizeGrid(height, width);
 
 // listen for resize button click to resize grid
@@ -312,6 +322,10 @@ $("#resize-btn").click(function() {
 	$("#grid-width-group").removeClass("has-error");
     }
 
+    // clear the robot/goal input states
+    $(icons).prop("draggable", true);
+    $(icons).css("opacity", 1);
+    
     if (!error) {
 	height = heightIn;
 	width = widthIn;
@@ -320,8 +334,10 @@ $("#resize-btn").click(function() {
 });
 
 // set the min/max/step/default values for the duration of each step
-$("#speed").prop("min", String(MIN_DURATION));
-$("#speed").prop("max", String(MAX_DURATION));
+// subtract the value from the max duration so that the slider is more intuitive
+// (as the slider value increases, duration decreases, i.e. simulation gets faster)
+$("#speed").prop("min", "0");
+$("#speed").prop("max", String(MAX_DURATION - MIN_DURATION));
 $("#speed").prop("step", String(STEP_DURATION));
 
 let duration = DEF_DURATION;
@@ -329,16 +345,12 @@ $("#speed").val(duration);
 
 // listen for change in duration
 $("#speed").change(function() {
-    duration = $("#speed").val();
+    duration = MAX_DURATION - $("#speed").val();
 });
 
 // listen for dragging and dropping robots/goals into cells
 
-$(robot).on("dragstart", function(e) {
-    e.originalEvent.dataTransfer.effectAllowed = "copy";
-    e.originalEvent.dataTransfer.setData("text", e.target.id);
-});
-$(goal).on("dragstart", function(e) {
+$(icons).on("dragstart", function(e) {
     e.originalEvent.dataTransfer.effectAllowed = "copy";
     e.originalEvent.dataTransfer.setData("text", e.target.id);
 });
@@ -351,7 +363,7 @@ $(world).on("dragenter", function(e) {
     e.preventDefault();
 });
 
-$(world).on("drop", function(e) {
+$(world).on("drop", ".grid-cell", function(e) {
     e.preventDefault();
     e = e.originalEvent;
     
@@ -359,20 +371,20 @@ $(world).on("drop", function(e) {
 
     if (ID[0] == "r")
 	// add robot to cell
-	setCell(windowToCanvas(this, e.clientX, e.clientY), "robot", ID);
+	setCell($(this).attr("x"), $(this).attr("y"), "robot", ID);
     else
 	// add goal to cell
-	setCell(windowToCanvas(this, e.clientX, e.clientY), "goal", ID);
+	setCell($(this).attr("x"), $(this).attr("y"), "goal", ID);
 });
 
 // listen for cell clicks to toggle cell state
-$(world).click(function(e) {
-    toggleCell(windowToCanvas(this, e.clientX, e.clientY));
+$(world).on("click", ".grid-cell", function(e) {
+    toggleCell($(this).attr("x"), $(this).attr("y"));
 });
 
 // listen for step button click to step through simulation
 $("#step-btn").click(function() {
-
+    pathPlanner(ctx);
 });
 
 // listen for run button click to start animation

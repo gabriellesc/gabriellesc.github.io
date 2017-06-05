@@ -1,3 +1,8 @@
+/* variables */
+:root {
+    --border: 2px;
+}
+
 /* Sticky footer styles: http://v4-alpha.getbootstrap.com/examples/sticky-footer/
 -------------------------------------------------- */
 html {
@@ -20,6 +25,8 @@ body {
 /**/
 
 #warehouse {
+    display: grid;
+    
     margin-top: 1vw;
     margin-bottom: 1vw;
 }
@@ -49,6 +56,18 @@ label[for="speed"] {
     margin-right: 1vw;
 }
 
-#rack-placeholder {
-    display: none;
+.grid-cell {
+    border-color: grey;
+    border-style: solid;
+    border-width: 0px var(--border) var(--border) 0px;
+
+    display: table-cell;
+}
+
+.grid-cell.top-row {
+    border-top: var(--border) solid grey;
+}
+
+.grid-cell.left-col {
+    border-left: var(--border) solid grey;
 }
