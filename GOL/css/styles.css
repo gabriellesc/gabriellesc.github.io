@@ -18,9 +18,8 @@ body {
 }
 /**/
 
-
 #world {
-    margin: 1vw;
+    margin: 1vw 1vw 0 1vw;
 }
 
 label[for="steps"],label[for="speed"],label[for="pattern-menu"] {
