@@ -6,6 +6,9 @@ nav.innerHTML = `<ul class="nav nav-tabs">
     <li role="presentation" id="robotGrid-nav">
     <a href="../robotGrid/index.html">Robot Navigation</a>
     </li>
+    <li role="presentation" id="ticTacToe-nav">
+    <a href="../ticTacToe/index.html">Tic Tac Toe</a>
+    </li>
     <li role="presentation" id="GOL-nav">
     <a href="../GOL/index.html">Game of Life</a>
     </li>
