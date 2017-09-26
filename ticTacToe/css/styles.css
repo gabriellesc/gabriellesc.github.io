@@ -1,0 +1,8 @@
+div.xterm-rows {
+    margin: 0 5px;
+}
+
+#xterm-container {
+    /* full height less the height of the title, navbar, note, and footer */
+    height: calc(100vh - 115px - 45px - 120px);
+}
