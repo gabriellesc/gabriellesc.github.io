@@ -1,0 +1,42 @@
+#info {
+    float: left;
+    width: 12%;
+}
+
+#info td {
+    padding: 4px;
+    justify-content: space-around;
+}
+
+#controls {
+    margin-bottom: 40px;
+}
+
+#controls td {
+    border: 1px solid grey;
+}
+
+#scoring tr td {
+    width: 85px;
+    font-weight: bold;
+}
+
+#game-screen {
+    float: left;
+    clear: right;
+    position: relative;
+    border: 1px solid black;
+    margin-bottom: 1vh;
+    background-size: cover;
+}
+
+.ship {
+    position: absolute;
+    height: auto;
+    -webkit-animation-timing-function: steps ;
+}
+
+#dev-note {
+    position: relative;
+    clear: left;
+}

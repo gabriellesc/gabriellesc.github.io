@@ -15,24 +15,52 @@
   <body>
     <!-- full-width content container, spanning entire viewport -->
     <div class="container-fluid"> 
-     <div class="page-header"><h1>Gabrielle's Home Page</h1></div>
+      <div class="page-header"><h1>Gabrielle's Home Page</h1></div>
 
       <div class="row" id="mainrow">
-          <div class="col-lg-4">
-	    <h3><a href="robotGrid/index.html">Robot Navigation</a></h3>
-	    <p>Create an obstacle course for robots and watch them move through it!</p>
-	    <p style="color:red;"><b>Still in development...</b></p>
-          </div>
-          <div class="col-lg-4">
-            <h3><a href="GOL/index.html">Game of Life</a></h3>
-	    <p>Conway's Game of Life: create a universe and watch it grow!</p>
-          </div>
-	  <div class="col-lg-4">
-	    <h3><a href="spaceInvaders/index.html">Space Invaders</a></h3>
-	    <p>The classic arcade game: defend your planet from evil alien invaders!</p>
-	    <p style="color:red;"><b>Still in development...</b></p>
-          </div>
-      </div>
+        <div class="col-lg-4">
+	  <div class="panel panel-default">
+	    <div class="list-group">
+	      <a class="list-group-item  list-group-item-info" href="GOL/index.html">
+		<h3 class="list-group-item-heading">Game of Life</h3>
+		<p class="list-group-item-text">
+		  Conway's Game of Life: create a universe and watch it grow!
+		</p>
+	      </a>
+
+	      <a class="list-group-item" href="robotGrid/index.html">
+		<h3 class="list-group-item-heading">Robot Navigation</h3>
+		<p class="list-group-item-text">
+		  Create an obstacle course for robots and watch them move through it!<br />
+		  <b style="color:red;">Still in development...</b>
+		</p>
+	      </a>
+
+	      <a class="list-group-item" href="spaceInvaders/index.html">
+		<h3 class="list-group-item-heading">Space Invaders</h3>
+		<p class="list-group-item-text">
+		  The classic arcade game: defend your planet from evil alien invaders!<br />
+		  <b style="color:red;">Still in development...</b>
+		</p>
+	      </a>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="col-lg-4">
+	  <div class="panel panel-default">
+	    <div class="list-group">
+	      <a class="list-group-item list-group-item-success" href="wordplay/index.html">
+		<h3 class="list-group-item-heading">Wordplay with Scrabble</h3>
+		<p class="list-group-item-text">
+		  Playing with scrabble words and pair programming
+		</p>
+	      </a>
+	    </div>
+	  </div>
+	</div>
+
+      </div>      
     </div>
 
     <footer class="footer">
