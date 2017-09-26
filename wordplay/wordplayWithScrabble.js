@@ -6,7 +6,6 @@ a.textContent = src;
 
 var small = document.createElement('small');
 small.style['font-size'] = '60%';
-small.style['margin-top'] = '5px';
 small.appendChild(document.createTextNode('using '));
 small.appendChild(a);
 
@@ -38,7 +37,10 @@ function prettyPrint(title, content) {
 
 function processWords(resp) {
     let words = resp.split(/\r*\n/g);
-    print('h2', words.length + ' words in total');
+
+    let elem = document.createElement('h3');
+    elem.innerHTML = '<b>' + words.length + ' words in total</b>';
+    main.insertBefore(elem, note);
 
     UU(words);
     
