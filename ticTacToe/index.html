@@ -44,7 +44,7 @@
     <script>
       var term = new Terminal({ cursorBlink: true });
 
-      var socket = new WebSocket('wss://gabriellesc-tic-tac-toe.herokuapp.com/');
+      var socket = new WebSocket('wss://bash-tic-tac-toe.herokuapp.com/');
       term.attach(socket, true, true);  // Attach the above socket to `term`
 
       term.open(document.getElementById('xterm-container'), true);
