@@ -1,0 +1,67 @@
+:root {
+    --green: #3dc06c;
+}
+
+#css-container:before {
+    position: absolute;
+    margin-top: 18px;
+    margin-left: 18px;
+    width: 182px;
+    height: 135px;
+    background: black;
+    z-index: 2;
+    display: block;
+    content: '';
+    border: 18px solid white;
+}
+
+#css-container:after {
+    position: absolute;
+    margin-top: 54px;
+    margin-left: 36px;
+    width: 18px;
+    height: 18px;
+    background: var(--green);
+    z-index: 3;
+    display: block;
+    content: '';
+    box-shadow: 36px 0 var(--green),
+    
+    72px 0 var(--green),
+    
+    18px 36px 0 1px var(--green),
+    36px 36px 0 1px var(--green),
+
+    72px 36px 0 1px var(--green),
+    90px 36px 0 1px var(--green),
+
+    -36px 117px 0 1px white,
+    -18px 117px 0 1px white,
+    0px 117px 0 1px white,
+    18px 117px 0 1px white,
+    -36px 135px 0 1px white,
+
+    108px 117px 0 1px white,
+    126px 117px 0 1px white,
+    144px 117px 0 1px white,
+    162px 117px 0 1px white,
+    162px 135px 0 1px white,
+    
+    /* keys */
+    0px 171px white,
+    18px 153px white,
+    36px 171px white,
+    54px 153px white,
+    72px 171px white,
+    90px 153px white,
+    108px 171px white,
+    126px 153px white
+    ;
+}
+
+#css-container {
+    width: 216px;
+    height: 255px;
+    background: black;
+    z-index: 1;
+}
