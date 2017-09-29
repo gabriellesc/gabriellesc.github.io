@@ -10,7 +10,6 @@
     <link href="../css/styles.css" rel="stylesheet">
     
     <link href="css/RClogo.css" rel="stylesheet">
-
   </head>
   <body>
     <!-- full-width content container, spanning entire viewport -->
@@ -39,18 +38,9 @@
 
         <div class="col-xs-2">
 	  <div class="thumbnail">
-	    <canvas></canvas>
+	    <canvas id="canvas" style="width:100%;"></canvas>
 	    <div class="caption">
 	      <h4>HTML &lt;canvas&gt;</h4>
-	    </div>
-	  </div>
-	</div>
-
-        <div class="col-xs-2">
-	  <div class="thumbnail">
-	    <canvas></canvas>
-	    <div class="caption">
-	      <h4>CSS transitions</h4>
 	    </div>
 	  </div>
 	</div>
@@ -60,6 +50,27 @@
 	    <img src="img/RClogo-turtlepy.gif">
 	    <div class="caption">
 	      <h4>turtle.py</h4>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="col-xs-2">
+	  <div class="thumbnail">
+	    <pre id="unicode-container">
+	    </pre>
+	    <div class="caption">
+	      <h4>Unicode (box drawing)</h4>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="col-xs-2">
+	  <div class="thumbnail">
+	    <div>
+	      <?php include "RClogo.php";?>
+	    </div>
+	    <div class="caption">
+	      <h4>PHP</h4>
 	    </div>
 	  </div>
 	</div>
@@ -83,6 +94,9 @@
     <script>
       document.getElementById('logos-nav').classList.add('active');
     </script>
+
+    <script src="RClogo-canvas.js"></script>
+    <script src="RClogo-unicode.js"></script>
     
   </body>
 </html>
