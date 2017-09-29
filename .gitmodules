@@ -1,3 +1,3 @@
-[submodule "ticTacToe/bash-tic-tac-toe"]
-	path = ticTacToe/bash-tic-tac-toe
+[submodule "ticTacToe/server"]
+	path = ticTacToe/server
 	url = https://github.com/gabriellesc/bash-tic-tac-toe.git
