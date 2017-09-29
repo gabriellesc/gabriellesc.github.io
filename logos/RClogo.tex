@@ -1,0 +1,29 @@
+\documentclass{article}
+
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz}
+
+\pagenumbering{gobble}
+
+\begin{document}
+\noindent\begin{tikzpicture}
+\draw[fill] (0,0) rectangle (\textwidth,\textwidth*0.8);
+\draw[fill, color=white] (1,1) rectangle (\textwidth-1cm,\textwidth*0.8-1cm);
+\draw[fill] (2,2) rectangle (\textwidth-2cm,\textwidth*0.8-2cm);
+\draw[fill] (\textwidth/3,-1) rectangle (\textwidth/3*2,0); % width of \textwidth/3
+\draw[fill] (1,-2) rectangle (\textwidth-1cm,-1);
+\draw[fill] (0,-4.5) rectangle (\textwidth,-2);
+\foreach \x in {2,4,6,8} {
+	\draw[fill, color=white] (\x*\textwidth/12, -4.5cm+\textwidth/24) rectangle +(\textwidth/12, \textwidth/12); % dim of \textwidth/12
+}
+\foreach \x in {3,5,7,9} {
+	\draw[fill, color=white] (\x*\textwidth/12, -4.5cm+\textwidth/24+\textwidth/12) rectangle +(\textwidth/12, \textwidth/12); % dim of \textwidth/12
+}
+\foreach \x in {0,2,4} {
+	\draw[fill, color=Green!70] (2+\x, \textwidth*0.8-2cm-\textwidth/6) rectangle +(\textwidth/12, \textwidth/12); % dim of \textwidth/6 x \textwidth/12
+}
+\foreach \x in {1,4} {
+	\draw[fill, color=Green!70] (2+\x, \textwidth*0.8-2cm-\textwidth/3) rectangle +(\textwidth/6, \textwidth/12); % dim of \textwidth/6 x \textwidth/12
+}
+\end{tikzpicture}
+\end{document}
