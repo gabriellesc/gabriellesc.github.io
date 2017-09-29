@@ -18,6 +18,9 @@ nav.innerHTML = `<ul class="nav nav-tabs">
     <li role="presentation" id="wordplay-nav">
     <a href="../wordplay/index.html">Wordplay</a>
     </li>
+    <li role="presentation" id="logos-nav">
+    <a href="../logos/index.html">RC Logos</a>
+    </li>
     </ul>`;
 
 let footer = document.createElement('div');
