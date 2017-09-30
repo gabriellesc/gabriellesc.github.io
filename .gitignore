@@ -3,3 +3,5 @@
 *\.zip
 */node_modules
 spaceInvaders/img/17217-NRHYPY.jpg
+logos/rb/build
+logos/latex/*[^t]??

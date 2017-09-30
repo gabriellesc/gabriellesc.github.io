@@ -1,0 +1,6 @@
+#ruby2d-app canvas {
+    width: 220px !important;
+    height: calc(280px * 220/240) !important;
+    display: block;
+    margin: auto;
+}
