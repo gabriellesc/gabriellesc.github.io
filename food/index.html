@@ -11,6 +11,7 @@
     <link href="../css/bootstrap-theme.css" rel="stylesheet">
     <link href="../css/styles.css" rel="stylesheet">
 
+    <style>.grid-sizer, .grid-item { width: 24%; } .thumbnail { margin-bottom: 5px; }</style>
   </head>
 
   <body>
@@ -20,9 +21,24 @@
 	<h2>Gabrielle's NYC Food Diary <small>Bad pictures of good foods!</small></h2>
       </div>
 
-      <div class="row" id="mainrow">
+      <div
+	 class="grid"
+	 data-masonry='{ "columnWidth": ".grid-sizer", "itemSelector": ".grid-item", "percentPosition": true, "gutter": 5 }'>
+	<div class="grid-sizer"></div>
+	
+	<div class="grid-item">
+	  <div class="thumbnail">
+	    <img src="img/20171001-1.JPG">
+	    <div class="caption">
+	      <h4><b>Peach gooseberry rye pie</b></h4>
+	      <p>from <a href="http://www.birdsblack.com/">Four &amp; Twenty Blackbirds</a></p>
+	      <p>(+ cafe au lait)</p>
+	      <p>October 1<sup>st</sup>, 2017</p>
+	    </div>
+	  </div>
+	</div>
 
-        <div class="col-xs-3">
+        <div class="grid-item">
 	  <div class="thumbnail">
 	    <img src="img/20170928.JPG">
 	    <div class="caption">
@@ -33,7 +49,7 @@
 	  </div>
 	</div>
 
-        <div class="col-xs-3">
+        <div class="grid-item">
 	  <div class="thumbnail">
 	    <img src="img/20170927-2.JPG">
 	    <div class="caption">
@@ -45,7 +61,7 @@
 	  </div>
 	</div>
 
-        <div class="col-xs-3">
+        <div class="grid-item">
 	  <div class="thumbnail">
 	    <img src="img/20170927-1.JPG">
 	    <div class="caption">
@@ -57,7 +73,7 @@
 	  </div>
 	</div>
 
-	<div class="col-xs-3">
+	<div class="grid-item">
 	  <div class="thumbnail">
 	    <img src="img/20170925.JPG">
 	    <div class="caption">
@@ -72,7 +88,7 @@
 	  </div>
 	</div>
 
-	<div class="col-xs-3">
+	<div class="grid-item">
 	  <div class="thumbnail">
 	    <img src="img/20170924.JPG">
 	    <div class="caption">
@@ -87,7 +103,7 @@
 	</div>
 
       </div>
-    </div>
+      </div>
 
     <footer class="footer">
       <div class="container col-xs-12">
@@ -98,6 +114,7 @@
     <!-- library scripts -->
     <script src="../js/lib/jquery-min.js"></script>
     <script src="../js/lib/bootstrap-min.js"></script>
-      
+    <script src="../js/lib/masonry.pkgd.min.js"></script>
+    
   </body>
 </html>
