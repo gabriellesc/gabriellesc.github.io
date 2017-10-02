@@ -1,3 +1,6 @@
 [submodule "ticTacToe/server"]
 	path = ticTacToe/server
 	url = https://github.com/gabriellesc/bash-tic-tac-toe.git
+[submodule "logos/server"]
+	path = logos/server
+	url = https://github.com/gabriellesc/php-RClogo
