@@ -2,7 +2,7 @@
 
 let nav = document.createElement('div');
 nav.innerHTML = `<ul class="nav nav-tabs">
-    <li role="presentation"><a href="../index.html">Home</a></li>
+    <li role="presentation"><a href="../index.html"><b>Home</b></a></li>
     <li role="presentation" id="robotGrid-nav">
     <a href="../robotGrid/index.html">Robot Navigation</a>
     </li>
@@ -23,6 +23,9 @@ nav.innerHTML = `<ul class="nav nav-tabs">
     </li>
     <li role="presentation" id="piet-nav">
     <a href="../piet/index.html">Piet IDE</a>
+    </li>
+    <li role="presentation" id="jsfuck-nav">
+    <a href="../jsfuck/pres.html">JSFuck Presentation</a>
     </li>
     </ul>`;
 
