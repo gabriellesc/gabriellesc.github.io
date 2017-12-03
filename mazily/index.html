@@ -12,9 +12,22 @@
   <body>
     <!-- full-width content container, spanning entire viewport -->
     <main class="container-fluid"> 
-      <div class="page-header"><h2>Mazily</h2></div>
+      <div class="page-header">
+	<h2>Mazily</h2>
+	<p><b>Use the arrow keys to navigate out of the maze!</b></p>
+	<p>Break through a wall by using 5 apples and holding down <kbd>X</kbd>. Press <kbd>P</kbd> to pause.</p>
+	<p><a href="#">Download</a> the cartridge to run it with PICO-8.</p>
+      </div>
 
       <iframe src="mazily.html" height="560" style="width:100%;"></iframe>
+
+      <div>
+	<hr>
+	<p><i><b>Developer's note:</b>&nbsp;
+	    This was a project to learn to work with the PICO-8 fantasy console.<br>
+	    Mazes are randomly generated using an iterative depth-first search algorithm with backtracking.
+	</i></p>
+      </div>
     </main>
 
     <script src="../js/lib/jquery-min.js"></script>
