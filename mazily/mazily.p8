@@ -208,15 +208,26 @@ function canmove(posx, posy, dir)
    if (dir == 3) then return band(walls, 8) > 0 end
 end
 
--- break a wall from position in direction
+-- try to break a wall from position in direction (and return true if the wall was broken)
 -- (0 = up, 1 = right, 2 = down, 3 = left)
 function breakwall(posx, posy, dir)
+   -- remove opposing wall from cell's neighbour
+   local n = neighbour(posy*width + posx, dir)
+   if n then
+      maze[n] = bor(maze[n], shl(1, (dir+2)%4))
+   else
+      -- no neighbour because this is an outer wall, so do not allow wall breaking
+      return false
+   end
+
    -- remove wall from cell at position
    maze[posy*width + posx] = bor(maze[posy*width + posx], shl(1, dir))
 
-   -- remove opposing wall from cell's neighbour
-   local n = neighbour(posy*width + posx, dir)
-   if (n) then maze[n] = bor(maze[n], shl(1, (dir+2)%4)) end
+   -- decrement gem count
+   gcount -= gbound
+   
+   sfx(sfxcrash)
+   return true
 end
 
 -- move the camera if necessary
@@ -243,12 +254,8 @@ end
 function trymove(dir, trybreakwall)
    -- opposing wall so we can't move
    if not canmove(spx, spy, dir) then
-      -- use gems to break the wall
-      if trybreakwall and gcount >= gbound then
-	 gcount -= 5
-	 breakwall(spx, spy, dir)
-	 sfx(sfxcrash)
-      else
+      -- see if we can use gems to break the wall
+      if not(trybreakwall and gcount >= gbound and breakwall(spx, spy, dir)) then
 	 -- bounce
 	 sfx(sfxbounce)
 	 return
@@ -351,9 +358,9 @@ function splash()
       print('help the animals find', 23, 30, 7)
       print('their way out of the maze!', 14, 40, 7)
       
-      print('collect '..gbound..'   and', 35, 60, 15)
-      spr(spgem, 71, 58)
-      print('use x to break a wall', 24, 70, 15)
+      print('collect '..gbound..'   and use x', 23, 60, 15)
+      spr(spgem, 59, 58)
+      print('to break an inner wall', 21, 70, 15)
       
       rectfill(29, 87, 99, 97, 3)      
       print('press z to start', 33, 90, 7)
