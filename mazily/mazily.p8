@@ -27,6 +27,35 @@ sfxbounce = 0
 sfxgem = 1
 sfxcrash = 2
 
+-- pre-made maze, used for the splash screens
+splheight = 15 splwidth=15
+splmaze = {
+   14, 12, 6, 12, 2, 10, 14, 10, 10, 10, 14, 10, 10, 12,
+   6, 9, 3, 9, 5, 6, 12, 3, 10, 8, 6, 9, 6, 10, 9,
+   5, 2, 10, 10, 11, 9, 3, 10, 10, 10, 13, 2, 11, 10, 12,
+   3, 10, 10, 10, 10, 12, 2, 10, 14, 10, 9, 6, 10, 12, 5,
+   4, 6, 14, 10, 12, 3, 10, 12, 1, 6, 10, 9, 6, 9, 5,
+   3, 9, 3, 12, 3, 10, 12, 3, 12, 5, 6, 12, 1, 4, 5,
+   6, 12, 6, 9, 6, 8, 5, 4, 5, 5, 5, 3, 10, 9, 5,
+   5, 3, 9, 2, 11, 10, 11, 13, 3, 9, 3, 12, 6, 10, 9,
+   3, 10, 10, 10, 10, 12, 2, 11, 10, 14, 10, 9, 5, 6, 12,
+   6, 10, 10, 10, 12, 3, 10, 10, 12, 5, 6, 10, 9, 5, 5,
+   7, 10, 12, 4, 3, 10, 10, 12, 5, 5, 5, 2, 10, 9, 5,
+   5, 6, 9, 3, 10, 10, 10, 15, 9, 1, 3, 10, 10, 10, 13,
+   5, 5, 6, 12, 6, 10, 12, 1, 6, 10, 14, 10, 12, 6, 9,
+   5, 3, 9, 3, 9, 4, 3, 10, 9, 6, 9, 2, 9, 3, 12,
+   3, 10, 10, 10, 10, 11, 10, 10, 8, 3, 10, 10, 10, 10, 9
+}
+splmaze[0] = 2
+-- sprite positions for winning splash screen
+splsppos = {
+   {10,15}, {25,25}, {60,12}, {100,15}, {105,50}, {15,80}, {35,95}, {55,85}, {95,105}, {110,65}
+}
+-- sprite position offsets for winning splash screen
+splspoff = { {0,0}, {-5,-5}, {0,0} }
+splspoff[0] = {5,-5}
+
+
 function _init()
    levelup()
 end
@@ -306,46 +335,27 @@ function splash()
    -- maze-like background
 
    camera(1, 1)
-   local pheight = 15 pwidth=15 pscale = 9
+   local splscale = 9
    
-   for i=0, 129, pscale do
+   for i=0, 129, splscale do
       line(i, 0, i, 129, 1)
       line(0, i, 129, i, 1)
    end
-
-   local permmaze = {
-      14, 12, 6, 12, 2, 10, 14, 10, 10, 10, 14, 10, 10, 12,
-      6, 9, 3, 9, 5, 6, 12, 3, 10, 8, 6, 9, 6, 10, 9,
-      5, 2, 10, 10, 11, 9, 3, 10, 10, 10, 13, 2, 11, 10, 12,
-      3, 10, 10, 10, 10, 12, 2, 10, 14, 10, 9, 6, 10, 12, 5,
-      4, 6, 14, 10, 12, 3, 10, 12, 1, 6, 10, 9, 6, 9, 5,
-      3, 9, 3, 12, 3, 10, 12, 3, 12, 5, 6, 12, 1, 4, 5,
-      6, 12, 6, 9, 6, 8, 5, 4, 5, 5, 5, 3, 10, 9, 5,
-      5, 3, 9, 2, 11, 10, 11, 13, 3, 9, 3, 12, 6, 10, 9,
-      3, 10, 10, 10, 10, 12, 2, 11, 10, 14, 10, 9, 5, 6, 12,
-      6, 10, 10, 10, 12, 3, 10, 10, 12, 5, 6, 10, 9, 5, 5,
-      7, 10, 12, 4, 3, 10, 10, 12, 5, 5, 5, 2, 10, 9, 5,
-      5, 6, 9, 3, 10, 10, 10, 15, 9, 1, 3, 10, 10, 10, 13,
-      5, 5, 6, 12, 6, 10, 12, 1, 6, 10, 14, 10, 12, 6, 9,
-      5, 3, 9, 3, 9, 4, 3, 10, 9, 6, 9, 2, 9, 3, 12,
-      3, 10, 10, 10, 10, 11, 10, 10, 8, 3, 10, 10, 10, 10, 9
-   }
-   permmaze[0] = 2
    
-   for i=0, pheight-1 do
-      for j=0, pwidth-1 do
-	    local walls = permmaze[i*pwidth + j]
+   for i=0, splheight-1 do
+      for j=0, splwidth-1 do
+	    local walls = splmaze[i*splwidth + j]
 	    if band(walls, 1) == 0 then
-	       line(j*pscale, i*pscale, (j+1)*pscale, i*pscale, 13)
+	       line(j*splscale, i*splscale, (j+1)*splscale, i*splscale, 13)
 	    end
 	    if band(walls, 2) == 0 then
-	       line((j+1)*pscale, i*pscale, (j+1)*pscale, (i+1)*pscale, 13)
+	       line((j+1)*splscale, i*splscale, (j+1)*splscale, (i+1)*splscale, 13)
 	    end
 	    if band(walls, 4) == 0 then
-	       line(j*pscale, (i+1)*pscale, (j+1)*pscale, (i+1)*pscale, 13)
+	       line(j*splscale, (i+1)*splscale, (j+1)*splscale, (i+1)*splscale, 13)
 	    end
 	    if band(walls, 8) == 0 then
-	       line(j*pscale, i*pscale, j*pscale, (i+1)*pscale, 13)
+	       line(j*splscale, i*splscale, j*splscale, (i+1)*splscale, 13)
 	    end
       end
    end
@@ -365,7 +375,7 @@ function splash()
       rectfill(29, 87, 99, 97, 3)      
       print('press z to start', 33, 90, 7)
       
-   elseif level < 11 then -- subsequent levels
+   elseif level < 2 then -- subsequent levels
       rectfill(25, 44, 107, 80, 3)
 
       print('good job!', 50, 50, 7)
@@ -379,26 +389,20 @@ function splash()
       
       -- dancing sprites
 
-      -- sprite positions
-      local sppos = {{10, 15}, {25, 25}, {60, 12}, {100, 15}, {105, 50}, {15, 80}, {35, 95}, {55, 85}, {95, 105}, {110, 65}}
-
-      -- countdown and move between 4 position offsets
+      -- countdown and move between position offsets
       if not ticker or ticker == 0 then
-	 ticker = 31
+	 ticker = (#splspoff + 1) * 8 - 1
       else
 	 ticker -= 1
       end
-
-      local offs = {}
-      offs[3] = {0,0}
-      offs[2] = {-5,-5}
-      offs[1] = {0,0}
-      offs[0] = {5,-5}
    
       for i, sp in pairs(spplayers) do
-	 local spoff = offs[(flr(ticker/8)+i)%4]
-	 camera(spoff[1], spoff[2])
-	 sspr(sp*8, 0, 8, 8, sppos[i][1], sppos[i][2], 12, 12)
+	 -- get the current position offset for the sprite, based on the sprite index and time
+	 local off = splspoff[(flr(ticker/8)+i) % (#splspoff + 1)]
+	 camera(off[1], off[2])
+
+	 -- draw an enlarged version of the sprite at this position+offset
+	 sspr(sp*8, 0, 8, 8, splsppos[i][1], splsppos[i][2], 12, 12)
       end
       
    end
