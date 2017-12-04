@@ -96,23 +96,23 @@ function _draw()
 
 	    -- top
 	    if band(walls, 1) == 0 then
-	       line(j*scale, i*scale, (j+1)*scale, i*scale, 3)
+	       line(j*scale, i*scale, (j+1)*scale, i*scale, (i == 0 and 11) or 3)
 	    end
 	    -- right
 	    if band(walls, 2) == 0 then
-	       line((j+1)*scale, i*scale, (j+1)*scale, (i+1)*scale, 3)
+	       line((j+1)*scale, i*scale, (j+1)*scale, (i+1)*scale, (j == width-1 and 11) or 3)
 	    end
 	    -- bottom
 	    if band(walls, 4) == 0 then
-	       line(j*scale, (i+1)*scale, (j+1)*scale, (i+1)*scale, 3)
+	       line(j*scale, (i+1)*scale, (j+1)*scale, (i+1)*scale, (i == height-1 and 11) or 3)
 	    end
 	    -- left
 	    if band(walls, 8) == 0 then
-	       line(j*scale, i*scale, j*scale, (i+1)*scale, 3)
+	       line(j*scale, i*scale, j*scale, (i+1)*scale, (j == 0 and 11) or 3)
 	    end
       end
    end
-   
+
    -- draw gems
    for i,_ in pairs(gems) do
       spr(spgem, (i % width) * scale + 1, flr(i / width) * scale + 1)
@@ -160,6 +160,7 @@ function levelup()
    width = flr(rnd(5*level + 1)) + 15
    
    genmaze() -- generate the initial maze
+   camx = 0 camy = 0 -- reset the camera offset
    pan() -- move the camera if necessary to show the player
    
    timerem = 1800 + 450*level -- set the time remaining to complete the level
@@ -365,9 +366,9 @@ function splash()
       print('onto the next level', 29, 70, 7)
       
    else -- win
-      rectfill(33, 57, 100, 77, 11)
-      print('congratulations,', 36, 60, 7)
-      print('you won!', 52, 70, 7)
+      rectfill(32, 57, 99, 77, 11)
+      print('congratulations,', 35, 60, 7)
+      print('you won!', 51, 70, 7)
       
       -- dancing sprites
 
