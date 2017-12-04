@@ -375,7 +375,7 @@ function splash()
       rectfill(29, 87, 99, 97, 3)      
       print('press z to start', 33, 90, 7)
       
-   elseif level < 2 then -- subsequent levels
+   elseif level < 11 then -- subsequent levels
       rectfill(25, 44, 107, 80, 3)
 
       print('good job!', 50, 50, 7)
@@ -395,14 +395,14 @@ function splash()
       else
 	 ticker -= 1
       end
-   
-      for i, sp in pairs(spplayers) do
+
+      for i=1, #spplayers do
 	 -- get the current position offset for the sprite, based on the sprite index and time
 	 local off = splspoff[(flr(ticker/8)+i) % (#splspoff + 1)]
 	 camera(off[1], off[2])
 
 	 -- draw an enlarged version of the sprite at this position+offset
-	 sspr(sp*8, 0, 8, 8, splsppos[i][1], splsppos[i][2], 12, 12)
+	 sspr(spplayers[i]*8, 0, 8, 8, splsppos[i][1], splsppos[i][2], 12, 12)
       end
       
    end
@@ -456,17 +456,17 @@ function genmaze()
       local found = false -- whether an unvisited neighbour is found for the current cell
 
       -- examine the neighbour of the current cell in each direction
-      for dir in all(dirs) do
-	 local nextcell = neighbour(currcell, dir)
+      for i=1, #dirs do
+	 local nextcell = neighbour(currcell, dirs[i])
 	 
 	 -- the neighbour exists and has not yet been visited
 	 if nextcell and maze[nextcell] == 0 then
 	    add(stack, currcell) -- push the current cell to the stack
 
 	    -- remove wall from current cell
-	    maze[currcell] = bor(maze[currcell], shl(1, dir))
+	    maze[currcell] = bor(maze[currcell], shl(1, dirs[i]))
 	    -- remove opposing wall from neighbour
-	    maze[nextcell] = bor(maze[nextcell], shl(1, (dir+2)%4))
+	    maze[nextcell] = bor(maze[nextcell], shl(1, (dirs[i]+2)%4))
 
 	    currcell = nextcell -- make the neighbour cell the current cell
 	    del(stack, currcell) -- mark it as visited
