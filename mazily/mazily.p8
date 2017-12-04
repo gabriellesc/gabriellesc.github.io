@@ -357,7 +357,7 @@ function splash()
       rectfill(29, 87, 99, 97, 3)      
       print('press z to start', 33, 90, 7)
       
-   elseif level < 2 then -- subsequent levels
+   elseif level < 11 then -- subsequent levels
       rectfill(25, 44, 107, 80, 3)
 
       print('good job!', 50, 50, 7)
@@ -365,30 +365,31 @@ function splash()
       print('onto the next level', 29, 70, 7)
       
    else -- win
-      print('congratulations!', 36, 60, 7)
-    
-      local sppos = {
-	 {30, 30},
-	 {50, 30},
-	 {70, 30},
-	 {90, 30},
-	 {40, 80},
-	 {60, 80},
-	 {80, 80},
-	 {100, 80},
-	 {40, 100},
-	 {80, 100}
-      }
-
-      if not spdance then
-	 spdance = {}
-	 for i,_ in pairs(spplayers) do
-	    
-	 end
-      end
+      rectfill(33, 57, 100, 77, 11)
+      print('congratulations,', 36, 60, 7)
+      print('you won!', 52, 70, 7)
       
+      -- dancing sprites
+
+      -- sprite positions
+      local sppos = {{10, 15}, {25, 25}, {60, 12}, {100, 15}, {105, 50}, {15, 80}, {35, 95}, {55, 85}, {95, 105}, {110, 65}}
+
+      -- countdown and move between 4 position offsets
+      if not ticker or ticker == 0 then
+	 ticker = 31
+      else
+	 ticker -= 1
+      end
+
+      local offs = {}
+      offs[3] = {0,0}
+      offs[2] = {-5,-5}
+      offs[1] = {0,0}
+      offs[0] = {5,-5}
+   
       for i, sp in pairs(spplayers) do
-	 --camera(flr(rnd(5))-2, flr(rnd(5))-2)
+	 local spoff = offs[(flr(ticker/8)+i)%4]
+	 camera(spoff[1], spoff[2])
 	 sspr(sp*8, 0, 8, 8, sppos[i][1], sppos[i][2], 12, 12)
       end
       
