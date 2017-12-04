@@ -419,6 +419,8 @@ end
 
 -- generate a maze using a non-recursive backtracking algorithm
 function genmaze()
+   local stack = {} spointer = 0
+
    -- return a random ordering of directions (sequence of 0, 1, 2, 3)
    local function rnddirs()
       local dirs = {0, 1, 2, 3}
@@ -432,6 +434,43 @@ function genmaze()
       return dirs
    end
 
+   -- add val to top of stack
+   local function push(val)
+      if stack[spointer] then
+	 spointer += 1
+      end
+      stack[spointer] = val
+   end
+
+   -- remove and return value at top of stack
+   local function pop()
+      -- find the top value
+      while not stack[spointer] and spointer >=0 do
+	 spointer -= 1
+      end
+      -- save and remove value
+      local val = stack[spointer]
+      stack[spointer] = nil
+      -- find the next top value
+      while not stack[spointer] and spointer >= 0 do
+	 spointer -= 1
+      end
+      return val
+   end
+
+   -- remove the (first) instance of val on the stack
+   local function remove(val)
+      for i=spointer, 0, -1 do
+	 if stack[i] == val then
+	    stack[i] = nil
+	    break
+	 end
+      end
+      while not stack[spointer] and spointer >= 0 do
+	 spointer -= 1
+      end
+   end
+   
    
    -- initialize the maze with all walls
    for i=0, height*width-1 do
@@ -443,15 +482,19 @@ function genmaze()
    spy = flr(rnd(height))
    currcell = spy*width + spx
    
-   local stack = {}   
    -- add all cells to the stack initially
    for i=0, height*width-1 do
-      add(stack, i)
+      stack[i] = i
    end
-   del(stack, currcell) -- remove the current cell from the stack
 
+   -- set stack pointer
+   spointer = height*width-1
+
+   -- exclude the current cell from the stack
+   remove(currcell)
+   
    -- loop while there are unvisited cells
-   while #stack > 0 do
+   while spointer >= 0 do
       local dirs = rnddirs() -- get a random ordering of directions
       local found = false -- whether an unvisited neighbour is found for the current cell
 
@@ -461,7 +504,8 @@ function genmaze()
 	 
 	 -- the neighbour exists and has not yet been visited
 	 if nextcell and maze[nextcell] == 0 then
-	    add(stack, currcell) -- push the current cell to the stack
+	    -- push the current cell to the stack
+	    push(currcell)
 
 	    -- remove wall from current cell
 	    maze[currcell] = bor(maze[currcell], shl(1, dirs[i]))
@@ -469,7 +513,7 @@ function genmaze()
 	    maze[nextcell] = bor(maze[nextcell], shl(1, (dirs[i]+2)%4))
 
 	    currcell = nextcell -- make the neighbour cell the current cell
-	    del(stack, currcell) -- mark it as visited
+	    remove(currcell) -- mark it as visited (remove it from the stack)
 	    
 	    found = true
 	    break
@@ -479,8 +523,7 @@ function genmaze()
       -- current cell has no unvisited neighbours
       if not found then
 	 -- pop a cell from the stack and make it the current cell
-	 currcell = stack[#stack]
-	 del(stack, currcell)
+	 currcell = pop()
       end
    end
 
