@@ -12,7 +12,7 @@ maze = {}
 spx = 0 spy = 0 -- sprite position
 camx = 0 camy = 0 -- camera offset
 
-gcount = 5 -- gem count
+gcount = 0 -- gem count
 gbound = 5 -- number of gems needed to break through a wall
 gemlife = 240 -- number of frames that gems last
 framestogem = 0 -- number of frames before next gem is spawned
@@ -146,7 +146,7 @@ function _draw()
    end
    
    -- draw gem count
-   print((gcount < 10 and '0'.. gcount) or gcount, 119, 121, (gcount >= gbound and 15) or 7)
+   print((gcount < 10 and '0'.. gcount) or gcount, 119, 121, (gcount >= gbound and 11) or 7)
    spr(spgem, 109, 120)
 end
 
@@ -388,8 +388,8 @@ function splash()
       end
       
       for i, sp in pairs(spplayers) do
-	 camera(flr(rnd(5))-2, flr(rnd(5))-2)
-	 spr(sp, sppos[i][1], sppos[i][2])
+	 --camera(flr(rnd(5))-2, flr(rnd(5))-2)
+	 sspr(sp*8, 0, 8, 8, sppos[i][1], sppos[i][2], 12, 12)
       end
       
    end
@@ -473,16 +473,18 @@ function genmaze()
 
    -- pick a random exit cell -- IS THERE AN ALGORITHM THAT WILL KEEP THIS FROM BEING TOO EASY?
    if rnd(1) >= 0.5 then -- horizontal
-      local exity = flr(rnd(2)) * (height-1) -- select either the top or bottom edge randomly
+      local bottom = flr(rnd(2))
+      local exity = bottom * (height-1) -- select either the top or bottom edge randomly
       local exitx = flr(rnd(width))
 
-      maze[exity*width + exitx] = bor(maze[exity*width + exitx], shl(1, exity*2))
+      maze[exity*width + exitx] = bor(maze[exity*width + exitx], shl(1, bottom*2))
       
    else -- vertical
-      local exitx = flr(rnd(2)) * (width-1) -- select either the left or right edge randomly
+      local right = flr(rnd(2))
+      local exitx = right * (width-1) -- select either the left or right edge randomly
       local exity = flr(rnd(height))
 
-      maze[exity*width + exitx] = bor(maze[exity*width + exitx], shl(1, (1-exitx)*2 + 1))
+      maze[exity*width + exitx] = bor(maze[exity*width + exitx], shl(1, (1-right)*2 + 1))
    end
 end
 __gfx__
