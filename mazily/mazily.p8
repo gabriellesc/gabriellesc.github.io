@@ -1,7 +1,7 @@
 pico-8 cartridge // http://www.pico-8.com
 version 14
 __lua__
-level = 0
+level = 3
 levelstarted = false -- whether the level has started yet
 timerem = 0 -- time remaining to complete level in frames
 
@@ -261,20 +261,21 @@ end
 
 -- move the camera if necessary
 function pan()
-   -- compute the current player position on the screen
-   local x1 = spx*scale+1-camx x2 = x1+scale-1
-   local y1 = spy*scale+1-camy y2 = y1+scale-1
-   
-   if x1 < 0 then -- moved off left
-      camx = max(camx-hbound, 0)
-   elseif x2 > hbound then -- moved off right
-      camx = min(camx+hbound, width*scale-hbound+1)
+   -- move right until player is on-screen
+   while spx*scale+1-camx < 0 do
+      camx = max(camx-hbound+1, 0)
    end
-   
-   if y1 < 0 then -- moved off up
-      camy = max(camy-vbound, 0)
-   elseif y2 > vbound then -- moved off down
-      camy = min(camy+vbound, height*scale-vbound+1)
+   -- move left until player is on-screen
+   while (spx+1)*scale-camx > hbound do
+      camx = min(camx+hbound-1, width*scale-hbound+1)
+   end
+   -- move down until player is on-screen
+   while spy*scale+1-camy < 0 do
+      camy = max(camy-vbound+1, 0)
+   end
+   -- move right until player is on-screen
+   while (spy+1)*scale-camy > vbound do
+      camy = min(camy+vbound-1, height*scale-vbound+1)
    end
 end
 
