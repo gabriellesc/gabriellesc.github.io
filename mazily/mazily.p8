@@ -419,20 +419,16 @@ end
 
 -- generate a maze using a non-recursive backtracking algorithm
 function genmaze()
-   local stack = {} spointer = 0
-
-   -- return a random ordering of directions (sequence of 0, 1, 2, 3)
+   local dirs = {0, 1, 2, 3}
+   -- produce a random ordering of dirs (sequence of 0, 1, 2, 3) using Fisher-Yates shuffle
    local function rnddirs()
-      local dirs = {0, 1, 2, 3}
-
-      for i = 4, 1, -1 do
-	 local dir = dirs[flr(rnd(i))] -- randomly select one of the unselected directions
-	 add(dirs, dir) -- append this direction to the end of the sequence
-	 del(dirs, dir) -- remove the original instance of this direction
+      for i = 4, 2, -1 do
+	 local j = flr(rnd(i))+1 -- randomly select one of the 'unstruck' indices
+	 dirs[i], dirs[j] = dirs[j], dirs[i] -- swap it with i
       end
-
-      return dirs
    end
+
+   local stack = {} spointer = 0
 
    -- add val to top of stack
    local function push(val)
@@ -495,11 +491,11 @@ function genmaze()
    
    -- loop while there are unvisited cells
    while spointer >= 0 do
-      local dirs = rnddirs() -- get a random ordering of directions
+      rnddirs() -- get a random ordering of directions
       local found = false -- whether an unvisited neighbour is found for the current cell
 
       -- examine the neighbour of the current cell in each direction
-      for i=1, #dirs do
+      for i=1, 4 do
 	 local nextcell = neighbour(currcell, dirs[i])
 	 
 	 -- the neighbour exists and has not yet been visited
