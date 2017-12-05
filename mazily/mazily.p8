@@ -1,7 +1,7 @@
 pico-8 cartridge // http://www.pico-8.com
 version 14
 __lua__
-level = 3
+level = 0
 levelstarted = false -- whether the level has started yet
 timerem = 0 -- time remaining to complete level in frames
 
