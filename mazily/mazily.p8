@@ -377,11 +377,11 @@ function splash()
       print('press z to start', 33, 90, 7)
       
    elseif level < 11 then -- subsequent levels
-      rectfill(25, 44, 107, 80, 3)
+      rectfill(22, 44, 107, 80, 3)
 
-      print('good job!', 50, 50, 7)
-      print('press z to move', 37, 60, 7)
-      print('onto the next level', 29, 70, 7)
+      print('good job!', 47, 50, 7)
+      print('press z to move', 34, 60, 7)
+      print('onto the next level', 26, 70, 7)
       
    else -- win
       rectfill(32, 57, 99, 77, 11)
