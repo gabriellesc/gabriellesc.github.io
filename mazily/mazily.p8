@@ -6,7 +6,7 @@ levelstarted = false -- whether the level has started yet
 timerem = 0 -- time remaining to complete level in frames
 
 scale = 9
-hbound = 126 vbound = 117 -- boundaries of visible maze
+hbound = 127 vbound = 118 -- boundaries of visible maze
 height = 0 width = 0
 maze = {}
 spx = 0 spy = 0 -- sprite position
@@ -262,18 +262,18 @@ end
 -- move the camera if necessary
 function pan()
    -- compute the current player position on the screen
-   local posx = spx*scale + 1 - camx
-   local posy = spy*scale + 1 - camy
+   local x1 = spx*scale+1-camx x2 = x1+scale-1
+   local y1 = spy*scale+1-camy y2 = y1+scale-1
    
-   if posx < 0 then -- moved off left
+   if x1 < 0 then -- moved off left
       camx = max(camx-hbound, 0)
-   elseif posx >= hbound-1 then -- moved off right
+   elseif x2 > hbound then -- moved off right
       camx = min(camx+hbound, width*scale-hbound+1)
    end
    
-   if posy < 0 then -- moved off up
+   if y1 < 0 then -- moved off up
       camy = max(camy-vbound, 0)
-   elseif posy >= vbound-1 then -- moved off down
+   elseif y2 > vbound then -- moved off down
       camy = min(camy+vbound, height*scale-vbound+1)
    end
 end
