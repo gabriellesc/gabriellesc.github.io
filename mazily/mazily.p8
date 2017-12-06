@@ -5,6 +5,8 @@ level = 0
 levelstarted = false -- whether the level has started yet
 timerem = 0 -- time remaining to complete level in frames
 
+mazeout = 6 -- colour of outer maze walls
+mazein = 13 -- colour of innter maze walls
 scale = 9
 hbound = 127 vbound = 118 -- boundaries of visible maze
 height = 0 width = 0
@@ -125,19 +127,19 @@ function _draw()
 
 	    -- top
 	    if band(walls, 1) == 0 then
-	       line(j*scale, i*scale, (j+1)*scale, i*scale, (i == 0 and 11) or 3)
+	       line(j*scale, i*scale, (j+1)*scale, i*scale, (i == 0 and mazeout) or mazein)
 	    end
 	    -- right
 	    if band(walls, 2) == 0 then
-	       line((j+1)*scale, i*scale, (j+1)*scale, (i+1)*scale, (j == width-1 and 11) or 3)
+	       line((j+1)*scale, i*scale, (j+1)*scale, (i+1)*scale, (j == width-1 and mazeout) or mazein)
 	    end
 	    -- bottom
 	    if band(walls, 4) == 0 then
-	       line(j*scale, (i+1)*scale, (j+1)*scale, (i+1)*scale, (i == height-1 and 11) or 3)
+	       line(j*scale, (i+1)*scale, (j+1)*scale, (i+1)*scale, (i == height-1 and mazeout) or mazein)
 	    end
 	    -- left
 	    if band(walls, 8) == 0 then
-	       line(j*scale, i*scale, j*scale, (i+1)*scale, (j == 0 and 11) or 3)
+	       line(j*scale, i*scale, j*scale, (i+1)*scale, (j == 0 and mazeout) or mazein)
 	    end
       end
    end
