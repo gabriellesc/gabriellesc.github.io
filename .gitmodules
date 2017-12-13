@@ -4,3 +4,6 @@
 [submodule "logos/server"]
 	path = logos/server
 	url = https://github.com/gabriellesc/php-RClogo
+[submodule "piet/piet-ide"]
+	path = piet/piet-ide
+	url = https://github.com/gabriellesc/piet-ide.git
