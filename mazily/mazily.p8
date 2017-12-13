@@ -1,6 +1,11 @@
 pico-8 cartridge // http://www.pico-8.com
 version 14
 __lua__
+btnstate = { 0, 0, 0, 0, 0 } -- used to keep track of button press states
+btnstate[0] = 0
+btnthresh = 10 -- number of frames before repeating button action
+btnfps = 6 -- number of frames between repeating button action
+
 level = 0
 levelstarted = false -- whether the level has started yet
 timerem = 0 -- time remaining to complete level in frames
@@ -63,6 +68,8 @@ function _init()
 end
 
 function _update()
+   updatebtns() -- update button press states for each frame
+
    -- if time has run out, end the game
    if timerem == 0 then
       return
@@ -77,10 +84,10 @@ function _update()
       end
    end
 
-   if btnp(0) then trymove(3, btn(5)) end -- try move left
-   if btnp(1) then trymove(1, btn(5)) end -- try move right
-   if btnp(2) then trymove(0, btn(5)) end -- try move up
-   if btnp(3) then trymove(2, btn(5)) end -- try move down
+   if mybtnp(0) then trymove(3, btn(5)) end -- try move left
+   if mybtnp(1) then trymove(1, btn(5)) end -- try move right
+   if mybtnp(2) then trymove(0, btn(5)) end -- try move up
+   if mybtnp(3) then trymove(2, btn(5)) end -- try move down
 
    -- decrement frame counter and generate gem if it reaches 0
    if framestogem == 0 then
@@ -181,6 +188,36 @@ function _draw()
    spr(spgem, 109, 120)
 end
 
+-- update the button states to whether each button is currently held
+-- down AND it was not held down in the last frame
+-- repeats after btnthresh frames and every btnfps frames after that
+function updatebtns()
+   for i=0, 5 do
+      if btn(i) then
+	 -- button is being held down
+	 if btnstate[i] < btnthresh then
+	    -- button was not held down in previous frame, or has been held down
+	    -- for <btnthresh frames
+	    btnstate[i] += 1
+	 elseif btnstate[i] == btnthresh then
+	    -- button has been held down for btnthresh (or btnthresh + some multiple
+	    -- of btnfps) frames
+	    btnstate[i] += btnfps
+	 else
+	    -- button has been held down for btnthresh + some number of frames
+	    btnstate[i] -= 1
+	 end
+      else
+	 -- button is not being held down
+	 btnstate[i] = 0
+      end
+   end
+end
+
+-- equivalent to built-in btnp, but with a lower frame rate
+function mybtnp(i)
+   return btnstate[i] == 1 or btnstate[i] == btnthresh
+end
 
 -- start a new level
 function levelup()
