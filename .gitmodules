@@ -7,3 +7,6 @@
 [submodule "piet/piet-ide"]
 	path = piet/js
 	url = https://github.com/gabriellesc/piet-ide.git
+[submodule "robotGrid/js"]
+	path = robotGrid/js
+	url = https://github.com/gabriellesc/robot-grid.git
