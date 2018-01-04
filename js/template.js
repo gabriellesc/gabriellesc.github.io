@@ -19,7 +19,7 @@ nav.innerHTML = `<ul class="nav nav-tabs">
         <a href="../spaceInvaders/index.html">Space Invaders</a>
       </li-->
       <li role="presentation" id="piet-nav">
-        <a href="../piet/index.html">Piet IDE</a>
+        <a href="../piet/index.html">MasterPiets</a>
       </li>
       <li role="presentation" id="wordplay-nav">
         <a href="../wordplay/index.html">Wordplay</a>
