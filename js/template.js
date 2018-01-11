@@ -7,7 +7,7 @@ nav.innerHTML = `<ul class="nav nav-tabs">
         <a href="../GOL/index.html">Game of Life</a>
       </li>
       <li role="presentation" id="ticTacToe-nav">
-        <a href="../ticTacToe/index.html">Tic Tac Toe</a>
+        <a href="../ticTacToe/index.html">Tic-Tac-Toe</a>
       </li>
       <li role="presentation" id="mazily-nav">
         <a href="../mazily/index.html">Mazily</a>
