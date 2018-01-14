@@ -18,6 +18,29 @@ body {
     background-color: #f5f5f5;
 }
 
-.rc-scout {
+/* styles for homepage */
+
+body#homepage #find-me {
+    float: right;
+}
+
+body#homepage #find-me * {
+    color: #337ab7;
+}
+
+body#homepage #find-me a {
+    font-size: 24px;
+}
+
+/* food link */
+body#homepage .page-header a {
+    float: right;
+    opacity: 0.5;
+}
+body#homepage .page-header a span {
+    font-size: 24px;
+}
+
+body#homepage .rc-scout {
     float: right;
 }

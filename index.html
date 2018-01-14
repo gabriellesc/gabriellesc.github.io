@@ -10,100 +10,141 @@
     <!-- optional stylesheet theme included with Bootstrap -->
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+	  rel="stylesheet">
   </head>
 
-  <body>
+  <body id="homepage">
     <!-- full-width content container, spanning entire viewport -->
-    <div class="container-fluid"> 
+    <div class="container-fluid">
+      <div id="find-me">
+	<b>Find me</b>&nbsp;
+	<a href="https://github.com/gabriellesc">
+	  <i class="fa fa-github-alt"></i>
+	</a>
+	<a href="https://www.linkedin.com/in/gsinghcadieux">
+	  <i class="fa fa-linkedin-square"></i>
+	</a>
+	<a href="https://www.facebook.com/gabrielle.s.cadieux">
+	  <i class="fa fa-facebook-official"></i>
+	</a>
+      </div>
+      
       <div class="page-header">
 	<h1>Gabrielle's Home Page</h1>
 	<a href="food/index.html">
-	  <span class="glyphicon glyphicon-ice-lolly-tasted" style="font-size:24px;float:right;">
-	  </span>
+	  <span class="glyphicon glyphicon-ice-lolly-tasted"></span>
 	</a>
       </div>
 
-      <div class="row" id="mainrow">
-        <div class="col-lg-4">
-	  <div class="panel panel-default">
+      <div class="row">
+
+	<div class="col-md-3 col-xs-12">
+	  <div class="list-group">
+	    <a class="list-group-item list-group-item-info" href="GOL/index.html">
+	      <h3 class="list-group-item-heading">Game of Life</h3>
+	      <p class="list-group-item-text">
+		Conway's Game of Life: create a universe and watch it grow!
+	      </p>
+	    </a>
+	  </div>
+	</div>
+	
+	<div class="col-md-3 col-xs-12">
+	  <div class="list-group">
+	    <a class="list-group-item list-group-item-info" href="ticTacToe/index.html">
+	      <h3 class="list-group-item-heading">Tic-Tac-Toe</h3>
+	      <p class="list-group-item-text">
+		Play against a computer or a human; choose your level of difficulty...
+	      </p>
+	    </a>
+	  </div>
+	</div>
+	
+	<div class="col-md-3 col-xs-12">
+
+	  <div class="list-group">
+	    <a class="list-group-item list-group-item-info" href="mazily/index.html">
+	      <h3 class="list-group-item-heading">Mazily</h3>
+	      <p class="list-group-item-text">
+		Help animals find their way out of a maze!
+	      </p>
+	    </a>
+	  </div>
+	</div>
+	
+	<div class="col-md-3 col-xs-12">
+
+	  <div class="list-group">
+	    <a class="list-group-item list-group-item-info" href="piet/index.html">
+	      <h3 class="list-group-item-heading">MasterPiets</h3>
+	      <p class="list-group-item-text">
+		An in-browser IDE for the arcane programming language Piet
+	      </p>
+	    </a>
+	  </div>
+	</div>
+	
+	<div class="clearfix visible-md-block"></div>
+
+	<div class="col-md-3 col-xs-12">
+	  <div class="list-group">
+	    <a class="list-group-item list-group-item-info" href="wordplay/index.html">
+	      <h3 class="list-group-item-heading">Wordplay with Scrabble</h3>
+	      <p class="list-group-item-text">
+		Playing with scrabble words and pair programming
+	      </p>
+	    </a>
+	  </div>
+	</div>
+	
+	<div class="col-md-3 col-xs-12">
+	  <div class="list-group">
+	    <a class="list-group-item list-group-item-info" href="logos/index.html">
+	      <h3 class="list-group-item-heading">RC Logo Generation</h3>
+	      <p class="list-group-item-text">
+		Recurse Center logos generated in all different languages!
+	      </p>
+	    </a>
+	  </div>
+	</div>
+	
+	<div class="col-md-3 col-xs-12">
+	  <div class="list-group">
+	    <a class="list-group-item list-group-item-info" href="jsfuck/pres.html">
+	      <h3 class="list-group-item-heading">JSFuck Presentation</h3>
+	      <p class="list-group-item-text">
+		Introduction to JSFuck for a Recurse Center presentation
+	      </p>
+	    </a>
+	  </div>
+	</div>
+	
+	<div class="col-md-3 col-xs-12">
+	  <div class="list-group">
+	    <a class="list-group-item list-group-item-warning" href="robotGrid/index.html">
+	      <h3 class="list-group-item-heading">Robot Navigation</h3>
+	      <p class="list-group-item-text">
+		Create an obstacle course for robots and watch them move through it!
+	      </p>
+	      <p class="list-group-item-text">
+		<i>Still in development...</i>
+	      </p>
+	    </a>
+	  </div>
+	</div>
+	
+	<!--div class="col-md-3 col-xs-12">
 	    <div class="list-group">
-
-	      <a class="list-group-item  list-group-item-info" href="GOL/index.html">
-		<h3 class="list-group-item-heading">Game of Life</h3>
-		<p class="list-group-item-text">
-		  Conway's Game of Life: create a universe and watch it grow!
-		</p>
-	      </a>
-
-	      <a class="list-group-item  list-group-item-info" href="ticTacToe/index.html">
-		<h3 class="list-group-item-heading">Tic-Tac-Toe</h3>
-		<p class="list-group-item-text">
-		  Play against a computer or a human; choose your level of difficulty...
-		</p>
-	      </a>
-
-	      <a class="list-group-item  list-group-item-info" href="mazily/index.html">
-		<h3 class="list-group-item-heading">Mazily</h3>
-		<p class="list-group-item-text">
-		  Help animals find their way out of a maze!
-		</p>
-	      </a>
-
-	      <a class="list-group-item" href="robotGrid/index.html">
-		<h3 class="list-group-item-heading">Robot Navigation</h3>
-		<p class="list-group-item-text">
-		  Create an obstacle course for robots and watch them move through it!<br />
-		  <b style="color:red;">Still in development...</b>
-		</p>
-	      </a>
-
-	      <!--a class="list-group-item" href="spaceInvaders/index.html">
+	      <a class="list-group-item" href="spaceInvaders/index.html">
 		<h3 class="list-group-item-heading">Space Invaders</h3>
 		<p class="list-group-item-text">
 		  The classic arcade game: defend your planet from evil alien invaders!<br />
 		  <b style="color:red;">Still in development...</b>
 		</p>
-	      </a-->
-
+	      </a>
 	    </div>
-	  </div>
-	</div>
-
-	<div class="col-lg-4">
-	  <div class="panel panel-default">
-	    <div class="list-group">
-
-	      <a class="list-group-item  list-group-item-success" href="piet/index.html">
-		<h3 class="list-group-item-heading">MasterPiets</h3>
-		<p class="list-group-item-text">
-		  An in-browser IDE for the arcane programming language Piet.
-		</p>
-	      </a>
-
-	      <a class="list-group-item list-group-item-success" href="wordplay/index.html">
-		<h3 class="list-group-item-heading">Wordplay with Scrabble</h3>
-		<p class="list-group-item-text">
-		  Playing with scrabble words and pair programming
-		</p>
-	      </a>
-
-	      <a class="list-group-item list-group-item-success" href="logos/index.html">
-		<h3 class="list-group-item-heading">RC Logo Generation</h3>
-		<p class="list-group-item-text">
-		  Recurse Center logos generated in all different languages!
-		</p>
-	      </a>
-
-	      <a class="list-group-item list-group-item-success" href="jsfuck/pres.html">
-		<h3 class="list-group-item-heading">JSFuck Presentation</h3>
-		<p class="list-group-item-text">
-		  Introduction to JSFuck for a Recurse Center presentation
-		</p>
-	      </a>
-
-	    </div>
-	  </div>
-	</div>
+	</div-->
 
       </div>
     </div>
