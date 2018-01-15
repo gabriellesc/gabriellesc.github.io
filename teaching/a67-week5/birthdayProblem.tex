@@ -1,0 +1,114 @@
+\documentclass{article}
+
+\usepackage{fullpage}
+\usepackage{amsmath,amssymb}
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\section*{The Birthday Problem}
+
+\textsc{Q: What is the probability that, in a group of $n$ people, at least 2 have the same birthday?}\\[1em]
+Let us represent the days of the year by the integers 1, 2, \ldots, 365. Then we choose our sample space $\textsl{S}$ to be \{all possible combinations of $n$ birthdays\}. That is, we include all possible combinations of $n$ days, with repetition (up to $n$ repetitions of the same day, where all $n$ birthdays fall on the same day).\\[1ex]
+For example, if $n=3$, we include:
+\begin{itemize}
+\item all the single days of the year (eg. (1, 1, 1), (2, 2, 2), (3, 3, 3), \ldots), in the case that all 3 birthdays fall on the same day,
+\item all combinations of 2 different days of the year (eg. (1, 1, 2), (1, 1, 3), (1, 1, 4), \ldots), in the case that 2 of the birthdays fall on the same day, and
+\item all combinations of 3 different days of the year (eg. (1, 2, 3), (1, 2, 4), (1, 2, 5), \ldots), in the case that all 3 birthdays fall on different days
+\end{itemize}
+Suppose that all birthdays are equally likely. Then, by the classical definition of probability,
+\begin{equation*}
+\boxed{
+P(\{\text{at least 2 people share a birthday}\})=\dfrac{|\{\text{at least 2\ldots}\}|}{|\textsl{S}|}
+}
+\end{equation*}
+We know from counting principles that
+\begin{align*}
+|\textsl{S}|& =\text{\# of ways to select the first birthday $\times$ \# of ways to select the second birthday}\\
+& \quad\times\ldots\times\text{\# of ways to select the $n$th birthday}\\
+& =365\times 365\times\ldots\times 365\\
+& =365^n
+\end{align*}
+and that
+\begin{align*}
+|\{\text{at least 2\ldots}\}|& =\text{\# of arrangements of $n$ birthdays where 2 people share a birthday}\\
+& \quad+\text{\# of arrangements of $n$ birthdays where 3 people share a birthday}\\
+& \quad+\ldots+\text{\# of arrangements of $n$ birthdays where $n$ people share a birthday}
+\end{align*}
+So
+\begin{equation*}
+\boxed{
+P(\{\text{at least 2 people share a birthday}\})=\dfrac{|\{\text{2 people share a birthday}\}|+\ldots+|\{\text{$n$ people share a birthday}\}|}{365^n}
+}
+\end{equation*}
+Then we consider that
+\begin{align*}
+\text{\# of arrangements of $n$ birthdays}& \\
+\text{where $r$ people share a birthday}& =\text{\# of ways to select the first unshared birthday}\\
+& \quad\times\text{\# of ways to select the second unshared birthday}\\
+& \quad\times\ldots\times\text{\# of ways to select the $(n-r)$th unshared birthday}\\
+& \quad\times \text{\# of ways to select the shared birthday}\\
+& \quad\times \text{\# of ways to arrange $n-r$ different birthdays and $r$ same birthdays}\\
+& =365\times 364\times\ldots\times(365-(n-r-1))\times(365-(n-r))\times \dfrac{n!}{r!1!\ldots 1!}
+\end{align*}
+For example, if $n=3$, 
+\begin{align*}
+\text{\# of arr. where 2 people share a birthday}& =\text{\# of ways to select the unshared birthday}\\
+& \quad\times \text{\# of ways to select the shared birthday}\\
+& \quad\times\text{\# of ways to arrange 1 unique birthday and 2 same birthdays}\\
+& =365\times 364\times \frac{3!}{2!1!}\\
+& =398\,580
+\end{align*}
+and then
+\begin{align*}
+P(\{\text{at least 2 people share a birthday}\})&=\dfrac{|\{\text{2 people share a birthday}\}|+|\{\text{3 people share a birthday}\}|}{365^3}\\
+& =\dfrac{398\,580+365}{365^3}\\
+& =\dfrac{398\,945}{365^3}
+\end{align*}
+%\textsc{In general,}
+%\begin{align*}
+%|\{\text{at least 2\ldots}\}|& =(365\times 364\times\ldots\times(365-(n-2-1))\times(365-(n-2)))\times \dfrac{n!}{2!1!\ldots 1!}\\
+%& \quad+(365\times 364\times\ldots\times(365-(n-3-1))\times(365-(n-3)))\times\dfrac{n!}{3!1!\ldots 1!}\\
+%& \quad+\ldots+365\\
+%& =\sum\limits_{i=2}^n \left(\dfrac{n!}{i!}\prod\limits_{j=i}^{n}(365-(n-j))\right)
+%\end{align*}
+%and so
+%\begin{equation*}
+%\boxed{
+%P(\{\text{at least 2 people share a birthday}\})=\dfrac{\sum\limits_{i=2}^n \left(\dfrac{n!}{i!}\prod\limits_{j=i}^{n}(365-(n-j))\right)}{365^n}
+%}
+%\end{equation*}
+\textsc{However}, this seems very laborious to compute, particularly if $n$ is large.\\
+We can instead use the complement rule to determine that
+\begin{equation*}
+\boxed{\begin{split}
+P(\{\text{at least 2 people share a birthday}\})& =1-P(\{\overline{\text{at least 2 people share a birthday}}\})\\
+& =1-P(\{\text{no shared birthdays}\})\\
+& =1-\dfrac{\text{\# of ways to select $n$ unshared birthdays}}{365^n}\\
+& =1-\dfrac{365\times 364\times\ldots\times(365-n+1)}{365^n}
+\end{split}}
+\end{equation*}
+For example, if $n=3$, 
+\begin{align*}
+P(\{\text{at least 2 people share a birthday}\})
+& =1-\dfrac{\text{\# of ways to select 3 unshared birthdays}}{365^n}\\
+& =1-\dfrac{365\times 364\times 363}{365^3}\\
+& =1-\dfrac{48\,228\,180}{365^3}\\
+& =\dfrac{398\,945}{365^3}
+\end{align*}
+\textsc{Notice} that, if $n>365$, the above calculation produces
+\begin{align*}
+P(\{\text{at least 2\ldots}\})& =1-\dfrac{365\times(365-1)\times\ldots\times(365-364)\times(365-365)\times\ldots\times(365-n+1)}{365^n}\\
+& =1-\dfrac{365\times\ldots\times 0\times\ldots\times(365-n+1)}{365^n}\\
+& =1-\dfrac{0}{365^n}\\
+& =1-0=1
+\end{align*}
+Why does this make sense?\\[1ex]
+By the pigeonhole principle, if we have $n$ objects to place in fewer than $n$ pigeonholes, at least 1 pigeonhole will contain multiple objects. In this case, if there are more than 365 birthdays to distribute over 365 days, at least 2 birthdays will fall on the same day. Thus, the probability of at least 2 people sharing a birthday is 1, or absolutely certain.\\[1ex]
+\textsc{Note} that this counting method counts \textit{ordered} $n$-tuples: for example, where $n=3$, we consider (1, 1, 2) and (1, 2, 1) to be different combinations of birthdays.\\
+If we were to instead consider unordered $n$-tuples, we could not use the classical definition of probability, since not all outcomes would be equally likely. For example, where $n=3$, the unordered combination (1, 1, 2) is more likely than the unordered combination (1, 2, 3), since there are more ways in which the former can occur.
+
+
+
+\end{document}

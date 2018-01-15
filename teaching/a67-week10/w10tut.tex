@@ -1,0 +1,125 @@
+\documentclass{article}
+
+\title{\sc\LARGE CSCA67 Tutorial, Week 10\\
+{\Large Nov. 16th-Nov. 20th, 2015}}
+\date{}
+\author{\sc Compiled by {\em G. Singh Cadieux}\\[1ex]
+\sc Adapted from\\
+R. Hammack. \href{http://www.people.vcu.edu/~rhammack/BookOfProof/}{\it Book of Proof}. 2013. \&
+A. Bretscher, \href{http://www.utsc.utoronto.ca/~bretscher/a67/lectures/indirect_proof.pdf}{\em Indirect Proofs I worksheet}.}
+
+\usepackage{fullpage}
+\usepackage{amsmath,amssymb}
+%\usepackage{color}
+%\usepackage{multirow}
+%\usepackage{tikz}
+\usepackage{hyperref}
+%\usepackage{array}
+
+\allowdisplaybreaks[1]
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+\maketitle
+
+\section{\sc Review of last week's lecture}
+\subsection*{\em Direct and indirect proof techniques}
+
+So far, we have seen 3 proof techniques for proving an implication $p\to q$ such as ``If $n\in\mathbb{Z}$, then $4\nmid(n^2-3)$":
+\begin{itemize}
+\item direct proof
+\item (indirect) proof by contraposition
+\item (indirect) proof by contradiction
+\end{itemize}
+Recall that each proof takes a different form:\\[1ex]
+\begin{tabular}{l|p{0.25\textwidth}p{0.25\textwidth}p{0.25\textwidth}}
+&Direct Proof&Contraposition&Contradiction\\\hline\hline
+Assumption(s)&$p$\newline eg., $n\in\mathbb{Z}$&$\neg q$\newline eg., $4|(n^2-3)$&$p\wedge\neg q$\newline eg., $n\in\mathbb{Z}\to 4|(n^2-3)$\medskip\\
+What to prove&$q$\newline eg., $4\nmid(n^2-3)$&$\neg p$\newline eg., $n\notin\mathbb{Z}$&some contradiction exists
+\end{tabular}\\[1em]
+Many statements are much easier to prove using one proof technique than another. In fact, some statements \textit{cannot} be proven using every technique. Thus, we have to carefully choose the technique we will use.\\[1ex]
+One approach we can take to choosing our proof technique is to identify, for each possible technique, what our proof would assume and what its conclusion would be (as above). We may find that the assumptions for one technique offer much more information than the assumptions for another.\\[1ex]
+For example, if we would like to prove ``If $n\in\mathbb{Z}$, then $4\nmid(n^2-3)$", and we attempt a direct proof, we start with the assumption that $n\in\mathbb{Z}$. This offers us very little information about $n$, which we need in order to start building a logical chain towards our conclusion $4\nmid(n^2-3)$.\\
+However, if we attempt a contrapositive proof of this statement, we start with the assumption $4|(n^2-3)$. This offers us much more initial information: for instance, we can then write $n^2-3=4k,\,k\in\mathbb{Z}$.\\[1em]
+Don't forget that most of the statements we are asked to prove can be restated using the universal quantifier: for example, ``If $n\in\mathbb{Z}$, then $4\nmid(n^2-3)$" can be restated as ``$\forall n\in\mathbb{Z},\,4\nmid(n^2-3)$".\\
+We can demonstrate for some value of $n$, eg. $n=2$, that $4\nmid(n^2-3)$. But we cannot show that $4\nmid(n^2-3)$ is true for every $n\in\mathbb{Z}$, since $\mathbb{Z}$ is countably infinite. To prove that this statement is true, we need a full proof.\\[1ex]
+However, to prove that this type of statement is false, we can simply find a counterexample - in this case, a value of $n$ such that $4\nmid(n^2-3)$, since this means that $4\nmid(n^2-3)$ is not true \textit{for all} $n$.
+
+\section{\sc Direct and contrapositive proofs}
+
+\subsection*{Q: {\em Let $a,b,c\in\mathbb{Z}$ and $n\in\mathbb{N}$. If $a\equiv_nb$, then $ca\equiv_ncb$.}}
+
+Recall that $x\equiv_ny$ means that $x\bmod n= y\bmod n$, and also that $n|(x-y)$ where $x>y$.\\[1em]
+Direct proof 1:\\[1ex]
+Suppose $a \equiv_n b$.\\
+This means $n | ( a -b )$, so there is an integer $d$ for which $a - b = nd$. We multiply both sides of this by $c$ to get $ac - bc = ndc$.\\
+Consequently, there is an integer $e = dc$ for which $ac - bc = ne$, so $n | ( ac - bc )$
+and consequently $ac \equiv_n bc$.\\[1em]
+Direct proof 2:\\[1ex]
+Suppose $a \equiv_n b$.\\
+This means $a\bmod n=b\bmod n=r$ for some remainder $r\in\mathbb{Z}$.\\
+Then by the divison theorem, we can write $a=k_1n+r$ and $b=k_2n+r$, where $k_1,k_2\in\mathbb{Z}$.
+\begin{align*}
+c(b-a)&=c((k_2n+r)-(k_1n+r))\\
+bc-ac&=c((k_2n+r)-(k_1n+r))\\
+&=c(k_2n-k_1n)\\
+&=n(c(k_2-k_1))
+\end{align*}
+Consequently, $n|(bc-ac)$ and so $ca\equiv_ncb$.
+
+\subsection*{Q: {\em Let $x\in\mathbb{Z}$. If $x^3-1$ is even, then $x$ is odd.}}
+
+Proof by contrapositive:\\[1ex]
+Suppose $x$ is not odd.\\
+\underline{WTP:} $x^3-1$ is not even.\\[1ex]
+Thus $x$ is even, so $x = 2 a$ for some $a\in\mathbb{Z}$. Then
+\begin{align*}
+x^3 - 1&= (2 a )^3 - 1\\
+&= 8 a^3 - 1\\
+&= 8 a^3 - 2 + 1\\
+&= 2(4 a^3 - 1) + 1\\
+&=2 b + 1,\;\text{where $b = 4 a^3 - 1 \in\mathbb{Z}$}
+\end{align*} 
+Therefore $x^3-1$ is odd if $x$ is even, and by contraposition, $x$ is odd if $x^3-1$ is even.
+
+\subsection*{Q: {\em If $a\equiv_4 0$ or $a\equiv_4 1$, then $\binom{a}{2}$ is even.}}
+
+We prove this directly.
+\begin{description}
+\item[Case 1:] Assume $a\equiv_4 0$.\\
+Then $a\bmod 4=0\bmod 4=0$. So $a$ is a multiple of 4.\\
+Since $a = 4 k_1$ for some $k_1 \in\mathbb{N}$, we have
+\begin{align*}
+\binom{a}{2}&=\dfrac{a!}{(a-2)!2!}\\
+&=\dfrac{a(a-1)}{2}\\
+&=\dfrac{4k_1(4k_1-1)}{2}\\
+&=2k_1(4k_1-1)\\
+&=2m,\;\text{where $m=k_1(4k_1-1)\in\mathbb{Z}$}
+\end{align*}
+Hence $\binom{a}{2}$ is even if $a\equiv_4 0$.
+\item[Case 2:]Assume $a\equiv_4 1$.\\
+Then $a\bmod 4=1\bmod 4=1$.\\
+Since $a = 4 k_2+1$ for some $k_2 \in\mathbb{N}$, we have
+\begin{align*}
+\binom{a}{2}&=\dfrac{a!}{(a-2)!2!}\\
+&=\dfrac{a(a-1)}{2}\\
+&=\dfrac{(4k_2+1)((4k_2+1)-1)}{2}\\
+&=2k_2(4k_2+1)\\
+&=2\ell,\;\text{where $\ell=k_2(4k_2+1)\in\mathbb{Z}$}
+\end{align*}
+Hence $\binom{a}{2}$ is even if $a\equiv_4 1$.
+\end{description}
+$\square$
+
+\section{\sc Additional practice problems}
+{\bf Q: Prove the following statements using contrapositive proof:}\\[1ex]
+Suppose $a, b \in \mathbb{Z}$. If $a^2(b^2-2b)$ is odd, then $a$ and $b$ are odd.\\[1ex]
+Suppose $x\in\mathbb{R}$. If $x^2 + 5 x < 0$ then $x < 0$.\\[1ex]
+Suppose $x\in\mathbb{R}$. If $x^5 + 7x^3 + 5x \geq x^4 + x^2 + 8$, then $x\geq 0$.\\[1em]
+{\bf Q: Prove the following statements using either direct or contrapositive proof:}\\[1ex]
+Let $a, b \in\mathbb{Z}$ and $n\in\mathbb{N}$. If $a\equiv b\pmod n$, then $a^3\equiv b^3 \pmod n$.\\[1ex]
+If $a, b \in\mathbb{Z}$ and $a$ and $b$ have the same parity (that is, $a$ and $b$ are both odd or both even), then $3 a + 7$ and $7 b -4$ do not.\\[1ex]
+
+
+\end{document}

@@ -1,0 +1,68 @@
+\documentclass{article}
+
+\usepackage{fullpage}
+\usepackage{textcomp}
+\usepackage{amsmath}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\cfoot{\sc Page \thepage\ of \pageref{end}}
+
+\begin{document}
+
+{\large \noindent{}University of Toronto at Scarborough\\
+\textbf{CSC A67/MAT A67 - Discrete Mathematics, Fall 2015}}
+
+\section*{\huge Exercise \#6: Logic and Proofs}
+
+{\large Due: November 13, 2015 at 11:59 p.m.\\
+This exercise is worth 3\% of your final grade.}\\[1em]
+\textbf{Warning:} Your electronic submission on MarkUs affirms that this exercise is your own work and no
+one else's, and is in accordance with the University of Toronto Code of Behaviour on Academic Matters,
+the Code of Student Conduct, and the guidelines for avoiding plagiarism in CSC A67/MAT A67.\\[1ex]
+This exercise is due by 11:59 p.m. November 13. Late exercises will not be accepted.\\[1ex]
+\renewcommand{\labelenumi}{\arabic{enumi}.}
+\renewcommand{\labelenumii}{(\alph{enumii})}
+\begin{enumerate}
+\item A\marginpar{[12]} technician suspects that one or more processors in a distributed system is not working properly. The processors, $A$, $B$, and $C$, are all capable of reporting information about the status of the processors in the system (either working or not working). The technician is unsure whether a processor is really not working, or whether the problem is in the status reporting routines in one or more of the processors. After polling each processor, the technician receives the following status reports:
+	\begin{itemize}
+	\item Processor $A$ reports that Processor $B$ is not working and Processor $C$ is working.
+	\item Processor $B$ reports that Processor $A$ is working if and only if Processor $B$ is working.
+	\item Processor $C$ reports that at least one of the other two processors is not working.
+	\end{itemize}
+	\begin{enumerate}
+	\item Let $a$ = ``$A$ is working," $b$ = ``$B$ is working," and $c$ = ``$C$ is working." Write the three status reports in terms of $a$, $b$, and $c$, using the symbols of formal logic.
+	\item Complete the following truth table:\\[1ex]
+	\begin{tabular}{c|c|c|c|c|c}
+	$a$&$b$&$c$&$A$'s report&$B$'s report&$C$'s report\\\hline
+	T&T&T&&&\\
+	T&T&F&&&\\
+	T&F&T&&&\\
+	T&F&F&&&\\
+	F&T&T&&&\\
+	F&T&F&&&\\
+	F&F&T&&&\\
+	F&F&F&&&
+	\end{tabular}
+	\item Assume that all of the status reports are true, which processor(s) is/are working?
+	\item Assuming that all of the processors are working, which status report(s) is/are false?
+	\item Assuming that a processor's status report is true if anf only if the processor is working, what is the status of each processor?
+	\end{enumerate}
+\item \begin{enumerate}
+	\item Construct\marginpar{[6]} a truth table for the following statement: $(p\leftrightarrow q)\to r$.
+	\item Construct an equivalent statement using only $\wedge$, $\vee$, and/or $\neg$.
+	\item Simplify the statement from (b) as much as possible using equivalence rules.
+	\end{enumerate}
+\item \begin{enumerate}
+	\item What\marginpar{[8]} is the contrapositive of the statement ``If $n^2$ is even, then so is $n$", where $n$ is an integer?
+	\item Prove that every perfect square is of the form $4k$ or $4k+1$ for some integer $k$.
+	\item A Pythagorean triple is a triple $(a,b,c)$ where $a^2+b^2=c^2$. Prove that, in a Pythagorean triple, if $c$ is even then so are both $a$ and $b$.
+	\end{enumerate}
+\item Prove\marginpar{[3]} that if $2^{3m-3}\text{ mod }7=1$, then $2^{3m}\text{ mod }7=1$.\\
+(\textit{Hint:} $2^{3m}=2^3\cdot 2^{3m-3}$)
+\end{enumerate}
+\hrulefill\\
+\noindent[Total: 29 marks]\label{end}
+
+\end{document}

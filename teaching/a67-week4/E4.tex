@@ -1,0 +1,48 @@
+\documentclass{article}
+
+\usepackage{fullpage}
+\usepackage{textcomp}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\cfoot{\sc Page \thepage\ of \pageref{end}}
+
+\begin{document}
+
+{\large \noindent{}University of Toronto at Scarborough\\
+\textbf{CSC A67/MAT A67 - Discrete Mathematics, Fall 2015}}
+
+\section*{\huge Exercise \#4: Probability}
+
+{\large Due: October 9, 2015 at 11:59 p.m.\\
+This exercise is worth 3\% of your final grade.}\\[1em]
+\textbf{Warning:} Your electronic submission on MarkUs affirms that this exercise is your own work and no
+one else's, and is in accordance with the University of Toronto Code of Behaviour on Academic Matters,
+the Code of Student Conduct, and the guidelines for avoiding plagiarism in CSC A67/MAT A67.\\[1ex]
+This exercise is due by 11:59 p.m. October 9. Late exercises will not be accepted.\\[1ex]
+\renewcommand{\labelenumi}{\arabic{enumi}.}
+\renewcommand{\labelenumii}{(\alph{enumii})}
+\begin{enumerate}
+\item A\marginpar{[2]} random number generator selects a sequence of 20 digits from \{0, 1, \ldots, 9\}. What is the probability that the sequence contains at least one 3?\\
+(Hint: consider the probability that the sequence contains no 3's.)
+\item An\marginpar{[3]} urn contains 7 red balls, 7 white balls, and 7 blue balls. A sample of 5 balls is drawn at random without replacement. What is the probability that the sample contains 3 balls of one colour and 2 of another?
+\item Odalys\marginpar{[8]} sells eggs to restaurants. Before she sends a package of eggs to a customer, she selects five of the eggs in the package at random and checks to see if they are spoiled. She won't send the package if any of the eggs she tests are spoiled.
+	\begin{enumerate}
+	\item Suppose the package contains 18 eggs, and half of them are spoiled. How likely is it that Odalys detects a spoiled egg?
+	\item Suppose the package contains 144 eggs, and half of them are spoiled. How likely is it that Odalys detects a spoiled egg?
+	\item Suppose the package contains 144 eggs, and 10 of them are spoiled. How likely is it that Odalys detects a spoiled egg?
+	\item What seems to have a bigger effect on the probability of finding a spoiled egg: the size of the package or the percentage of spoiled eggs? Justify your answer.
+	\end{enumerate}
+\item We\marginpar{[8]} select a subset $X$ of the set $S=\{1,2,\ldots,100\}$ randomly and uniformly (i.e. every subset has the same probability of being selected). What is the probability that
+	\begin{enumerate}
+	\item $X$ has an even number of elements?
+	\item both 1 and 100 belong to $X$?
+	\item the largest element of $X$ is 50?
+	\item $X$ has at most 2 elements?
+	\end{enumerate}
+\end{enumerate}
+\hrulefill\\
+\noindent[Total: 21 marks]\label{end}
+
+\end{document}

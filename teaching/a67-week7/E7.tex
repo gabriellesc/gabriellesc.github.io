@@ -1,0 +1,47 @@
+\documentclass{article}
+
+\usepackage{fullpage}
+\usepackage{textcomp}
+\usepackage{amsmath}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\cfoot{\sc Page \thepage\ of \pageref{end}}
+
+\begin{document}
+
+{\large \noindent{}University of Toronto at Scarborough\\
+\textbf{CSC A67/MAT A67 - Discrete Mathematics, Fall 2015}}
+
+\section*{\huge Exercise \#7: Proofs}
+
+{\large Due: November 20, 2015 at 11:59 p.m.\\
+This exercise is worth 3\% of your final grade.}\\[1em]
+\textbf{Warning:} Your electronic submission on MarkUs affirms that this exercise is your own work and no
+one else's, and is in accordance with the University of Toronto Code of Behaviour on Academic Matters,
+the Code of Student Conduct, and the guidelines for avoiding plagiarism in CSC A67/MAT A67.\\[1ex]
+This exercise is due by 11:59 p.m. November 20. Late exercises will not be accepted.\\[1ex]
+\renewcommand{\labelenumi}{\arabic{enumi}.}
+\renewcommand{\labelenumii}{(\alph{enumii})}
+\begin{enumerate}
+\item The\marginpar{[5]} \textit{greatest common divisor} of two positive integers $a$ and $b$ is the largest positive integer that divides both $a$ and $b$ (written $\gcd(a,b)$). For example, $\gcd(4,6)=2$ and $\gcd(5,6)=1$.
+	\begin{enumerate}
+	\item Prove that $\gcd(a,b) = \gcd(a,b-a).$
+	\item Let $r=b\bmod a$. Using part \textbf{(a)}, prove that $\gcd(a,b) = \gcd(a,r)$.
+	\end{enumerate}
+\item Prove\marginpar{[4]} that $\sqrt[3]{5}$ is irrational.
+\item Prove\marginpar{[4]} the following statement by contraposition:\\[1ex]
+Let $x$ be an integer. If $x^2+x+1$ is even, then $x$ is odd.
+\item Prove\marginpar{[4]} the following statement by contradiction:\\[1ex]
+Let $x$ and $y$ be integers. If $3x+5y=153$, then at least one of $x$ and $y$ is odd.
+\item An\marginpar{[4]} integer is called ``sane" if $3\,|\,(n^2+2n)$. (That is, if $(n^2+2n)\bmod 3=0$.)
+	\begin{enumerate}
+	\item Prove or disprove that all odd integers are sane.
+	\item Prove or disprove that, if $3\,|\,n$, then $n$ is sane.
+	\end{enumerate}
+\end{enumerate}
+\hrulefill\\
+\noindent[Total: 21 marks]\label{end}
+
+\end{document}

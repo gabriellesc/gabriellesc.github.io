@@ -1,0 +1,17 @@
+#doc-list {
+    width: 250px;
+    float: left;
+    max-height: calc(100vh - 155px - 70px);
+    overflow: auto;
+}
+
+iframe {
+    width: calc(100% - 250px - 10px);
+    height: calc(100vh - 155px - 70px);
+    margin-bottom: 10px;
+    float: right;
+}
+
+#doc-list li a {
+    padding: 8px 10px;
+}

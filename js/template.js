@@ -30,6 +30,9 @@ nav.innerHTML = `<ul class="nav nav-tabs">
       <li role="presentation" id="jsfuck-nav">
         <a href="../jsfuck/pres.html">JSFuck Presentation</a>
       </li>
+      <li role="presentation" id="teaching-nav">
+        <a href="../teaching/index.html">Teaching Materials</a>
+      </li>
     </ul>`;
 
 let footer = document.createElement('div');

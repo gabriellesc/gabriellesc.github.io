@@ -1,0 +1,265 @@
+\documentclass{article}
+
+\title{\sc\LARGE CSCA67 Tutorial, Week 3\\
+{\Large Sept. 28th-Oct. 2nd, 2015}}
+\date{}
+\author{\sc Compiled by {\em G. Singh Cadieux}\\[1ex]
+\sc Adapted from\\
+A. Bretscher, \href{http://www.utsc.utoronto.ca/~bretscher/a67/lectures/w4.pdf}{\em CSCA67 Week 4 Lecture Notes},\\
+\href{http://www.intmath.com/counting-probability/3-permutations.php}{\em Interactive Mathematics: Permutations (Ordered Arrangements)} \&\\
+Lov\'{a}sz, et al. \textit{Discrete Mathematics: Elementary and Beyond.} Springer, 2003.}
+
+\usepackage{fullpage}
+\usepackage{amsmath,amssymb}
+%\usepackage{color}
+%\usepackage{multicol}
+\usepackage{tikz}
+\usepackage{hyperref}
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+\maketitle
+
+\section{\sc More counting problems}
+
+\subsection*{{\normalsize A class consists of 15 students of whom 5 are prefects.}\\
+Q: {\em How many committees of 8 can be formed if each consists of}}
+\subsubsection*{a) {\em exactly 2 prefects?}}
+Let us consider the students on the committee who are prefects as 1 entity $P$, and those who are not prefects as 1 entity $NP$. Then, using the product rule, we determine that
+\begin{equation*}
+\text{total \# of possible committees with 2 prefects}=\text{\# of possibilities for }P\times \text{\# of possibilities for }NP
+\end{equation*}
+The total number of possible $P$s is the number of ways we can choose 2 prefects for the committee from the 5 prefects in the class.\\[1ex]
+Similarly, the total number of possible $NP$s is the number of ways we can choose $8-2=6$ non-prefects for the committee from the $15-5=10$ non-prefects in the class.
+\begin{align*}
+\text{total \# of possible committees with 2 prefects}& =\dfrac{5!}{(5-2)!\,2!}\times\dfrac{10!}{(10-6)!\,6!}\\
+& =10\times 120\\
+& =2100
+\end{align*}
+
+\subsubsection*{b) {\em at least 2 prefects?}}
+The total number of committees consisting of at least 2 prefects is the sum of the number of committees containing 2 prefects, and the number of committees containing 3 prefects, and so on.\\[1ex]
+Rather than calculating each of these combinations and summing them, it is simpler to consider the total number of committees consisting of fewer than 2 prefects, since this is only the sum of the number of committees containing 1 prefect and the number of committees containing no prefects. As there are only 2 possibilities - either a committee has fewer than 2 prefects or at least 2 prefects - and both possibilities cannot be true simultaneously - a committee cannot simultaneously have fewer than 2 prefects and at least 2 prefects - the total number of committees is the sum of these 2 possibilities.
+\begin{align*}
+\text{total \# of committees}& =\left(\text{\# of committees cont.}<\text{2 prefects}\right)+
+\left(\text{\# of committees cont.}\geq\text{2 prefects}\right)\\
+\text{\# of committees cont.}\geq\text{2 prefects}& =\text{total \# of committees}-\left(\text{\# of committees cont.}<\text{2 prefects}\right)\\
+& =\text{total \# of committees}-(\text{\# of committees cont. no prefects}\\
+& \quad+\text{\# of committees cont. 1 prefect})
+\end{align*}
+By the same reasoning as in \textbf{(a)},
+\begin{align*}
+\text{\# of committees with no prefects}& =\dfrac{5!}{(5-0)!\,0!}\times\dfrac{10!}{(10-8)!\,8!}\\
+& =1\times 45\\
+& =45\\
+\text{\# of committees with 1 prefect}& =\dfrac{5!}{(5-1)!\,1!}\times\dfrac{10!}{(10-7)!\,7!}\\
+& =5\times 120\\
+& =600
+\end{align*}
+And the total number of all possible committees is simply the number of ways that 8 students can be chosen, without restriction, from the class of 15. Thus,
+\begin{align*}
+\text{\# of committees cont.}\geq\text{2 prefects}& =\dfrac{15!}{(15-8)!\,8!}-\left(45+600\right)\\
+& =6435-645\\
+& =5790
+\end{align*}
+
+\subsection*{{\normalsize Out of 5 mathematicians and 7 engineers, a committee consisting of 2 mathematicians and 3 engineers is formed.}\\
+Q: {\em How many ways can this be done if}}
+\subsubsection*{a) {\em any mathematician and any engineer can be included?}}
+Let us consider the mathematicians on the committee who are prefects as 1 entity $M$, and the engineers on the committee as 1 entity $E$. Then, using the product rule, we determine that
+\begin{equation*}
+\text{total \# of possible committees}=\text{\# of possibilities for }M\times \text{\# of possibilities for }E
+\end{equation*}
+The total number of possibilities for $M$ is the number of ways we can choose 2 mathematicians from 5, and the total number of possibilities for $E$ is the number of ways we can choose 3 engineers from 7.
+\begin{align*}
+\text{total \# of possible committees}& =\dfrac{5!}{(5-2)!\,2!}\times\dfrac{7!}{(7-3)!\,3!}\\
+& =10\times 35\\
+& =350
+\end{align*}
+
+\subsubsection*{b) {\em one particular engineer must be on the committee?}}
+If one particular engineer must be on the committee, we use the same method as above, except that we are choosing 2 engineers from 6 rather than 3 from 7, since we have already selected 1 engineer and must now choose from those remaining.
+\begin{align*}
+\text{total \# of possible committees}& =\dfrac{5!}{(5-2)!\,2!}\times\dfrac{6!}{(6-2)!\,2!}\\
+& =10\times 15\\
+& =150
+\end{align*}
+
+\subsubsection*{c) {\em two particular mathematicians cannot be on the committee?}}
+If two particular engineers cannot be on the committee, then we continue to use the same method as above, but we are choosing 2 mathematicians from 3 rather than from 5, since we have excluded 2 mathematicians as choices.
+\begin{align*}
+\text{total \# of possible committees}& =\dfrac{3!}{(3-2)!\,2!}\times\dfrac{7!}{(7-3)!\,3!}\\
+& =3\times 35\\
+& =105
+\end{align*}
+
+\subsection*{{\normalsize You have 8 colours of paint and 14 rooms in your house, each of which you want to paint in a single colour.\\}
+Q: {\em How many ways can you paint your house?}}
+If there are 8 ways to paint each room, and 14 rooms to be painted, then by the product rule,
+\begin{align*}
+\text{\# of ways to paint 14 rooms}& =\text{\# of ways to paint room1}\times\text{\# of ways to paint room2}\times\ldots\\
+& \quad\times\text{\# of ways to paint room14}\\
+& =8^{14}
+\end{align*}
+
+\subsubsection*{Q: {\em How many combinations of coloured rooms can you make?}}
+Because we are asked for the number of combinations, we do not consider the order in which the rooms are painted, but simply the number of rooms in the house that are painted each colour.\\[1ex]
+Specifically, since we can paint multiple rooms the same colour, we are asked for the number of combinations of colours for $r=14$ rooms, with $n=8$ colours from which to choose.
+\begin{equation*}
+\binom{r+(n-1)}{r}\Rightarrow\binom{14+(8-1)}{14}=116\,280\text{ colour combinations for 14 rooms}
+\end{equation*}
+
+\section{\sc Review of week 4's lecture}
+\subsection*{\em Introduction to probability}
+
+\subsection{\em Basic definitions}
+\begin{description}
+\item[\sc Experiment:] \hfill\\
+a clearly-defined procedure that results in 1 of a set of \textit{outcomes}/\textit{elementary events}\\
+\textbf{eg.} tossing a coin and recording the outcome
+\item[\sc Sample space:] \hfill\\
+a set \textsl{S} that includes all possible outcomes of an experiment\\
+\textbf{eg.} the experiment of tossing a coin and recording its outcome has sample space \textsl{S} = \{heads, tails\}
+\item[\sc Event:] \hfill\\
+a subset of the sample space \textsl{S}\\
+\textbf{eg.} for the experiment of tossing a coin and recording its outcome, the events are $\emptyset$ (empty set), \{heads\}, \{tails\}, \{heads, tails\}
+	\begin{description}
+	\item[\sc Compound event:] an event consisting of multiple outcomes/elementary events\\
+	\textbf{eg.} for the experiment of tossing a coin and recording its outcome, the only compound event is \{heads, tails\}\\[1ex]
+	\textbf{eg.} for the experiment of throwing a standard die, the compound events include \{1, 2\}, \{at least 3\} = \{3, 4, 5, 6\}, \{even numbers\} = \{2, 4, 6\}
+	\end{description}
+\item[\sc Probability:]\hfill\\
+the chance of the occurrence of an event, between 0 (it is impossible for the event to occur) and 1 (it is absolutely certain that the event will occur)
+\end{description}
+
+\subsubsection*{\em Choosing an appropriate sample space}
+Generally, the sample space for an experiment should be \textit{collectively exhaustive} - that is, no matter what happens in the experiment, the result is an outcome that is included in the sample space. Thus (as described in the definition below), there should be a 100\% probability of any outcome in the sample space occurring; and by the same token, there should be a 0\% probability of no outcome in the sample space occurring.\\[1ex]
+For example, the experiment of throwing a standard die could not have sample space \textsl{S} = \{1, 2, 3, 4\}, since it is also possible for us to roll a 5 or 6.\\[1em]
+Within the sample space, all elements should be \textit{distinct} and \textit{mutually exclusive} - that is, it should not be possible for the experiment to have more than 1 outcome (as described in the definition above).\\[1ex]
+For example, the experiment of throwing a standard die could have sample space \textsl{S} = \{1 or 2, 3, 4 or 5 or 6\}, but not \textsl{S} = \{1 or 2, 2 or 3, 4 or 5 or 6\}, since rolling a 2 results in both ``1 or 2" and ``2 or 3" as outcomes.\\[1em]
+The sample space should have enough detail to distinguish between all outcomes of interest, without including irrelevant outcomes.\\[1ex]
+For example, the experiment of throwing a standard die should generally not have sample space \textsl{S} = \{1 or 2 or 3 or 4 or 5 or 6\}, since this does not allow us to distinguish between each face of the die.\\
+Nor should it have sample space \textsl{S} = \{1, 2, 3, 4, 5, 6, 7, 9, 100\}, since 7, 9, and 100 are not faces of a standard die and so will never occur.\\[1em]
+Finally, it may be useful to design a sample space in which all outcomes are \textit{equally likely}. If this is the case, then we can use the definition of probability below to calculate the probabilities of various events. Otherwise, we need to assign probability values to all relevant outcomes and/or events.\\[1ex]
+For example, the experiment of throwing two standard dice and recording their sum could have an equally-likely sample space \textsl{S} = \{(1,1), (1,2), \ldots, (6,6)\}, or sample space \textsl{S}$^*$ = \{2, 3, \ldots, 12\}. For \textsl{S}$^*$, the probability of each of 3, 4, \ldots, 11 would increase with the number of ways in which these sums could occur: 3 can be formed in 2 ways ((1,2), (2,1), while 4 can be formed in 3 ways ((1,3), (2,2), (3,1)), making 4 a more likely outcome than 3.
+
+\subsection{\em Probability \text{(Laplace's classical definition)}}
+The probability $P(E)$ of an event $E$ in an \textit{equally-likely} sample space \textsl{S} is 
+\begin{equation*}
+P(E)=\dfrac{|E|}{|\textsl{S}|}
+\end{equation*}
+(That is, the number of outcomes in $E$ divided by the number of outcomes in \textsl{S}.)\\[1ex]
+\textbf{eg.} for the experiment of throwing a standard die, with \textsl{S} = \{1, 2, 3, 4, 5, 6\}, the probability of rolling an even number is
+\begin{equation*}
+\dfrac{|\{\text{even numbers}\}|}{|\textsl{S}|}=\dfrac{|\{2,4,6\}|}{|\{1,2,3,4,5,6\}|}=\dfrac{3}{6}=50\%
+\end{equation*}
+\textbf{eg.} for the experiment of throwing a standard die, with \textsl{S} = \{1, 2, 3, 4, 5, 6\}, the probability of rolling a power of 2 is
+\begin{equation*}
+\dfrac{|\{\text{powers of 2}\}|}{|\textsl{S}|}=\dfrac{|\{1,2,4\}|}{|\{1,2,3,4,5,6\}|}=\dfrac{3}{6}=50\%
+\end{equation*}
+
+\section{\sc Probability problems}
+\textsc{N.B. There are} several possible, equally valid ways to arrive at these answers, including different methods that may have been demonstrated in lecture.
+
+\subsection*{Q: {\em What is the probability of}}
+\subsubsection*{a) {\em getting an ace if we choose a card at random from a standard pack of 52 playing cards?}}
+Let us select \textsl{S} = \{52-card deck\} = \{\textcolor{red}{2$\heartsuit$}, \ldots, \textcolor{red}{2$\diamondsuit$}, \ldots, 2$\clubsuit$, \ldots, 2$\spadesuit$, \ldots\}. The probability of choosing any one card is the same for every card in the deck, so all outcomes in \textsl{S} are equally likely, and we can use the above classical definition of probability:
+\begin{equation*}
+P(E)=\dfrac{|E|}{|\textsl{S}|}\Rightarrow P(\{\text{aces}\})=\dfrac{|\{\text{aces}\}|}{|\{\text{52-card deck}\}|} =\dfrac{|\{\textcolor{red}{A\heartsuit},\textcolor{red}{A\diamondsuit},A\clubsuit,A\spadesuit\}|}{52}
+=\dfrac{4}{52}=\dfrac{1}{13}
+\end{equation*}
+
+\subsubsection*{b) {\em getting a 5 if we roll a die?}}
+Let us select \textsl{S} = \{1, 2, 3, 4, 5, 6\}. The probability of rolling any number on the die is the same (assuming that it is a standard die), so all outcomes in \textsl{S} are equally likely, and we can again use the classical definition of probability:
+\begin{equation*}
+P(\{5\})=\dfrac{|\{5\}|}{|\{1, 2, 3, 4, 5, 6\}|}=\dfrac{1}{6}
+\end{equation*}
+
+\subsubsection*{c) {\em getting an even number if we roll a die?}}
+As in \textbf{(b)}, we select \textsl{S} = \{1, 2, 3, 4, 5, 6\}, and again use the definition of probability:
+\begin{equation*}
+P(\{\text{even numbers}\})=\dfrac{|\{\text{even numbers}\}|}{|\{1, 2, 3, 4, 5, 6\}|}=\dfrac{|\{2,4,6\}|}{6}=\dfrac{3}{6}=\dfrac{1}{2}
+\end{equation*}
+
+\subsubsection*{d) {\em having one Tuesday in this week?}}
+Every week must have a Tuesday, so $P(\{\text{Tuesday}\})=1$.
+
+\subsection*{{\normalsize There are 15 balls numbered 1 to 15, in a bag.}\\
+Q: {\em If we select one at random, what is the probability that the number printed on the ball will be a prime number greater than 5?}}
+Let us select \textsl{S} = \{ball 1, ball 2, \ldots, ball 15\}. Then, assuming that it is equally likely that we will select any one ball, all outcomes in \textsl{S} are equally likely, and we can use the above classical definition of probability:
+\begin{align*}
+P(E)=\dfrac{|E|}{|\textsl{S}|}\Rightarrow P(\{\text{prime-numbered balls greater than 5}\})& =\dfrac{|\{\text{prime-numbered balls greater than 5}\}|}{|\{\text{ball 1, ball 2, \ldots, ball 15}\}|}\\
+& =\dfrac{|\{\text{ball 7, ball 11, ball 13}\}|}{15}\\
+& =\dfrac{3}{15}=\dfrac{1}{5}
+\end{align*}
+
+\subsection*{{\normalsize The names of 4 directors of a company will be placed in a hat and a 2-member delegation will be selected at random to represent the company at an international meeting. Let A, B, C and D denote the directors of the company.}\\
+Q: {\em What is the probability that}}
+\subsubsection*{a) {\em A is selected?}}
+Let us select \textsl{S} = \{delegations\} = \{AB, AC, AD, BC, BD, CD\}. The outcomes in which A is selected are AB, AC, and AD. Assuming that it is equally likely that any one director's name will be drawn from the hat, all outcomes in \textsl{S} are equally likely, so we can use the above classical definition of probability:
+\begin{equation*}
+P(E)=\dfrac{|E|}{|\textsl{S}|}\Rightarrow P(\{\text{A is selected}\})=\dfrac{|\{\text{A is selected}\}|}{|\{\text{AB, AC, AD, BC, BD, CD}\}|}=\dfrac{|\{\text{AB, AC, AD}\}|}{6}=\dfrac{3}{6}=\dfrac{1}{2}
+\end{equation*}
+
+\textsc{Alternatively}, we can simply select \textsl{S} = \{delegations\} without describing the possible delegations. We instead use combinatorics, as we have seen before, to count the total number of possible delegations, and the number of possible delegations which include A.\\[1ex]
+The total number of possible delegations is the number of ways in which we can select 2 members from the 4 directors.\\[1ex]
+The number of possible delegations which include A is the number of ways in which we can select the second member from the 3 remaining directors, after having selected A.
+\begin{equation*}
+P(\{\text{A is selected}\})=\dfrac{|\{\text{A is selected}\}|}{|\{\text{delegations}\}|}=\dfrac{\binom{3}{1}}{\binom{4}{2}}=\dfrac{3}{6}=\dfrac{1}{2}
+\end{equation*}
+
+\subsubsection*{b) {\em A or B is selected?}}
+Let us select \textsl{S} = \{delegations\} = \{AB, AC, AD, BC, BD, CD\}. The outcomes in which A or B is selected are AB, AC, AD, BC, and BD. Assuming that it is equally likely that any one director's name will be drawn from the hat, all outcomes in \textsl{S} are equally likely, so we can again use the definition of probability:
+\begin{equation*}
+P(\{\text{A or B is selected}\})=\dfrac{|\{\text{A or B is selected}\}|}{|\{\text{AB, AC, AD, BC, BD, CD}\}|}=\dfrac{|\{\text{AB, AC, AD, BC, BD}\}|}{6}=\dfrac{5}{6}
+\end{equation*}
+
+\textsc{Alternatively}, we can again select \textsl{S} = \{delegations\}, and use combinatorics to count the total number of possible delegations, and the number of possible delegations which include A or B.\\[1ex]
+To form a delegation that includes A or B, we can first choose A, and then a second member from the 3 remaining directors (including B); or we can first choose B, and then a second member from the 2 remaining directors (we exclude A so as not to count AB again).
+\begin{equation*}
+P(\{\text{A or B is selected}\})=\dfrac{|\{\text{A or B is selected}\}|}{|\{\text{delegations}\}|}=\dfrac{\binom{3}{1}+\binom{2}{1}}{\binom{4}{2}}=\dfrac{5}{6}
+\end{equation*}
+
+\textsc{Another alternative} is to use the complement rule above. Rather than counting the number of outcomes in which A or B is selected, we can count the number of outcomes in which \textit{not} ``A or B is selected" - that is, in which it is not true that A or B is selected. From \textsl{S} = \{delegations\} = \{AB, AC, AD, BC, BD, CD\}, CD is the only outcome in which this is the case.\\[1ex]
+We can also determine logically that, if it is not true that A or B is selected, it must be true that neither A nor B was selected. This leaves only 2 directors, C and D, from which to select, meaning that the only remaining delegation is CD.
+\begin{align*}
+P(E)=1-P(\bar{E})\Rightarrow P(\{\text{A or B is selected}\})& =1-P(\{\overline{\text{A or B is selected}}\})\\
+& =1-P(\{\text{CD}\})\\
+& =1-\dfrac{|\{\text{CD}\}|}{|\{\text{AB, AC, AD, BC, BD, CD}\}|}\\
+& =1-\dfrac{1}{6}=\dfrac{5}{6}
+\end{align*}
+\textsc{Generally}, we use the complement rule in cases in which there are fewer outcomes in $\bar{E}$ than in $E$, or in which $\bar{E}$ is easier to compute than $E$.
+
+\subsubsection*{c) {\em A is not selected?}}
+Let us select \textsl{S} = \{delegations\} = \{AB, AC, AD, BC, BD, CD\}. The outcomes in which A is not selected are BC, BD, and CD. Assuming that it is equally likely that any one director's name will be drawn from the hat, all outcomes in \textsl{S} are equally likely, so we can again use the definition of probability:
+\begin{equation*}
+P(\{\text{A is not selected}\})=\dfrac{|\{\text{A is not selected}\}|}{|\{\text{AB, AC, AD, BC, BD, CD}\}|}=\dfrac{|\{\text{BC, BD, CD}\}|}{6}=\dfrac{3}{6}=\dfrac{1}{2}
+\end{equation*}
+
+\textsc{Alternatively}, we can again select \textsl{S} = \{delegations\}, and use combinatorics to count the total number of possible delegations, and the number of possible delegations which do not include A.\\[1ex]
+The number of possible delegations which do not include A is the number of ways in which we can select 2 members from the remaining 3 directors, after having excluded A.
+\begin{equation*}
+P(\{\text{A is not selected}\})=\dfrac{|\{\text{A is not selected}\}|}{|\{\text{delegations}\}|}=\dfrac{\binom{3}{2}}{\binom{4}{2}}=\dfrac{5}{6}=\dfrac{1}{2}
+\end{equation*}
+
+\textsc{Another alternative} is to again use the complement rule. We have already determined the probability of the event that A is selected, which is the complement of the event that A is not selected. Thus
+\begin{equation*}
+P(\{\text{A is not selected}\})=1-P(\{\text{A is selected}\})=1-\dfrac{1}{2}=\dfrac{1}{2}
+\end{equation*}
+
+\section{\sc Additional practice problems}
+
+The names of 5 directors of a company will be placed in a hat and a 2-member delegation will be selected at random to represent the company at an international meeting. Let A, B, C, D, and E denote the directors of the company.\\[1ex]
+{\bf Q: What is the probability that\\[1ex]
+a) A is selected?\\[1ex]
+b) A or B is selected?\\[1ex]
+c) A is not selected?}\\[1em]
+{\bf Q: What is the probability of drawing a diamond from a standard pack of 52 playing cards?}\\[1em]
+{\bf Q: If a die is rolled and a coin is tossed, what is the probability that the die shows an odd number and the coin shows a head?}\\[1em]
+{\bf Q: If 2 standard dice are rolled, what is the probability that the sum is\\
+a) equal to 1?\\[1ex]
+b) equal to 4?\\[1ex]
+c) less than 13?}
+
+\end{document}

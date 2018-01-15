@@ -1,0 +1,44 @@
+\documentclass{article}
+
+\usepackage{fullpage}
+\usepackage{amsmath}
+\usepackage{textcomp}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\cfoot{\sc Page \thepage\ of \pageref{end}}
+
+\begin{document}
+
+{\large \noindent{}University of Toronto at Scarborough\\
+\textbf{CSC A67/MAT A67 - Discrete Mathematics, Fall 2015}}
+
+\section*{\huge Exercise \#2: Counting with Repetition}
+
+{\large Due: September 25, 2015 at 11:59 p.m.\\
+This assignment is worth 3\% of your final grade.}\\[1em]
+\textbf{Warning:} Your electronic submission on MarkUs affirms that this exercise is your own work and no
+one else's, and is in accordance with the University of Toronto Code of Behaviour on Academic Matters,
+the Code of Student Conduct, and the guidelines for avoiding plagiarism in CSC A67/MAT A67.\\[1ex]
+This exercise is due by 11:59 p.m. September 25. Late exercises will not be accepted.\\[1ex]
+\renewcommand{\labelenumi}{\arabic{enumi}.}
+\renewcommand{\labelenumii}{(\alph{enumii})}
+\begin{enumerate}
+\item Form\marginpar{[6]} a seven-letter word by mixing up the letters in the word COMBINE.
+	\begin{enumerate}
+	\item How many ways can you do this?
+	\item How many ways can you do this if all the vowels have to be at the beginning?
+	\item How many ways can you do this if no vowel is isolated between two consonants?\\
+	(eg. EBMCION and MOIENCB are acceptable, but B\underline{E}MCNIO is not)
+	\end{enumerate}
+\item A\marginpar{[3]} men's field lacrosse team consists of ten players: three attackmen, three midfielders, three defenders, and one goaltender. Given a set of 10 team members, how many different ways are there to assign the roles of attackmen, midfielders, defenders, and goaltender?\\
+Count in \textit{two} different ways and verify that your answer is the same.
+\item Snow\marginpar{[2]} White has 50 (American) one-dollar bills, which she wishes to divide up among seven different dwarves. Each dwarf may receive any integral (whole) number of bills, from 0 to 50. How many different ways can she distribute this money?
+\item Suppose\marginpar{[3]} you have four squares of stained glass, all of different colours, and you wish to make a 2x2 square stained glass window. How many different windows are possible?\\
+(Note that any pattern may be rotated 180\textdegree, flipped vertically, or flipped horizontally. You should count all the possible resulting patterns as the same window.)
+\end{enumerate}
+\hrulefill\\
+\noindent[Total: 14 marks]\label{end}
+
+\end{document}
