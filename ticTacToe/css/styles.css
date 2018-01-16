@@ -3,6 +3,6 @@ div.xterm-rows {
 }
 
 #xterm-container {
-    /* full height less the height of the title, navbar, note, and footer */
-    height: calc(100vh - 115px - 45px - 120px);
+    /* full height less the height of the title+navbar, note, and footer */
+    height: calc(100vh - 155px - 92px - 50px);
 }
