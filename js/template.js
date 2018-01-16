@@ -28,7 +28,7 @@ nav.innerHTML = `<ul class="nav nav-tabs">
         <a href="../logos/index.html">RC Logos</a>
       </li>
       <li role="presentation" id="jsfuck-nav">
-        <a href="../jsfuck/pres.html">JSFuck Presentation</a>
+        <a href="../jsfuck/index.html">JSFuck Presentation</a>
       </li>
       <li role="presentation" id="teaching-nav">
         <a href="../teaching/index.html">Teaching Materials</a>
