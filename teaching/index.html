@@ -11,12 +11,14 @@
     <link href="css/styles.css" rel="stylesheet">
     
     <script>
-      function toggleActive(elem) {
+      function toggleActive(elem, href) {
           if (!elem.classList.contains('active')) {
-               for (var doc of document.querySelectorAll('#doc-list li')) {
-                   doc.classList.remove('active');
-               }
-               elem.classList.add('active');
+              for (var doc of document.querySelectorAll('#doc-list li')) {
+                  doc.classList.remove('active');
+              }
+              elem.classList.add('active');
+      
+              document.getElementById('pdf-container').data = href;
           }
       }
     </script>
@@ -31,134 +33,153 @@
 
       <ul id="doc-list" class="nav nav-pills nav-stacked">
 	
-	<li role="presentation" onclick="toggleActive(this)">
-	  <a href="resources/Intro-to-Combinatorics-Tut.pdf" target="pdf-container">
+	<li role="presentation"
+	    onclick="toggleActive(this, 'resources/Intro-to-Combinatorics-Tut.pdf')">
+	  <a href="#">
 	    <span class="glyphicon glyphicon-book"></span>&nbsp;
 	    Intro. to combinatorics tutorial
 	  </a>
 	</li>
 	
-	<li role="presentation" onclick="toggleActive(this)">
-	  <a href="resources/Counting-Arrangements-Exercise.pdf" target="pdf-container">
+	<li role="presentation"
+	    onclick="toggleActive(this, 'resources/Counting-Arrangements-Exercise.pdf')">
+	  <a href="#">
 	    <span class="glyphicon glyphicon-pencil"></span>&nbsp;
 	    Counting/arrangements exercise
 	  </a>
 	</li>
 
-	<li role="presentation" onclick="toggleActive(this)">
-	  <a href="resources/Combinatorics-cont-Tut.pdf" target="pdf-container">
+	<li role="presentation"
+	    onclick="toggleActive(this, 'resources/Combinatorics-cont-Tut.pdf')">
+	  <a href="#">
 	    <span class="glyphicon glyphicon-book"></span>&nbsp;
 	    Combinatorics (cont.) tutorial
 	  </a>
 	</li>
 	
-	<li role="presentation" onclick="toggleActive(this)">
-	  <a href="resources/Counting-with-Repetition_Exercise.pdf" target="pdf-container">
+	<li role="presentation"
+	    onclick="toggleActive(this, 'resources/Counting-with-Repetition-Exercise.pdf')">
+	  <a href="#">
 	    <span class="glyphicon glyphicon-pencil"></span>&nbsp;
 	    Counting with repetition exercise
 	  </a>
 	</li>
 
-	<li role="presentation" onclick="toggleActive(this)">
-	  <a href="resources/Combinatorics-Probability-Tut.pdf" target="pdf-container">
+	<li role="presentation"
+	    onclick="toggleActive(this, 'resources/Combinatorics-Probability-Tut.pdf')">
+	  <a href="#">
 	    <span class="glyphicon glyphicon-book"></span>&nbsp;
 	    Combinatorics &amp; probability tutorial
 	  </a>
 	</li>
 	
-	<li role="presentation" onclick="toggleActive(this)">
-	  <a href="resources/Counting-Probability-Exercise.pdf" target="pdf-container">
+	<li role="presentation"
+	    onclick="toggleActive(this, 'resources/Counting-Probability-Exercise.pdf')">
+	  <a href="#">
 	    <span class="glyphicon glyphicon-pencil"></span>&nbsp;
 	    Counting and probability exercise
 	  </a>
 	</li>
 
-	<li role="presentation" onclick="toggleActive(this)">
-	  <a href="resources/Probability-cont-Tut.pdf" target="pdf-container">
+	<li role="presentation"
+	    onclick="toggleActive(this, 'resources/Probability-cont-Tut.pdf')">
+	  <a href="#">
 	    <span class="glyphicon glyphicon-book"></span>&nbsp;
 	    Probability (cont.) tutorial
 	  </a>
 	</li>
 	
-	<li role="presentation" onclick="toggleActive(this)">
-	  <a href="resources/Probability-exercise.pdf" target="pdf-container">
+	<li role="presentation"
+	    onclick="toggleActive(this, 'resources/Probability-Exercise.pdf')">
+	  <a href="#">
 	    <span class="glyphicon glyphicon-pencil"></span>&nbsp;
 	    Probability exercise
 	  </a>
 	</li>
 
-	<li role="presentation" onclick="toggleActive(this)">
-	  <a href="resources/Conditional-Probability-Tut.pdf" target="pdf-container">
+	<li role="presentation"
+	    onclick="toggleActive(this, 'resources/Conditional-Probability-Tut.pdf')">
+	  <a href="#">
 	    <span class="glyphicon glyphicon-book"></span>&nbsp;
 	    Conditional probability tutorial
 	  </a>
 	</li>
 	
-	<li role="presentation" onclick="toggleActive(this)">
-	  <a href="resources/Formal-Logic-Tut.pdf" target="pdf-container">
+	<li role="presentation"
+	    onclick="toggleActive(this, 'resources/Formal-Logic-Tut.pdf')">
+	  <a href="#">
 	    <span class="glyphicon glyphicon-book"></span>&nbsp;
 	    Formal logic tutorial
 	  </a>
 	</li>
 	
-	<li role="presentation" onclick="toggleActive(this)">
-	  <a href="resources/Formal-Logic-Exercise.pdf" target="pdf-container">
+	<li role="presentation"
+	    onclick="toggleActive(this, 'resources/Formal-Logic-Exercise.pdf')">
+	  <a href="#">
 	    <span class="glyphicon glyphicon-pencil"></span>&nbsp;
 	    Formal logic exercise
 	  </a>
 	</li>
 
-	<li role="presentation" onclick="toggleActive(this)">
-	  <a href="resources/Formal-Logic-Predicate-Logic-Tut.pdf" target="pdf-container">
+	<li role="presentation"
+	    onclick="toggleActive(this, 'resources/Formal-Logic-Predicate-Logic-Tut.pdf')">
+	  <a href="#">
 	    <span class="glyphicon glyphicon-book"></span>&nbsp;
 	    Formal logic &amp; predicate logic tutorial
 	  </a>
 	</li>
 	
-	<li role="presentation" onclick="toggleActive(this)">
-	  <a href="resources/Proofs-Tut.pdf" target="pdf-container">
+	<li role="presentation"
+	    onclick="toggleActive(this, 'resources/Proofs-Tut.pdf')">
+	  <a href="#">
 	    <span class="glyphicon glyphicon-book"></span>&nbsp;
 	    Proofs tutorial
 	  </a>
 	</li>
 	
-	<li role="presentation" onclick="toggleActive(this)">
-	  <a href="resources/Formal-Logic-Proofs-Exercise.pdf" target="pdf-container">
+	<li role="presentation"
+	    onclick="toggleActive(this, 'resources/Formal-Logic-Proofs-Exercise.pdf')">
+	  <a href="#">
 	    <span class="glyphicon glyphicon-pencil"></span>&nbsp;
 	    Formal logic &amp; proofs exercise
 	  </a>
 	</li>
 
-	<li role="presentation" onclick="toggleActive(this)">
-	  <a href="resources/Proofs-Exercise.pdf" target="pdf-container">
+	<li role="presentation"
+	    onclick="toggleActive(this, 'resources/Proofs-Exercise.pdf')">
+	  <a href="#">
 	    <span class="glyphicon glyphicon-pencil"></span>&nbsp;
 	    Proofs exercise
 	  </a>
 	</li>
 
-	<li role="presentation" onclick="toggleActive(this)">
-	  <a href="resources/Proof-by-Induction-Tut.pdf" target="pdf-container">
+	<li role="presentation"
+	    onclick="toggleActive(this, 'resources/Proof-by-Induction-Tut.pdf')">
+	  <a href="#">
 	    <span class="glyphicon glyphicon-book"></span>&nbsp;
 	    Proof by induction tutorial
 	  </a>
 	</li>
 	
-	<li role="presentation" onclick="toggleActive(this)">
-	  <a href="resources/Proof-by-Induction-Exercise.pdf" target="pdf-container">
+	<li role="presentation"
+	    onclick="toggleActive(this, 'resources/Proof-by-Induction-Exercise.pdf')">
+	  <a href="#">
 	    <span class="glyphicon glyphicon-pencil"></span>&nbsp;
 	    Proof by induction exercise
 	  </a>
 	</li>
 
-	<li role="presentation" onclick="toggleActive(this)">
-	  <a href="resources/GDB-cheat-sheet.pdf" target="pdf-container">
+	<li role="presentation"
+	    onclick="toggleActive(this, 'resources/GDB-cheat-sheet.pdf')">
+	  <a href="#">
 	    <span class="glyphicon glyphicon-list-alt"></span>&nbsp;
 	    GDB cheat sheet
 	  </a>
 	</li>
 
-	<li role="presentation" onclick="toggleActive(this)">
-	  <a href="resources/Unix-Essentials-Tut.pdf" target="pdf-container">
+	<li role="presentation"
+	    onclick="toggleActive(this, 'resources/Unix-Essentials-Tut.pdf')">
+	  <a href="#">
 	    <span class="glyphicon glyphicon-book"></span>&nbsp;
 	    Unix essentials tutorial
 	  </a>
@@ -166,7 +187,7 @@
 	
       </ul>
       
-      <iframe name="pdf-container" src="about:blank"></iframe>
+      <object id="pdf-container" type="application/pdf"></object>
     </main>
 
     <script src="../js/lib/jquery-min.js"></script>
@@ -176,9 +197,7 @@
     <script>
       document.getElementById('teaching-nav').classList.add('active');
 
-      var firstDoc = document.querySelector('#doc-list li a');
-      firstDoc.parentNode.classList.add('active');
-      window.open(firstDoc.href, 'pdf-container');
+      document.querySelector('#doc-list li').click();
     </script>
 
   </body>
