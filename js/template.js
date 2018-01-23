@@ -38,7 +38,7 @@ nav.innerHTML = `<ul class="nav nav-tabs">
 let footer = document.createElement('div');
 footer.innerHTML = `<footer class="footer">
       <div class="container col-xs-12">
-        <span class="text-muted">Gabrielle Singh Cadieux, 2017.</span>
+        <span class="text-muted">Gabrielle Singh Cadieux, 2018.</span>
       </div>
     </footer>`;
 
