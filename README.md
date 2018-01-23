@@ -4,10 +4,10 @@
 ### Contents
 <dl>
   <dt><a href="https://github.com/gabriellesc/gabriellesc.github.io/tree/master/GOL">GOL</a></dt>
-  <dd>Conway's Game of Life: create a universe and watch it grow!</dd>
+  <dd>Platform for playing Conway's Game of Life</dd>
 
   <dt><a href="https://github.com/gabriellesc/gabriellesc.github.io/tree/master/food">food</a></dt>
-  <dd></dd>
+  <dd>Pictures of interesting foods from NYC</dd>
 
   <dt><a href="https://github.com/gabriellesc/gabriellesc.github.io/tree/master/jsfuck">jsfuck</a></dt>
   <dd>Slideshow introduction to JSFuck (created for a Recurse Center presentation)<br>
@@ -15,15 +15,25 @@
   </dd>
 
   <dt><a href="https://github.com/gabriellesc/gabriellesc.github.io/tree/master/logos">logos</a></dt>
-  <dd>Recurse Center logos generated in all different languages!</dd>
-  https://github.com/gabriellesc/php-RClogo
+  <dd>Recurse Center logos generated in all different languages
+    <dl>
+      <dt><a href="https://github.com/gabriellesc/php-RClogo">server</a></dt>
+      <dd>Apache server serving the RC logo written in PHP</dd>
+    </dl>
+  </dd>
 
   <dt><a href="https://github.com/gabriellesc/gabriellesc.github.io/tree/master/mazily">mazily</a></dt>
-  <dd>Help animals find their way out of a maze!</dd>
+  <dd>Maze navigation PICO-8 console game</dd>
 
   <dt><a href="https://github.com/gabriellesc/gabriellesc.github.io/tree/master/piet">piet</a></dt>
-  <dd>In-browser tool for users to edit, import, export, and debug Piet programs</dd>
-  https://github.com/gabriellesc/piet-ide
+  <dd>*MasterPiets*, an in-browser tool for editing, importing, exporting, and debugging Piet programs
+    <dl>
+      <dt><a href="https://github.com/gabriellesc/piet-ide">js</a></dt>
+      <dd>Main project respository</dd>
+      <dt><a href="https://github.com/gabriellesc/gabriellesc.github.io/tree/master/piet/img/test">img/test</a></dt>
+      <dd>Sample Piet programs</dd>
+    </dl>
+  </dd>
 
   <dt><a href="https://github.com/gabriellesc/gabriellesc.github.io/tree/master/robotGrid">robotGrid</a></dt>
   <dd>Visual, customizable simulation of robots intelligently moving towards goals and around obstacles</dd>
