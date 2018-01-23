@@ -31,7 +31,7 @@
 > > Sample Piet programs
 
 [**robotGrid**](robotGrid)
-> Visual, customizable simulation of robots intelligently moving towards goals and around obstacles (based on Amazon warehouse robots)
+> Visual, customizable simulation of an automated warehouse (robots intelligently moving towards goals/around obstacles)
 >
 > [**js**](https://github.com/gabriellesc/robot-grid)
 > > Main project respository
