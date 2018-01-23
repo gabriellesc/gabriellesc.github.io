@@ -15,7 +15,7 @@
 [**logos**](logos)
 > Recurse Center logos generated in all different languages
 >
-> [**server**](https://github.com/gabriellesc/php-RClogo)
+> [**phpServer**](https://github.com/gabriellesc/php-RClogo)
 > > Apache server serving the RC logo written in PHP
 
 [**mazily**](mazily)

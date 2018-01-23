@@ -1,12 +1,12 @@
 [submodule "ticTacToe/server"]
 	path = ticTacToe/server
 	url = https://github.com/gabriellesc/bash-tic-tac-toe.git
-[submodule "logos/server"]
-	path = logos/server
-	url = https://github.com/gabriellesc/php-RClogo
 [submodule "piet/piet-ide"]
 	path = piet/js
 	url = https://github.com/gabriellesc/piet-ide.git
 [submodule "robotGrid/js"]
 	path = robotGrid/js
 	url = https://github.com/gabriellesc/robot-grid.git
+[submodule "logos/phpServer"]
+	path = logos/phpServer
+	url = https://github.com/gabriellesc/php-RClogo.git
