@@ -37,6 +37,7 @@
 > > Main project respository
 
 [**spaceInvaders**](spaceInvaders)
+> *(Suspended)* Space Invaders arcade game
 
 [**teaching**](teaching)
 > Handouts, assessments, and other teaching materials resources
