@@ -2,7 +2,6 @@
 #### Main repository for Gabrielle Singh Cadieux's personal website
 
 ### Contents
----
 <dl>
   <dt><a href="https://github.com/gabriellesc/gabriellesc.github.io/tree/master/GOL">GOL</a></dt>
   <dd>Conway's Game of Life: create a universe and watch it grow!</dd>
@@ -11,7 +10,9 @@
   <dd></dd>
 
   <dt><a href="https://github.com/gabriellesc/gabriellesc.github.io/tree/master/jsfuck">jsfuck</a></dt>
-  <dd>Introduction to JSFuck for a Recurse Center presentation</dd>
+  <dd>Slideshow introduction to JSFuck (created for a Recurse Center presentation)<br>
+    Presentation also available <a href="https://docs.google.com/presentation/d/e/2PACX-1vSncbb-Hmp48RfG9FkRa-xkbHC_I4VL_ePQYaPZdEsAmRZlGcaDtVij9J7fT5rLE6IF9ZXtAfXaz7Zk/pub?start=false&loop=false&delayms=3000">unembedded</a>
+  </dd>
 
   <dt><a href="https://github.com/gabriellesc/gabriellesc.github.io/tree/master/logos">logos</a></dt>
   <dd>Recurse Center logos generated in all different languages!</dd>
