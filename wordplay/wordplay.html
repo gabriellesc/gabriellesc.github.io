@@ -11781,7 +11781,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-javascript"><pre><span></span><span class="kd">var</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;node-fetch&#39;</span><span class="p">);</span>
@@ -11795,6 +11795,7 @@ div#notebook {
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">text</span> <span class="p">=&gt;</span> <span class="p">{</span>
         <span class="nx">dict</span> <span class="o">=</span> <span class="nx">text</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="sr">/\r*\n/g</span><span class="p">);</span>
         <span class="nx">dict</span> <span class="o">=</span> <span class="nx">dict</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">word</span> <span class="p">=&gt;</span> <span class="nx">word</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+    
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">dict</span><span class="p">.</span><span class="nx">length</span> <span class="o">+</span> <span class="s1">&#39; words in total&#39;</span><span class="p">);</span>
     <span class="p">});</span>
 </pre></div>
@@ -11832,7 +11833,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-javascript"><pre><span></span><span class="nx">dict</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">word</span> <span class="p">=&gt;</span> <span class="nx">word</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/UU/</span><span class="p">));</span>
@@ -11848,7 +11849,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[23]:</div>
+<div class="prompt output_prompt">Out[2]:</div>
 
 
 
@@ -12501,7 +12502,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-javascript"><pre><span></span><span class="kd">function</span> <span class="nx">cheat</span><span class="p">(</span><span class="nx">rack</span><span class="p">)</span> <span class="p">{</span>  
@@ -12513,25 +12514,27 @@ div#notebook {
     <span class="c1">// hash the rack as a product of primes</span>
     <span class="kd">var</span> <span class="nx">rackHash</span> <span class="o">=</span> <span class="nx">rack</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">).</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">prod</span><span class="p">,</span> <span class="nx">letter</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">primes</span><span class="p">[</span><span class="nx">letter</span><span class="p">]</span> <span class="o">*</span> <span class="nx">prod</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
 
-    <span class="kd">var</span> <span class="nx">valid</span> <span class="o">=</span> <span class="p">[],</span> <span class="nx">factored</span><span class="p">,</span> <span class="nx">subword</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">valid</span> <span class="o">=</span> <span class="p">[],</span> <span class="nx">factoredHash</span><span class="p">,</span> <span class="nx">subset</span><span class="p">;</span>
 
+    <span class="c1">// for each word, check whether the rack hash can be (at least partially) factored by its letters</span>
     <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">word</span> <span class="k">of</span> <span class="nx">dict</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">factoredHash</span> <span class="o">=</span> <span class="nx">rackHash</span><span class="p">;</span>
-        <span class="nx">subword</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="nx">factoredHash</span> <span class="o">=</span> <span class="nx">rackHash</span><span class="p">;</span> <span class="c1">// rack hash being factored</span>
+        <span class="nx">subset</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>           <span class="c1">// whether this word is a subset of the rack</span>
 
         <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">letter</span> <span class="k">of</span> <span class="nx">word</span><span class="p">)</span> <span class="p">{</span>
             <span class="c1">// check if the prime corresponding to this letter is a factor of the rack hash (prime product)</span>
             <span class="k">if</span> <span class="p">(</span><span class="nx">factoredHash</span> <span class="o">%</span> <span class="nx">primes</span><span class="p">[</span><span class="nx">letter</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-                <span class="c1">// if so, the letter is in the rack, so factor it out from the hash (&quot;remove it from the rack&quot;)</span>
+                <span class="c1">// the letter is in the rack, so factor it out from the hash (&quot;remove it from the rack&quot;)</span>
                 <span class="nx">factoredHash</span> <span class="o">/=</span> <span class="nx">primes</span><span class="p">[</span><span class="nx">letter</span><span class="p">];</span>
+                
             <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="c1">// if not, the letter is not in the rack, so this word can&#39;t be made from this rack</span>
-                <span class="nx">subword</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+                <span class="c1">// the letter is not in the rack, so this word can&#39;t be made from this rack</span>
+                <span class="nx">subset</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
                 <span class="k">break</span><span class="p">;</span>
             <span class="p">}</span>
         <span class="p">}</span>
         
-        <span class="k">if</span> <span class="p">(</span><span class="nx">subword</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">subset</span><span class="p">)</span> <span class="p">{</span>
             <span class="nx">valid</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">word</span><span class="p">);</span>
         <span class="p">}</span>
     <span class="p">}</span>
@@ -12604,6 +12607,198 @@ div#notebook {
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-javascript"><pre><span></span><span class="c1">// use &#39;_&#39; to represent a blank tile in the rack</span>
+<span class="kd">function</span> <span class="nx">cheatWithBlanks</span><span class="p">(</span><span class="nx">rack</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// map of letters to unique primes</span>
+    <span class="c1">// (map blank tiles to 1 so that they do not contribute to the rack hash)</span>
+    <span class="kr">const</span> <span class="nx">primes</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;A&#39;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="o">:</span> <span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="o">:</span> <span class="mi">11</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="o">:</span> <span class="mi">13</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="o">:</span> <span class="mi">17</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="o">:</span> <span class="mi">19</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="o">:</span> <span class="mi">23</span><span class="p">,</span>
+                     <span class="s1">&#39;J&#39;</span><span class="o">:</span> <span class="mi">29</span><span class="p">,</span> <span class="s1">&#39;K&#39;</span><span class="o">:</span> <span class="mi">31</span><span class="p">,</span> <span class="s1">&#39;L&#39;</span><span class="o">:</span> <span class="mi">37</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="o">:</span> <span class="mi">41</span><span class="p">,</span> <span class="s1">&#39;N&#39;</span><span class="o">:</span> <span class="mi">43</span><span class="p">,</span> <span class="s1">&#39;O&#39;</span><span class="o">:</span> <span class="mi">47</span><span class="p">,</span> <span class="s1">&#39;P&#39;</span><span class="o">:</span> <span class="mi">53</span><span class="p">,</span> <span class="s1">&#39;Q&#39;</span><span class="o">:</span> <span class="mi">59</span><span class="p">,</span> <span class="s1">&#39;R&#39;</span><span class="o">:</span> <span class="mi">61</span><span class="p">,</span>
+                     <span class="s1">&#39;S&#39;</span><span class="o">:</span> <span class="mi">67</span><span class="p">,</span> <span class="s1">&#39;T&#39;</span><span class="o">:</span> <span class="mi">71</span><span class="p">,</span> <span class="s1">&#39;U&#39;</span><span class="o">:</span> <span class="mi">73</span><span class="p">,</span> <span class="s1">&#39;V&#39;</span><span class="o">:</span> <span class="mi">79</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="o">:</span> <span class="mi">83</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="o">:</span> <span class="mi">89</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="o">:</span> <span class="mi">97</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span><span class="o">:</span> <span class="mi">101</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="o">:</span> <span class="mi">1</span> <span class="p">};</span>
+    
+    <span class="c1">// hash the rack as a product of primes</span>
+    <span class="kd">var</span> <span class="nx">rackHash</span> <span class="o">=</span> <span class="nx">rack</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">).</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">prod</span><span class="p">,</span> <span class="nx">letter</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">primes</span><span class="p">[</span><span class="nx">letter</span><span class="p">]</span> <span class="o">*</span> <span class="nx">prod</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    
+    <span class="c1">// count the blank tiles</span>
+    <span class="kd">var</span> <span class="nx">blanks</span> <span class="o">=</span> <span class="nx">rack</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/_/g</span><span class="p">);</span>
+    <span class="nx">blanks</span> <span class="o">=</span> <span class="nx">blanks</span> <span class="o">?</span> <span class="nx">blanks</span><span class="p">.</span><span class="nx">length</span> <span class="o">:</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="c1">// scores for each letter in Scrabble</span>
+    <span class="kr">const</span> <span class="nx">scores</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;A&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+                     <span class="s1">&#39;F&#39;</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;K&#39;</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;J&#39;</span><span class="o">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span>
+                     <span class="s1">&#39;L&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;O&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;N&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Q&#39;</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;P&#39;</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;S&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+                     <span class="s1">&#39;R&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;U&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;T&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;V&#39;</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span>
+                     <span class="s1">&#39;X&#39;</span><span class="o">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span><span class="o">:</span> <span class="mi">10</span> <span class="p">}</span>
+    
+    <span class="kd">var</span> <span class="nx">valid</span> <span class="o">=</span> <span class="p">[],</span> <span class="nx">factoredHash</span><span class="p">,</span> <span class="nx">blanksLeft</span><span class="p">,</span> <span class="nx">score</span><span class="p">,</span> <span class="nx">subset</span><span class="p">;</span>
+
+    <span class="c1">// for each word, check whether the rack hash can be (at least partially) factored by its letters</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">word</span> <span class="k">of</span> <span class="nx">dict</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">factoredHash</span> <span class="o">=</span> <span class="nx">rackHash</span><span class="p">;</span> <span class="c1">// rack hash being factored</span>
+        <span class="nx">blanksLeft</span> <span class="o">=</span> <span class="nx">blanks</span><span class="p">;</span>     <span class="c1">// how many blank tiles are left to use</span>
+        <span class="nx">score</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>               <span class="c1">// score for this word</span>
+        <span class="nx">subset</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>           <span class="c1">// whether this word is a subset of the rack</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">letter</span> <span class="k">of</span> <span class="nx">word</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// check if the prime corresponding to this letter is a factor of the rack hash (prime product)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">factoredHash</span> <span class="o">%</span> <span class="nx">primes</span><span class="p">[</span><span class="nx">letter</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// the letter is in the rack, so factor it out from the hash (&quot;remove it from the rack&quot;)</span>
+                <span class="nx">factoredHash</span> <span class="o">/=</span> <span class="nx">primes</span><span class="p">[</span><span class="nx">letter</span><span class="p">];</span>
+    
+                <span class="nx">score</span> <span class="o">+=</span> <span class="nx">scores</span><span class="p">[</span><span class="nx">letter</span><span class="p">];</span> <span class="c1">// add this letter to the score</span>
+                
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">blanksLeft</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// the letter is not in the rack, but we can use a blank tile to represent it</span>
+                <span class="nx">blanksLeft</span> <span class="o">-=</span> <span class="mi">1</span><span class="p">;</span>
+                
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="c1">// the letter is not in the rack, and we have no blank tiles left</span>
+                <span class="nx">subset</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="nx">subset</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">valid</span><span class="p">.</span><span class="nx">push</span><span class="p">([</span><span class="nx">score</span><span class="p">,</span> <span class="nx">word</span><span class="p">]);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// sort valid words by decreasing score</span>
+    <span class="nx">valid</span><span class="p">.</span><span class="nx">sort</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="nx">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">?</span> <span class="o">-</span><span class="mi">1</span> <span class="o">:</span> <span class="mi">1</span><span class="p">);</span>
+    
+    <span class="k">return</span> <span class="nx">valid</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cheatWithBlanks</span><span class="p">(</span><span class="s1">&#39;ZAEFIE_&#39;</span><span class="p">));</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[ [ 17, &#39;FEAZES&#39; ],
+  [ 17, &#39;FEAZED&#39; ],
+  [ 17, &#39;FEAZE&#39; ],
+  [ 17, &#39;FRIEZE&#39; ],
+  [ 16, &#39;FEEZE&#39; ],
+  [ 16, &#39;FRIZE&#39; ],
+  [ 16, &#39;FAZES&#39; ],
+  [ 16, &#39;FUZEE&#39; ],
+  [ 16, &#39;FAZE&#39; ],
+  [ 16, &#39;FEZES&#39; ],
+  [ 16, &#39;HAFIZ&#39; ],
+  [ 16, &#39;FAZED&#39; ],
+  [ 15, &#39;FIZ&#39; ],
+  [ 15, &#39;ZARF&#39; ],
+  [ 15, &#39;FEZ&#39; ],
+  [ 15, &#39;FIZZ&#39; ],
+  [ 15, &#39;FUZE&#39; ],
+  [ 15, &#39;FRIZ&#39; ],
+  [ 15, &#39;ZIFF&#39; ],
+  [ 13, &#39;AVIZE&#39; ],
+  [ 13, &#39;ZOEAE&#39; ],
+  [ 13, &#39;PEAZE&#39; ],
+  [ 13, &#39;WEIZE&#39; ],
+  [ 13, &#39;PEIZE&#39; ],
+  [ 13, &#39;LEAZE&#39; ],
+  [ 13, &#39;RAZEE&#39; ],
+  [ 13, &#39;BAIZE&#39; ],
+  [ 13, &#39;AIZLE&#39; ],
+  [ 13, &#39;TEAZE&#39; ],
+  [ 13, &#39;ZAIRE&#39; ],
+  [ 13, &#39;SEIZE&#39; ],
+  [ 13, &#39;SEAZE&#39; ],
+  [ 13, &#39;AZIDE&#39; ],
+  [ 13, &#39;AZINE&#39; ],
+  [ 13, &#39;MAIZE&#39; ],
+  [ 13, &#39;CEAZE&#39; ],
+  [ 12, &#39;DAZE&#39; ],
+  [ 12, &#39;ZOEA&#39; ],
+  [ 12, &#39;MAZE&#39; ],
+  [ 12, &#39;ZITE&#39; ],
+  [ 12, &#39;GEEZ&#39; ],
+  [ 12, &#39;ZEA&#39; ],
+  [ 12, &#39;ZETA&#39; ],
+  [ 12, &#39;NAZI&#39; ],
+  [ 12, &#39;HAZE&#39; ],
+  [ 12, &#39;NAZE&#39; ],
+  [ 12, &#39;ZILA&#39; ],
+  [ 12, &#39;MZEE&#39; ],
+  [ 12, &#39;RIZA&#39; ],
+  [ 12, &#39;KAZI&#39; ],
+  [ 12, &#39;JEEZ&#39; ],
+  [ 12, &#39;MEZE&#39; ],
+  [ 12, &#39;RAZE&#39; ],
+  [ 12, &#39;ZEAL&#39; ],
+  [ 12, &#39;ZATI&#39; ],
+  [ 12, &#39;ZEAS&#39; ],
+  [ 12, &#39;SIZE&#39; ],
+  [ 12, &#39;BIZE&#39; ],
+  [ 12, &#39;ZEES&#39; ],
+  [ 12, &#39;ZINE&#39; ],
+  [ 12, &#39;LAZE&#39; ],
+  [ 12, &#39;ZEE&#39; ],
+  [ 12, &#39;ADZE&#39; ],
+  [ 12, &#39;ZEIN&#39; ],
+  [ 12, &#39;PIZE&#39; ],
+  [ 12, &#39;IZAR&#39; ],
+  [ 12, &#39;ZEZE&#39; ],
+  [ 12, &#39;GAZE&#39; ],
+  [ 11, &#39;ZEK&#39; ],
+  [ 11, &#39;ZEL&#39; ],
+  [ 11, &#39;BEZ&#39; ],
+  [ 11, &#39;ZIN&#39; ],
+  [ 11, &#39;BIZ&#39; ],
+  [ 11, &#39;ZAS&#39; ],
+  [ 11, &#39;MIZ&#39; ],
+  [ 11, &#39;LEZ&#39; ],
+  [ 11, &#39;ZED&#39; ],
+  [ 11, &#39;AZO&#39; ],
+  [ 11, &#39;RIZ&#39; ],
+  [ 11, &#39;CAZ&#39; ],
+  [ 11, &#39;SEZ&#39; ],
+  [ 11, &#39;JIZ&#39; ],
+  [ 11, &#39;WIZ&#39; ],
+  [ 11, &#39;ZIP&#39; ],
+  [ 11, &#39;ZAG&#39; ],
+  [ 11, &#39;ZIT&#39; ],
+  [ 11, &#39;ZAP&#39; ],
+  [ 11, &#39;SAZ&#39; ],
+  [ 11, &#39;REZ&#39; ],
+  [ 11, &#39;ZIZ&#39; ],
+  [ 11, &#39;ZAX&#39; ],
+  [ 11, &#39;ADZ&#39; ],
+  [ 11, &#39;ZOA&#39; ],
+  [ 11, &#39;ZEP&#39; ],
+  [ 11, &#39;ZIG&#39; ],
+  [ 11, &#39;ZEX&#39; ],
+  [ 11, &#39;ZA&#39; ],
+  [ 10, &#39;ZO&#39; ],
+  [ 8, &#39;FERIAE&#39; ],
+  [ 8, &#39;FAERIE&#39; ],
+  ... 330 more items ]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
     </div>
   </div>
