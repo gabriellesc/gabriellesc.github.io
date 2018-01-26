@@ -33,6 +33,9 @@ nav.innerHTML = `<ul class="nav nav-tabs">
       <li role="presentation" id="teaching-nav">
         <a href="../teaching/index.html">Teaching Materials</a>
       </li>
+      <li role="presentation" id="tappcp-nav">
+        <a href="https://github.com/uoft-tapp/tapp-cp">TAPP-CP</a>
+      </li>
     </ul>`;
 
 let footer = document.createElement('div');
