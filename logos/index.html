@@ -163,7 +163,11 @@
     <script src="RClogo-unicode.js"></script>
     <script src="rb/RClogo-rb.js"></script>
     <script src="RClogo-svg.js"></script>
-    <script src="RClogo-php.js"></script>
+    <script>
+      fetch('https://php-rclogo.herokuapp.com')
+          .then(resp => resp.text())
+          .then(html => document.getElementById('php-container').innerHTML = html);
+    </script>
     
   </body>
 </html>
