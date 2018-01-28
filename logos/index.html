@@ -139,6 +139,17 @@
 	  </div>
 	</div>
 
+	<div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+	  <a href="https://github.com/gabriellesc/gabriellesc.github.io/blob/master/logos/clj/src/clj/RClogo.cljs">
+	    <div class="thumbnail">
+	      <canvas id="clojure-canvas" style="width:100% !important;"></canvas>
+	      <div class="caption">
+		<h4>ClojureScript using Quil</h4>
+	      </div>
+	    </div>
+	  </a>
+	</div>
+
       </div>
 
       <div class="row" id="note">
@@ -163,11 +174,15 @@
     <script src="RClogo-unicode.js"></script>
     <script src="rb/RClogo-rb.js"></script>
     <script src="RClogo-svg.js"></script>
+
     <script>
       fetch('https://php-rclogo.herokuapp.com')
           .then(resp => resp.text())
           .then(html => document.getElementById('php-container').innerHTML = html);
     </script>
     
-  </body>
+    <script src="clj/resources/public/js/main.js"></script>
+    <script>clj.core.run_sketch()</script>
+
+</body>
 </html>

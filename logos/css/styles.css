@@ -20,3 +20,7 @@
     display: block;
     margin: auto;
 }
+
+#clojure-canvas {
+    width: 100% !important;
+}

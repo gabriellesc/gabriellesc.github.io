@@ -6,4 +6,9 @@ spaceInvaders/img/17217-NRHYPY.jpg
 logos/rb/build
 logos/latex/*[^t]??
 logos/java/*.class
+logos/clj/LICENSE
+logos/clj/README.md
+logos/clj/LICENSE
+logos/clj/resources/public/js/optimized
+logos/clj/target
 wordplay/.ipynb_checkpoints
