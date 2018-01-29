@@ -12305,16 +12305,16 @@ For example, we could search for each pair of doubled letters individually ($O(n
 <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">word</span> <span class="k">of</span> <span class="nx">dict</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">vowels</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
     
-    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">letter</span> <span class="k">of</span> <span class="nx">word</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">letter</span> <span class="k">of</span> <span class="nx">word</span><span class="p">)</span> <span class="p">{</span>      
+        <span class="c1">// if the letter is a vowel or Y, set the bit in vowels corresponding to this letter</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">letter</span> <span class="k">in</span> <span class="nx">bits</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">vowels</span> <span class="o">|=</span> <span class="nx">bits</span><span class="p">[</span><span class="nx">letter</span><span class="p">];</span>
+        <span class="p">}</span>
+        
         <span class="c1">// if all vowels and Y have been found in the word, stop looking</span>
         <span class="k">if</span> <span class="p">(</span><span class="nx">vowels</span> <span class="o">==</span> <span class="mi">63</span><span class="p">)</span> <span class="p">{</span>
             <span class="nx">all</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">word</span><span class="p">);</span>
             <span class="k">break</span><span class="p">;</span>
-        <span class="p">}</span>
-        
-        <span class="c1">// if the letter is a vowel or Y, set the bit in vowels corresponding to this letter</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">letter</span> <span class="k">in</span> <span class="nx">bits</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">vowels</span> <span class="o">|=</span> <span class="nx">bits</span><span class="p">[</span><span class="nx">letter</span><span class="p">];</span>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
@@ -12336,16 +12336,45 @@ For example, we could search for each pair of doubled letters individually ($O(n
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[ &#39;ACTINOMYCETOUS&#39;,
+<pre>[ &#39;ABSTEMIOUSLY&#39;,
+  &#39;ACTINOMYCETOUS&#39;,
+  &#39;ADVENTITIOUSLY&#39;,
+  &#39;AERONAUTICALLY&#39;,
+  &#39;ALUMINOTHERMY&#39;,
   &#39;AMARYLLIDACEOUS&#39;,
+  &#39;AMBIDEXTROUSLY&#39;,
+  &#39;ANEUPLOIDY&#39;,
+  &#39;ANTIREGULATORY&#39;,
   &#39;APODYTERIUM&#39;,
   &#39;APODYTERIUMS&#39;,
+  &#39;AUDIOMETRICALLY&#39;,
+  &#39;AUDIOMETRY&#39;,
+  &#39;AUTHORITATIVELY&#39;,
+  &#39;AUTOECIOUSLY&#39;,
+  &#39;AUTOTETRAPLOIDY&#39;,
   &#39;AUTOTYPIES&#39;,
+  &#39;AYUNTAMIENTO&#39;,
   &#39;AYUNTAMIENTOS&#39;,
   &#39;BASIDIOMYCETOUS&#39;,
+  &#39;BEHAVIOURALLY&#39;,
+  &#39;BIMOLECULARLY&#39;,
   &#39;BUOYANCIES&#39;,
   &#39;CALYCOIDEOUS&#39;,
+  &#39;CLEISTOGAMOUSLY&#39;,
+  &#39;COEDUCATIONALLY&#39;,
+  &#39;COEQUALITY&#39;,
+  &#39;COEVOLUTIONARY&#39;,
+  &#39;COMMUNICATIVELY&#39;,
+  &#39;COMMUTATIVELY&#39;,
+  &#39;CONCEPTUALITY&#39;,
+  &#39;CONSEQUENTIALLY&#39;,
+  &#39;CONSUETUDINARY&#39;,
+  &#39;CONSULTATIVELY&#39;,
+  &#39;CONTINUATIVELY&#39;,
+  &#39;COPULATIVELY&#39;,
   &#39;CORYNEBACTERIUM&#39;,
+  &#39;COULOMETRICALLY&#39;,
+  &#39;COUNTERACTIVELY&#39;,
   &#39;COUNTERCYCLICAL&#39;,
   &#39;COUNTERRALLYING&#39;,
   &#39;CYANOBACTERIUM&#39;,
@@ -12354,51 +12383,60 @@ For example, we could search for each pair of doubled letters individually ($O(n
   &#39;DAGUERREOTYPIES&#39;,
   &#39;DAGUERREOTYPING&#39;,
   &#39;DAGUERREOTYPIST&#39;,
+  &#39;DELUSIONARY&#39;,
+  &#39;DENUNCIATORY&#39;,
+  &#39;DEVOLUTIONARY&#39;,
   &#39;DIALYPETALOUS&#39;,
   &#39;DICHLAMYDEOUS&#39;,
+  &#39;DOCUMENTARILY&#39;,
+  &#39;DUODECIMALLY&#39;,
+  &#39;EDACIOUSLY&#39;,
+  &#39;EDUCATIONALLY&#39;,
+  &#39;EFFICACIOUSLY&#39;,
+  &#39;ELOCUTIONARY&#39;,
+  &#39;ELUCIDATORY&#39;,
   &#39;ENANTIOSTYLOUS&#39;,
+  &#39;ENCOURAGINGLY&#39;,
+  &#39;ENUNCIATORY&#39;,
+  &#39;EQUANIMOUSLY&#39;,
+  &#39;EQUATIONALLY&#39;,
+  &#39;EQUATORIALLY&#39;,
+  &#39;EQUILIBRATORY&#39;,
+  &#39;EQUINOCTIALLY&#39;,
+  &#39;EQUIPONDERANCY&#39;,
+  &#39;EQUIPROBABILITY&#39;,
+  &#39;EQUIVOCALITY&#39;,
+  &#39;EQUIVOCALLY&#39;,
+  &#39;EQUIVOCATINGLY&#39;,
+  &#39;EQUIVOCATORY&#39;,
   &#39;ERYSIPELATOUS&#39;,
   &#39;EUCARYOTIC&#39;,
+  &#39;EUDIOMETRICALLY&#39;,
   &#39;EUGEOSYNCLINAL&#39;,
   &#39;EUKARYOTIC&#39;,
+  &#39;EULOGISTICALLY&#39;,
+  &#39;EUPHONICALLY&#39;,
+  &#39;EUPHORICALLY&#39;,
+  &#39;EVOLUTIONARILY&#39;,
+  &#39;EVOLUTIONARY&#39;,
+  &#39;EXCLUSIONARY&#39;,
+  &#39;EXCOMMUNICATORY&#39;,
+  &#39;EXPOSTULATINGLY&#39;,
+  &#39;FACETIOUSLY&#39;,
+  &#39;GELATINOUSLY&#39;,
+  &#39;GEMMIPAROUSLY&#39;,
+  &#39;GENITOURINARY&#39;,
+  &#39;GESTICULATORY&#39;,
+  &#39;GRANDILOQUENTLY&#39;,
+  &#39;GREGARIOUSLY&#39;,
+  &#39;HALFSERIOUSLY&#39;,
+  &#39;HELLACIOUSLY&#39;,
+  &#39;HETEROSEXUALITY&#39;,
+  &#39;HOMOSEXUALITY&#39;,
+  &#39;HYALURONIDASE&#39;,
   &#39;HYALURONIDASES&#39;,
   &#39;HYDROPNEUMATIC&#39;,
-  &#39;HYPERCAUTIOUS&#39;,
-  &#39;HYPERFASTIDIOUS&#39;,
-  &#39;HYPERFUNCTIONAL&#39;,
-  &#39;ICHTHYOSAURUSES&#39;,
-  &#39;LECYTHIDACEOUS&#39;,
-  &#39;LEUCOCYTHAEMIA&#39;,
-  &#39;LEUCOCYTHAEMIAS&#39;,
-  &#39;LEUCOCYTOPENIAS&#39;,
-  &#39;MYCOBACTERIUM&#39;,
-  &#39;NEUROPSYCHIATRY&#39;,
-  &#39;NYCTAGINACEOUS&#39;,
-  &#39;OUTWEARYING&#39;,
-  &#39;OXYURIASES&#39;,
-  &#39;PARAMYXOVIRUSES&#39;,
-  &#39;PHENYLTHIOUREAS&#39;,
-  &#39;PLEURAPOPHYSIS&#39;,
-  &#39;PLEURODYNIAS&#39;,
-  &#39;PNEUMATOLYSIS&#39;,
-  &#39;PNEUMATOLYTIC&#39;,
-  &#39;PNEUMODYNAMICS&#39;,
-  &#39;POLYBUTADIENE&#39;,
-  &#39;POLYBUTADIENES&#39;,
-  &#39;PRASEODYMIUM&#39;,
-  &#39;PRASEODYMIUMS&#39;,
-  &#39;PRESBYACOUSIS&#39;,
-  &#39;PSYCHOSEXUALITY&#39;,
-  &#39;SAUROPTERYGIAN&#39;,
-  &#39;SCEUOPHYLACIA&#39;,
-  &#39;SCEUOPHYLACIUM&#39;,
-  &#39;SULFINPYRAZONES&#39;,
-  &#39;SUPERLOYALIST&#39;,
-  &#39;SUPERLOYALISTS&#39;,
-  &#39;TAUTONYMIES&#39;,
-  &#39;UNEMPLOYABILITY&#39;,
-  &#39;VOYEURISTICALLY&#39;,
-  &#39;XYRIDACEOUS&#39; ]
+  ... 149 more items ]
 </pre>
 </div>
 </div>
