@@ -11775,7 +11775,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="In-the-official-SOWPODS-Scrabble-dictionary...">In the official SOWPODS Scrabble dictionary...<a class="anchor-link" href="#In-the-official-SOWPODS-Scrabble-dictionary...">&#182;</a></h2>
+<h1 id="In-the-official-SOWPODS-Scrabble-dictionary...">In the official SOWPODS Scrabble dictionary...<a class="anchor-link" href="#In-the-official-SOWPODS-Scrabble-dictionary...">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -11827,7 +11827,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="What-words-contain-&quot;UU&quot;?">What words contain "UU"?<a class="anchor-link" href="#What-words-contain-&quot;UU&quot;?">&#182;</a></h2>
+<h1 id="What-words-contain-&quot;UU&quot;?">What words contain "UU"?<a class="anchor-link" href="#What-words-contain-&quot;UU&quot;?">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -11836,7 +11836,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-javascript"><pre><span></span><span class="nx">dict</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">word</span> <span class="p">=&gt;</span> <span class="nx">word</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/UU/</span><span class="p">));</span>
+<div class=" highlight hl-javascript"><pre><span></span><span class="nx">dict</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">word</span> <span class="p">=&gt;</span> <span class="o">/</span><span class="nx">UU</span><span class="o">/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">word</span><span class="p">));</span>
 </pre></div>
 
 </div>
@@ -11906,7 +11906,47 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="What-is-the-big-O-complexity-of-the-solution?">What is the big-O complexity of the solution?<a class="anchor-link" href="#What-is-the-big-O-complexity-of-the-solution?">&#182;</a></h3><h3 id="What-is-another-way-of-solving-the-problem?">What is another way of solving the problem?<a class="anchor-link" href="#What-is-another-way-of-solving-the-problem?">&#182;</a></h3><h3 id="Is-there-a-faster-solution?">Is there a faster solution?<a class="anchor-link" href="#Is-there-a-faster-solution?">&#182;</a></h3>
+<h3 id="What-is-the-big-O-complexity-of-the-solution?">What is the big-O complexity of the solution?<a class="anchor-link" href="#What-is-the-big-O-complexity-of-the-solution?">&#182;</a></h3><p>The solution is $O(n)$ for an input word of length $n$ (with the coefficient of $n$ depending on the <a href="https://en.wikibooks.org/wiki/Regular_Expressions/Implementation">regex matcher implementation</a>).</p>
+<h3 id="What-is-another-way-of-solving-the-problem?">What is another way of solving the problem?<a class="anchor-link" href="#What-is-another-way-of-solving-the-problem?">&#182;</a></h3><p>Other ways of solving the problem are either directly equivalent to or less efficient than this method.<br>
+For example, we could implement filtering and regex matching ourselves ($O(n)$):</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-javascript"><pre><span></span><span class="kd">var</span> <span class="nx">UU</span> <span class="o">=</span> <span class="p">[];</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">word</span> <span class="k">of</span> <span class="nx">dict</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">word</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// equivalent to regex matching</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">word</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;U&#39;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">word</span><span class="p">[</span><span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;U&#39;</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">UU</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">word</span><span class="p">);</span>
+                <span class="k">break</span><span class="p">;</span>
+                
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">i</span><span class="o">++</span><span class="p">;</span> <span class="c1">// skip the following letter, since it can&#39;t be the start of &#39;UU&#39;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Is-there-a-faster-solution?">Is there a faster solution?<a class="anchor-link" href="#Is-there-a-faster-solution?">&#182;</a></h3><p>There is no faster solution: in the worst case (the word doesn't contain "UU"), all $n$ letters in a word must be examined to check for a match with this regular expression.</p>
+
 </div>
 </div>
 </div>
@@ -11914,16 +11954,17 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="What-words-contain-&quot;Q&quot;-without-&quot;U&quot;?">What words contain "Q" without "U"?<a class="anchor-link" href="#What-words-contain-&quot;Q&quot;-without-&quot;U&quot;?">&#182;</a></h2>
+<h1 id="What-words-contain-&quot;Q&quot;-without-&quot;U&quot;?">What words contain "Q" without "U"?<a class="anchor-link" href="#What-words-contain-&quot;Q&quot;-without-&quot;U&quot;?">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-javascript"><pre><span></span><span class="nx">dict</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">word</span> <span class="p">=&gt;</span> <span class="nx">word</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/^[^U]*Q[^U]*$/</span><span class="p">));</span>
+<div class=" highlight hl-javascript"><pre><span></span><span class="c1">// match any number of characters other than &#39;U&#39;, then &#39;Q&#39;, then any number of characters other than &#39;U&#39;</span>
+<span class="nx">dict</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">word</span> <span class="p">=&gt;</span> <span class="o">/^</span><span class="p">[</span><span class="o">^</span><span class="nx">U</span><span class="p">]</span><span class="o">*</span><span class="nx">Q</span><span class="p">[</span><span class="o">^</span><span class="nx">U</span><span class="p">]</span><span class="o">*</span><span class="nx">$</span><span class="o">/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">word</span><span class="p">));</span>
 </pre></div>
 
 </div>
@@ -11936,7 +11977,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[3]:</div>
+<div class="prompt output_prompt">Out[4]:</div>
 
 
 
@@ -12024,7 +12065,33 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="What-is-the-big-O-complexity-of-the-solution?">What is the big-O complexity of the solution?<a class="anchor-link" href="#What-is-the-big-O-complexity-of-the-solution?">&#182;</a></h3><h3 id="What-is-another-way-of-solving-the-problem?">What is another way of solving the problem?<a class="anchor-link" href="#What-is-another-way-of-solving-the-problem?">&#182;</a></h3><h3 id="Is-there-a-faster-solution?">Is there a faster solution?<a class="anchor-link" href="#Is-there-a-faster-solution?">&#182;</a></h3>
+<h3 id="What-is-the-big-O-complexity-of-the-solution?">What is the big-O complexity of the solution?<a class="anchor-link" href="#What-is-the-big-O-complexity-of-the-solution?">&#182;</a></h3><p>The solution is $O(n)$ for an input word of length $n$ (with the coefficient of $n$ depending on the <a href="https://en.wikibooks.org/wiki/Regular_Expressions/Implementation">regex matcher implementation</a>).</p>
+<h3 id="What-is-another-way-of-solving-the-problem?">What is another way of solving the problem?<a class="anchor-link" href="#What-is-another-way-of-solving-the-problem?">&#182;</a></h3><p>Other ways of solving the problem are either directly equivalent to or less efficient than this method.<br>
+For example, we could filter by words containing "Q" and then by words not containing "U" ($O(n^2)$):</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-javascript"><pre><span></span><span class="nx">dict</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">word</span> <span class="p">=&gt;</span> <span class="o">/</span><span class="nx">Q</span><span class="o">/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">word</span><span class="p">))</span>
+    <span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">word</span> <span class="p">=&gt;</span> <span class="o">!</span><span class="sr">/U/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">word</span><span class="p">));</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Is-there-a-faster-solution?">Is there a faster solution?<a class="anchor-link" href="#Is-there-a-faster-solution?">&#182;</a></h3><p>There is no faster solution: in the worst case (the word doesn't contain either "Q" or "U"), all $n$ letters in a word must be examined to check for a match with this regular expression.</p>
+
 </div>
 </div>
 </div>
@@ -12032,37 +12099,33 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="What-letters,-if-any,-never-appear-doubled?">What letters, if any, never appear doubled?<a class="anchor-link" href="#What-letters,-if-any,-never-appear-doubled?">&#182;</a></h2>
+<h1 id="What-letters,-if-any,-never-appear-doubled?">What letters, if any, never appear doubled?<a class="anchor-link" href="#What-letters,-if-any,-never-appear-doubled?">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-javascript"><pre><span></span><span class="kd">var</span> <span class="nx">undoubled</span> <span class="o">=</span> <span class="s1">&#39;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#39;</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span> <span class="c1">// letters that have not appeared doubled</span>
+<div class=" highlight hl-javascript"><pre><span></span><span class="kd">var</span> <span class="nx">undoubled</span> <span class="o">=</span> <span class="s1">&#39;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#39;</span><span class="p">;</span> <span class="c1">// letters that have not appeared doubled</span>
 
 <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">word</span> <span class="k">of</span> <span class="nx">dict</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">undoubled</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// if all the letters have already appeared doubled, stop looking</span>
-        <span class="k">break</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="kd">var</span> <span class="nx">letters</span> <span class="o">=</span> <span class="nx">word</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/([A-Z])\1/g</span><span class="p">);</span> <span class="c1">// match any letters that are doubled in the word</span>
-    
-    <span class="k">if</span> <span class="p">(</span><span class="nx">letters</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">letters</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">letter</span> <span class="p">=&gt;</span> <span class="p">{</span>
-            <span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">undoubled</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">letter</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
-            
-            <span class="c1">// if the letter has not previously appeared doubled, remove it from undoubled</span>
-            <span class="k">if</span> <span class="p">(</span><span class="nx">i</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">undoubled</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="p">});</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">word</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// if all the letters have already appeared doubled, stop looking</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">undoubled</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="nx">word</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">==</span> <span class="nx">word</span><span class="p">[</span><span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="p">{</span>
+            <span class="c1">// remove a doubled letter</span>
+            <span class="nx">undoubled</span> <span class="o">=</span> <span class="nx">undoubled</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="nx">word</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
+            <span class="nx">i</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">undoubled</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">undoubled</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">));</span>
 </pre></div>
 
 </div>
@@ -12092,7 +12155,51 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="What-is-the-big-O-complexity-of-the-solution?">What is the big-O complexity of the solution?<a class="anchor-link" href="#What-is-the-big-O-complexity-of-the-solution?">&#182;</a></h3><h3 id="What-is-another-way-of-solving-the-problem?">What is another way of solving the problem?<a class="anchor-link" href="#What-is-another-way-of-solving-the-problem?">&#182;</a></h3><h3 id="Is-there-a-faster-solution?">Is there a faster solution?<a class="anchor-link" href="#Is-there-a-faster-solution?">&#182;</a></h3>
+<h3 id="What-is-the-big-O-complexity-of-the-solution?">What is the big-O complexity of the solution?<a class="anchor-link" href="#What-is-the-big-O-complexity-of-the-solution?">&#182;</a></h3><p>The solution is $O(n)$ for a set of input words of total length $n$ (with the coefficient of $n$ depending on the <a href="https://en.wikibooks.org/wiki/Regular_Expressions/Implementation">regex matcher implementation</a>). That is, $n$ is the sum of the lengths of all of the words in the set.</p>
+<h3 id="What-is-another-way-of-solving-the-problem?">What is another way of solving the problem?<a class="anchor-link" href="#What-is-another-way-of-solving-the-problem?">&#182;</a></h3><p>Other ways of solving the problem are either directly equivalent to or less efficient than this method.<br>
+For example, we could search for each pair of doubled letters individually ($O(n)$, with a larger coefficient of $n$ than in the original solution):</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-javascript"><pre><span></span><span class="kd">var</span> <span class="nx">undoubled</span> <span class="o">=</span> <span class="p">[],</span>
+    <span class="nx">doubled</span><span class="p">;</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">letter</span> <span class="k">of</span> <span class="s1">&#39;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#39;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">regex</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="nx">letter</span> <span class="o">+</span> <span class="nx">letter</span><span class="p">);</span> <span class="c1">// construct a regex matching the doubled letter</span>
+    <span class="nx">doubled</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+    
+    <span class="c1">// search for the doubled letter in each word</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">word</span> <span class="k">of</span> <span class="nx">dict</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">regex</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">word</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nx">doubled</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// if the letter has not appeared doubled in any word, add it to undoubled    </span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">doubled</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">undoubled</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">letter</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Is-there-a-faster-solution?">Is there a faster solution?<a class="anchor-link" href="#Is-there-a-faster-solution?">&#182;</a></h3><p>There is no faster solution: in the worst case (no letters ever appear doubled), every letter of every word must be examined to check for a match with the regular expression.</p>
+
 </div>
 </div>
 </div>
@@ -12100,18 +12207,19 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="What-is-the-longest-palindrome?">What is the longest palindrome?<a class="anchor-link" href="#What-is-the-longest-palindrome?">&#182;</a></h2>
+<h1 id="What-is-the-longest-palindrome?">What is the longest palindrome?<a class="anchor-link" href="#What-is-the-longest-palindrome?">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-javascript"><pre><span></span><span class="c1">// find all palindromes</span>
 <span class="kd">var</span> <span class="nx">pals</span> <span class="o">=</span> <span class="nx">dict</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">word</span> <span class="p">=&gt;</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">end</span> <span class="o">=</span> <span class="nx">word</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> 
+        <span class="nx">end</span> <span class="o">=</span> <span class="nx">word</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
 
     <span class="c1">// advance the start and end indices until they meet</span>
     <span class="k">while</span> <span class="p">(</span><span class="nx">start</span> <span class="o">&lt;</span> <span class="nx">end</span><span class="p">)</span> <span class="p">{</span>
@@ -12126,7 +12234,8 @@ div#notebook {
 <span class="p">});</span>
 
 <span class="c1">// find the longest palindrome by examining the length of each</span>
-<span class="kd">var</span> <span class="nx">maxLen</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">maxPal</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="kd">var</span> <span class="nx">maxLen</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> 
+    <span class="nx">maxPal</span> <span class="o">=</span> <span class="p">[];</span>
 
 <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">pal</span> <span class="k">of</span> <span class="nx">pals</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">palLen</span> <span class="o">=</span> <span class="nx">pal</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
@@ -12180,16 +12289,37 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="What-words-contain-all-of-the-vowels-and-Y,-in-any-order?">What words contain all of the vowels and Y, in any order?<a class="anchor-link" href="#What-words-contain-all-of-the-vowels-and-Y,-in-any-order?">&#182;</a></h2>
+<h1 id="What-words-contain-all-of-the-vowels-and-Y,-in-any-order?">What words contain all of the vowels and Y, in any order?<a class="anchor-link" href="#What-words-contain-all-of-the-vowels-and-Y,-in-any-order?">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-javascript"><pre><span></span><span class="nx">dict</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">word</span> <span class="p">=&gt;</span> <span class="nx">word</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/.*A.*E.*I.*O.*U.*Y/</span><span class="p">));</span>
+<div class=" highlight hl-javascript"><pre><span></span><span class="kd">var</span> <span class="nx">all</span> <span class="o">=</span> <span class="p">[],</span>
+    <span class="c1">// map of vowels and Y to powers of 2</span>
+    <span class="nx">bits</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;A&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;O&#39;</span><span class="o">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;U&#39;</span><span class="o">:</span> <span class="mi">16</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="o">:</span> <span class="mi">32</span> <span class="p">};</span>
+                        
+<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">word</span> <span class="k">of</span> <span class="nx">dict</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">vowels</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">letter</span> <span class="k">of</span> <span class="nx">word</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// if all vowels and Y have been found in the word, stop looking</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">vowels</span> <span class="o">==</span> <span class="mi">63</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">all</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">word</span><span class="p">);</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+        
+        <span class="c1">// if the letter is a vowel or Y, set the bit in vowels corresponding to this letter</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">letter</span> <span class="k">in</span> <span class="nx">bits</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">vowels</span> <span class="o">|=</span> <span class="nx">bits</span><span class="p">[</span><span class="nx">letter</span><span class="p">];</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">all</span><span class="p">);</span>
 </pre></div>
 
 </div>
@@ -12202,20 +12332,75 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[6]:</div>
+<div class="prompt"></div>
 
 
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[ &#39;ABSTEMIOUSLY&#39;,
-  &#39;ADVENTITIOUSLY&#39;,
-  &#39;AUTOECIOUSLY&#39;,
-  &#39;FACETIOUSLY&#39;,
-  &#39;HALFSERIOUSLY&#39;,
-  &#39;SACRILEGIOUSLY&#39; ]</pre>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[ &#39;ACTINOMYCETOUS&#39;,
+  &#39;AMARYLLIDACEOUS&#39;,
+  &#39;APODYTERIUM&#39;,
+  &#39;APODYTERIUMS&#39;,
+  &#39;AUTOTYPIES&#39;,
+  &#39;AYUNTAMIENTOS&#39;,
+  &#39;BASIDIOMYCETOUS&#39;,
+  &#39;BUOYANCIES&#39;,
+  &#39;CALYCOIDEOUS&#39;,
+  &#39;CORYNEBACTERIUM&#39;,
+  &#39;COUNTERCYCLICAL&#39;,
+  &#39;COUNTERRALLYING&#39;,
+  &#39;CYANOBACTERIUM&#39;,
+  &#39;CYLINDRACEOUS&#39;,
+  &#39;CYTOMEGALOVIRUS&#39;,
+  &#39;DAGUERREOTYPIES&#39;,
+  &#39;DAGUERREOTYPING&#39;,
+  &#39;DAGUERREOTYPIST&#39;,
+  &#39;DIALYPETALOUS&#39;,
+  &#39;DICHLAMYDEOUS&#39;,
+  &#39;ENANTIOSTYLOUS&#39;,
+  &#39;ERYSIPELATOUS&#39;,
+  &#39;EUCARYOTIC&#39;,
+  &#39;EUGEOSYNCLINAL&#39;,
+  &#39;EUKARYOTIC&#39;,
+  &#39;HYALURONIDASES&#39;,
+  &#39;HYDROPNEUMATIC&#39;,
+  &#39;HYPERCAUTIOUS&#39;,
+  &#39;HYPERFASTIDIOUS&#39;,
+  &#39;HYPERFUNCTIONAL&#39;,
+  &#39;ICHTHYOSAURUSES&#39;,
+  &#39;LECYTHIDACEOUS&#39;,
+  &#39;LEUCOCYTHAEMIA&#39;,
+  &#39;LEUCOCYTHAEMIAS&#39;,
+  &#39;LEUCOCYTOPENIAS&#39;,
+  &#39;MYCOBACTERIUM&#39;,
+  &#39;NEUROPSYCHIATRY&#39;,
+  &#39;NYCTAGINACEOUS&#39;,
+  &#39;OUTWEARYING&#39;,
+  &#39;OXYURIASES&#39;,
+  &#39;PARAMYXOVIRUSES&#39;,
+  &#39;PHENYLTHIOUREAS&#39;,
+  &#39;PLEURAPOPHYSIS&#39;,
+  &#39;PLEURODYNIAS&#39;,
+  &#39;PNEUMATOLYSIS&#39;,
+  &#39;PNEUMATOLYTIC&#39;,
+  &#39;PNEUMODYNAMICS&#39;,
+  &#39;POLYBUTADIENE&#39;,
+  &#39;POLYBUTADIENES&#39;,
+  &#39;PRASEODYMIUM&#39;,
+  &#39;PRASEODYMIUMS&#39;,
+  &#39;PRESBYACOUSIS&#39;,
+  &#39;PSYCHOSEXUALITY&#39;,
+  &#39;SAUROPTERYGIAN&#39;,
+  &#39;SCEUOPHYLACIA&#39;,
+  &#39;SCEUOPHYLACIUM&#39;,
+  &#39;SULFINPYRAZONES&#39;,
+  &#39;SUPERLOYALIST&#39;,
+  &#39;SUPERLOYALISTS&#39;,
+  &#39;TAUTONYMIES&#39;,
+  &#39;UNEMPLOYABILITY&#39;,
+  &#39;VOYEURISTICALLY&#39;,
+  &#39;XYRIDACEOUS&#39; ]
+</pre>
 </div>
-
 </div>
 
 </div>
@@ -12234,21 +12419,18 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="What-words-contain-all-of-the-vowels-and-Y,-in-alphabetical-order?">What words contain all of the vowels and Y, in alphabetical order?<a class="anchor-link" href="#What-words-contain-all-of-the-vowels-and-Y,-in-alphabetical-order?">&#182;</a></h2>
+<h1 id="What-words-contain-all-of-the-vowels-and-Y,-in-alphabetical-order?">What words contain all of the vowels and Y, in alphabetical order?<a class="anchor-link" href="#What-words-contain-all-of-the-vowels-and-Y,-in-alphabetical-order?">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-javascript"><pre><span></span><span class="c1">// find the words containing all the vowels and Y in any order</span>
-<span class="nx">dict</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">word</span> <span class="p">=&gt;</span> <span class="nx">word</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/.*A.*E.*I.*O.*U.*Y/</span><span class="p">))</span>
-    <span class="c1">// extract the vowels and Y from those words</span>
-    <span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">word</span> <span class="p">=&gt;</span> <span class="nx">word</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/[AEIOUY]/g</span><span class="p">)</span>
-                        <span class="c1">// check that the vowels and Y occur in alphabetical order</span>
-                        <span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">prev</span><span class="p">,</span> <span class="nx">curr</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">curr</span> <span class="o">&gt;=</span> <span class="nx">prev</span> <span class="o">?</span> <span class="nx">curr</span> <span class="o">:</span> <span class="kc">false</span><span class="p">));</span>
+<div class=" highlight hl-javascript"><pre><span></span><span class="c1">// match any number of non-vowel characters, then A, then any number of non-vowel characters or A,</span>
+<span class="c1">// then E, then any number of non-vowel characters or E, etc.</span>
+<span class="nx">dict</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">word</span> <span class="p">=&gt;</span> <span class="o">/^</span><span class="p">[</span><span class="o">^</span><span class="nx">AEIOUY</span><span class="p">]</span><span class="o">*</span><span class="nx">A</span><span class="p">[</span><span class="o">^</span><span class="nx">EIOUY</span><span class="p">]</span><span class="o">*</span><span class="nx">E</span><span class="p">[</span><span class="o">^</span><span class="nx">AIOUY</span><span class="p">]</span><span class="o">*</span><span class="nx">I</span><span class="p">[</span><span class="o">^</span><span class="nx">AEOUY</span><span class="p">]</span><span class="o">*</span><span class="nx">O</span><span class="p">[</span><span class="o">^</span><span class="nx">AEIUY</span><span class="p">]</span><span class="o">*</span><span class="nx">U</span><span class="p">[</span><span class="o">^</span><span class="nx">AEIOY</span><span class="p">]</span><span class="o">*</span><span class="nx">Y</span><span class="p">[</span><span class="o">^</span><span class="nx">AEIOU</span><span class="p">]</span><span class="o">*</span><span class="nx">$</span><span class="o">/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">word</span><span class="p">));</span>
 </pre></div>
 
 </div>
@@ -12261,7 +12443,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[7]:</div>
+<div class="prompt output_prompt">Out[10]:</div>
 
 
 
@@ -12283,7 +12465,32 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="What-is-the-big-O-complexity-of-the-solution?">What is the big-O complexity of the solution?<a class="anchor-link" href="#What-is-the-big-O-complexity-of-the-solution?">&#182;</a></h3><h3 id="What-is-another-way-of-solving-the-problem?">What is another way of solving the problem?<a class="anchor-link" href="#What-is-another-way-of-solving-the-problem?">&#182;</a></h3><h3 id="Is-there-a-faster-solution?">Is there a faster solution?<a class="anchor-link" href="#Is-there-a-faster-solution?">&#182;</a></h3>
+<h3 id="What-is-the-big-O-complexity-of-the-solution?">What is the big-O complexity of the solution?<a class="anchor-link" href="#What-is-the-big-O-complexity-of-the-solution?">&#182;</a></h3><p>The solution is $O(n)$ for an input word of length $n$ (with the coefficient of $n$ depending on the <a href="https://en.wikibooks.org/wiki/Regular_Expressions/Implementation">regex matcher implementation</a>).</p>
+<h3 id="What-is-another-way-of-solving-the-problem?">What is another way of solving the problem?<a class="anchor-link" href="#What-is-another-way-of-solving-the-problem?">&#182;</a></h3><p>Other ways of solving the problem are either directly equivalent to or less efficient than this method.<br>
+For example, we could remove all of the letters that are not vowels or Y, then check that the result is "AEIOUY", possibly with repeated letters ($O(n)$):</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-javascript"><pre><span></span><span class="nx">dict</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">word</span> <span class="p">=&gt;</span> <span class="o">/^</span><span class="nx">A</span><span class="o">+</span><span class="nx">E</span><span class="o">+</span><span class="nx">I</span><span class="o">+</span><span class="nx">O</span><span class="o">+</span><span class="nx">U</span><span class="o">+</span><span class="nx">Y</span><span class="o">+</span><span class="nx">$</span><span class="o">/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">word</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[^AEIOUY]/g</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)));</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Is-there-a-faster-solution?">Is there a faster solution?<a class="anchor-link" href="#Is-there-a-faster-solution?">&#182;</a></h3><p>There is no faster solution: in the worst case (the word contains all of the vowels in alphabetical order, without Y or with the only Y at the end of the word), all $n$ letters in a word must be examined to check for a match with this regular expression.</p>
+
 </div>
 </div>
 </div>
@@ -12291,13 +12498,13 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="What-letter-makes-the-most-appearances-in-a-single-word,-and-what-is-that-word?">What letter makes the most appearances in a single word, and what is that word?<a class="anchor-link" href="#What-letter-makes-the-most-appearances-in-a-single-word,-and-what-is-that-word?">&#182;</a></h2>
+<h1 id="What-letter-makes-the-most-appearances-in-a-single-word,-and-what-is-that-word?">What letter makes the most appearances in a single word, and what is that word?<a class="anchor-link" href="#What-letter-makes-the-most-appearances-in-a-single-word,-and-what-is-that-word?">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-javascript"><pre><span></span><span class="c1">// frequencies (# of appearances) of letters in each word</span>
@@ -12307,7 +12514,8 @@ div#notebook {
 
 <span class="c1">// maxLetter: the letter(s) that appear most frequently, mapped to a list of the </span>
 <span class="c1">// word(s) in which they appear most frequently</span>
-<span class="kd">var</span> <span class="nx">maxFreq</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">maxLetter</span> <span class="o">=</span> <span class="p">{};</span>
+<span class="kd">var</span> <span class="nx">maxFreq</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> 
+    <span class="nx">maxLetter</span> <span class="o">=</span> <span class="p">{};</span>
 
 <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">word</span> <span class="k">of</span> <span class="nx">dict</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// calculate the frequency of each letter in this word</span>
@@ -12382,13 +12590,13 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="What-words-are-the-longest-anagrams-of-each-other?">What words are the longest anagrams of each other?<a class="anchor-link" href="#What-words-are-the-longest-anagrams-of-each-other?">&#182;</a></h2>
+<h1 id="What-words-are-the-longest-anagrams-of-each-other?">What words are the longest anagrams of each other?<a class="anchor-link" href="#What-words-are-the-longest-anagrams-of-each-other?">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-javascript"><pre><span></span><span class="c1">// map of letters to unique primes</span>
@@ -12408,7 +12616,8 @@ div#notebook {
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">var</span> <span class="nx">maxLen</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">maxAna</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="kd">var</span> <span class="nx">maxLen</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> 
+    <span class="nx">maxAna</span> <span class="o">=</span> <span class="p">[];</span>
 <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">key</span> <span class="k">in</span> <span class="nx">hashmap</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// multiple words had the same hash (i.e., these words are anagrams of each other)</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">hashmap</span><span class="p">[</span><span class="nx">key</span><span class="p">].</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
@@ -12495,14 +12704,14 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Scrabble-cheater">Scrabble cheater<a class="anchor-link" href="#Scrabble-cheater">&#182;</a></h2><p>Write a program that takes a Scrabble rack as an argument and returns all valid Scrabble words that can be constructed from that rack, along with their Scrabble scores, sorted by score.</p>
+<h1 id="Scrabble-cheater">Scrabble cheater<a class="anchor-link" href="#Scrabble-cheater">&#182;</a></h1><p>Write a program that takes a Scrabble rack as an argument and returns all valid Scrabble words that can be constructed from that rack, along with their Scrabble scores, sorted by score.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-javascript"><pre><span></span><span class="kd">function</span> <span class="nx">cheat</span><span class="p">(</span><span class="nx">rack</span><span class="p">)</span> <span class="p">{</span>  
@@ -12514,7 +12723,8 @@ div#notebook {
     <span class="c1">// hash the rack as a product of primes</span>
     <span class="kd">var</span> <span class="nx">rackHash</span> <span class="o">=</span> <span class="nx">rack</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">).</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">prod</span><span class="p">,</span> <span class="nx">letter</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">primes</span><span class="p">[</span><span class="nx">letter</span><span class="p">]</span> <span class="o">*</span> <span class="nx">prod</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
 
-    <span class="kd">var</span> <span class="nx">valid</span> <span class="o">=</span> <span class="p">[],</span> <span class="nx">factoredHash</span><span class="p">,</span> <span class="nx">subset</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">valid</span> <span class="o">=</span> <span class="p">[],</span> 
+        <span class="nx">factoredHash</span><span class="p">,</span> <span class="nx">subset</span><span class="p">;</span>
 
     <span class="c1">// for each word, check whether the rack hash can be (at least partially) factored by its letters</span>
     <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">word</span> <span class="k">of</span> <span class="nx">dict</span><span class="p">)</span> <span class="p">{</span>
@@ -12603,14 +12813,14 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Bonus">Bonus<a class="anchor-link" href="#Bonus">&#182;</a></h3><p>Modify your program to allow blank tiles, which can be used as any letter but contribute no points to the word score.</p>
+<h2 id="Bonus">Bonus<a class="anchor-link" href="#Bonus">&#182;</a></h2><p>Modify your program to allow blank tiles, which can be used as any letter but contribute no points to the word score.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-javascript"><pre><span></span><span class="c1">// use &#39;_&#39; to represent a blank tile in the rack</span>
@@ -12635,7 +12845,8 @@ div#notebook {
                      <span class="s1">&#39;R&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;U&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;T&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;V&#39;</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span>
                      <span class="s1">&#39;X&#39;</span><span class="o">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span><span class="o">:</span> <span class="mi">10</span> <span class="p">}</span>
     
-    <span class="kd">var</span> <span class="nx">valid</span> <span class="o">=</span> <span class="p">[],</span> <span class="nx">factoredHash</span><span class="p">,</span> <span class="nx">blanksLeft</span><span class="p">,</span> <span class="nx">score</span><span class="p">,</span> <span class="nx">subset</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">valid</span> <span class="o">=</span> <span class="p">[],</span> 
+        <span class="nx">factoredHash</span><span class="p">,</span> <span class="nx">blanksLeft</span><span class="p">,</span> <span class="nx">score</span><span class="p">,</span> <span class="nx">subset</span><span class="p">;</span>
 
     <span class="c1">// for each word, check whether the rack hash can be (at least partially) factored by its letters</span>
     <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">word</span> <span class="k">of</span> <span class="nx">dict</span><span class="p">)</span> <span class="p">{</span>
