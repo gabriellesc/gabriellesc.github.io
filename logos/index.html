@@ -170,19 +170,14 @@
       document.getElementById('logos-nav').classList.add('active');
     </script>
 
-    <script src="RClogo-canvas.js"></script>
-    <script src="RClogo-unicode.js"></script>
-    <script src="rb/RClogo-rb.js"></script>
-    <script src="RClogo-svg.js"></script>
-
-    <script>
-      fetch('https://php-rclogo.herokuapp.com')
-          .then(resp => resp.text())
-          .then(html => document.getElementById('php-container').innerHTML = html);
-    </script>
-    
     <script src="clj/resources/public/js/main.js"></script>
     <script>clj.core.run_sketch()</script>
+
+    <script async=false src="RClogo-php.js"></script>
+    <script async=false src="RClogo-canvas.js"></script>
+    <script async=false src="RClogo-unicode.js"></script>
+    <script async=false src="rb/RClogo-rb.js"></script>
+    <script async=false src="RClogo-svg.js"></script>
 
 </body>
 </html>
