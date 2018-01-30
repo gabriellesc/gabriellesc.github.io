@@ -12199,7 +12199,7 @@ For example, we could search for each pair of doubled letters individually ($O(n
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Is-there-a-faster-solution?">Is there a faster solution?<a class="anchor-link" href="#Is-there-a-faster-solution?">&#182;</a></h3><p>There is no faster solution: in the worst case (no letters ever appear doubled), every letter of every word must be examined.</p>
+<h3 id="Is-there-a-faster-solution?">Is there a faster solution?<a class="anchor-link" href="#Is-there-a-faster-solution?">&#182;</a></h3><p>There is no faster solution: in the worst case (no letters ever appear doubled), every letter of every word must be examined to look for a doubled letter.</p>
 
 </div>
 </div>
@@ -12217,38 +12217,29 @@ For example, we could search for each pair of doubled letters individually ($O(n
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-javascript"><pre><span></span><span class="c1">// find all palindromes</span>
-<span class="kd">var</span> <span class="nx">pals</span> <span class="o">=</span> <span class="nx">dict</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">word</span> <span class="p">=&gt;</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> 
-        <span class="nx">end</span> <span class="o">=</span> <span class="nx">word</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
-
-    <span class="c1">// advance the start and end indices until they meet</span>
-    <span class="k">while</span> <span class="p">(</span><span class="nx">start</span> <span class="o">&lt;</span> <span class="nx">end</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// if the letters at start and end do not match, the word is not a palindrome</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">word</span><span class="p">[</span><span class="nx">start</span><span class="p">]</span> <span class="o">!=</span> <span class="nx">word</span><span class="p">[</span><span class="nx">end</span><span class="p">])</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="nx">start</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
-        <span class="nx">end</span> <span class="o">-=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
-<span class="p">});</span>
-
-<span class="c1">// find the longest palindrome by examining the length of each</span>
-<span class="kd">var</span> <span class="nx">maxLen</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> 
+<div class=" highlight hl-javascript"><pre><span></span><span class="kd">var</span> <span class="nx">maxLen</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> 
     <span class="nx">maxPal</span> <span class="o">=</span> <span class="p">[];</span>
 
-<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">pal</span> <span class="k">of</span> <span class="nx">pals</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">palLen</span> <span class="o">=</span> <span class="nx">pal</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">word</span> <span class="k">of</span> <span class="nx">dict</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">wordLen</span> <span class="o">=</span> <span class="nx">word</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
 
-    <span class="c1">// this palindrome is as long as the previous longest</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">palLen</span> <span class="o">==</span> <span class="nx">maxLen</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">maxPal</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">pal</span><span class="p">);</span>
-        
-    <span class="c1">// this palindrome is longer than the previous longest</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">palLen</span> <span class="o">&gt;</span> <span class="nx">maxLen</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">maxLen</span> <span class="o">=</span> <span class="nx">palLen</span><span class="p">;</span>
-        <span class="nx">maxPal</span> <span class="o">=</span> <span class="p">[</span><span class="nx">pal</span><span class="p">];</span>
+    <span class="c1">// advance the start and end indices until they meet</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">end</span> <span class="o">=</span> <span class="nx">wordLen</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> 
+         <span class="c1">// if the letters at start and end do not match, the word is not a palindrome</span>
+         <span class="nx">start</span> <span class="o">&lt;</span> <span class="nx">end</span> <span class="o">&amp;&amp;</span> <span class="nx">word</span><span class="p">[</span><span class="nx">start</span><span class="p">]</span> <span class="o">==</span> <span class="nx">word</span><span class="p">[</span><span class="nx">end</span><span class="p">];</span>
+         <span class="nx">start</span><span class="o">++</span><span class="p">,</span> <span class="nx">end</span><span class="o">--</span><span class="p">);</span>
+    
+    <span class="c1">// if the start and end indices met, the word is a palindrome</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">start</span> <span class="o">&gt;=</span> <span class="nx">end</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">wordLen</span> <span class="o">&gt;</span> <span class="nx">maxLen</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// this palindrome is longer than the previous longest</span>
+            <span class="nx">maxLen</span> <span class="o">=</span> <span class="nx">wordLen</span><span class="p">;</span>
+            <span class="nx">maxPal</span> <span class="o">=</span> <span class="p">[</span><span class="nx">word</span><span class="p">];</span>
+
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">wordLen</span> <span class="o">==</span> <span class="nx">maxLen</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// this palindrome is as long as the previous longest</span>
+            <span class="nx">maxPal</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">word</span><span class="p">);</span>
+        <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
@@ -12282,7 +12273,10 @@ For example, we could search for each pair of doubled letters individually ($O(n
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="What-is-the-big-O-complexity-of-the-solution?">What is the big-O complexity of the solution?<a class="anchor-link" href="#What-is-the-big-O-complexity-of-the-solution?">&#182;</a></h3><h3 id="What-is-another-way-of-solving-the-problem?">What is another way of solving the problem?<a class="anchor-link" href="#What-is-another-way-of-solving-the-problem?">&#182;</a></h3>
+<h3 id="What-is-the-big-O-complexity-of-the-solution?">What is the big-O complexity of the solution?<a class="anchor-link" href="#What-is-the-big-O-complexity-of-the-solution?">&#182;</a></h3><p>The solution is $O(n)$ for a set of input words of total length $n$ (that is, $n$ is the sum of the lengths of all of the words in the set).</p>
+<h3 id="What-is-another-way-of-solving-the-problem?">What is another way of solving the problem?<a class="anchor-link" href="#What-is-another-way-of-solving-the-problem?">&#182;</a></h3><p>Other ways of solving the problem are either directly equivalent to or less efficient than this method.<br>
+For example,</p>
+
 </div>
 </div>
 </div>
@@ -12290,7 +12284,8 @@ For example, we could search for each pair of doubled letters individually ($O(n
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Is-there-a-faster-solution?">Is there a faster solution?<a class="anchor-link" href="#Is-there-a-faster-solution?">&#182;</a></h3>
+<h3 id="Is-there-a-faster-solution?">Is there a faster solution?<a class="anchor-link" href="#Is-there-a-faster-solution?">&#182;</a></h3><p>There is no faster solution: in the worst case (every word is a palindrome), every letter of each word must be examined to verify that it is a palindrome.</p>
+
 </div>
 </div>
 </div>
