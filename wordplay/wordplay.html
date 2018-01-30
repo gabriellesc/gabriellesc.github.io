@@ -11960,7 +11960,7 @@ For example, we could implement filtering and regex matching ourselves ($O(n)$):
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-javascript"><pre><span></span><span class="c1">// match any number of characters other than &#39;U&#39;, then &#39;Q&#39;, then any number of characters other than &#39;U&#39;</span>
@@ -11977,7 +11977,7 @@ For example, we could implement filtering and regex matching ourselves ($O(n)$):
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[4]:</div>
+<div class="prompt output_prompt">Out[3]:</div>
 
 
 
@@ -12105,7 +12105,7 @@ For example, we could filter by words containing "Q" and then by words not conta
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-javascript"><pre><span></span><span class="kd">var</span> <span class="nx">undoubled</span> <span class="o">=</span> <span class="s1">&#39;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#39;</span><span class="p">;</span> <span class="c1">// letters that have not appeared doubled</span>
@@ -12214,7 +12214,7 @@ For example, we could search for each pair of doubled letters individually ($O(n
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-javascript"><pre><span></span><span class="c1">// find all palindromes</span>
@@ -12282,7 +12282,15 @@ For example, we could search for each pair of doubled letters individually ($O(n
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="What-is-the-big-O-complexity-of-the-solution?">What is the big-O complexity of the solution?<a class="anchor-link" href="#What-is-the-big-O-complexity-of-the-solution?">&#182;</a></h3><h3 id="What-is-another-way-of-solving-the-problem?">What is another way of solving the problem?<a class="anchor-link" href="#What-is-another-way-of-solving-the-problem?">&#182;</a></h3><h3 id="Is-there-a-faster-solution?">Is there a faster solution?<a class="anchor-link" href="#Is-there-a-faster-solution?">&#182;</a></h3>
+<h3 id="What-is-the-big-O-complexity-of-the-solution?">What is the big-O complexity of the solution?<a class="anchor-link" href="#What-is-the-big-O-complexity-of-the-solution?">&#182;</a></h3><h3 id="What-is-another-way-of-solving-the-problem?">What is another way of solving the problem?<a class="anchor-link" href="#What-is-another-way-of-solving-the-problem?">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Is-there-a-faster-solution?">Is there a faster solution?<a class="anchor-link" href="#Is-there-a-faster-solution?">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -12296,7 +12304,7 @@ For example, we could search for each pair of doubled letters individually ($O(n
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-javascript"><pre><span></span><span class="kd">var</span> <span class="nx">all</span> <span class="o">=</span> <span class="p">[],</span>
@@ -12494,7 +12502,7 @@ For example, we could search that a word contains each vowel and Y, independentl
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-javascript"><pre><span></span><span class="c1">// match any number of non-vowel characters, then A, then any number of non-vowel characters or A,</span>
@@ -12512,7 +12520,7 @@ For example, we could search that a word contains each vowel and Y, independentl
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[11]:</div>
+<div class="prompt output_prompt">Out[7]:</div>
 
 
 
@@ -12573,7 +12581,7 @@ For example, we could remove all of the letters that are not vowels or Y, then c
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-javascript"><pre><span></span><span class="c1">// frequencies (# of appearances) of letters in each word</span>
@@ -12665,7 +12673,7 @@ For example, we could remove all of the letters that are not vowels or Y, then c
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-javascript"><pre><span></span><span class="c1">// map of letters to unique primes</span>
@@ -12780,7 +12788,7 @@ For example, we could remove all of the letters that are not vowels or Y, then c
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-javascript"><pre><span></span><span class="kd">function</span> <span class="nx">cheat</span><span class="p">(</span><span class="nx">rack</span><span class="p">)</span> <span class="p">{</span>  
@@ -12889,7 +12897,7 @@ For example, we could remove all of the letters that are not vowels or Y, then c
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-javascript"><pre><span></span><span class="c1">// use &#39;_&#39; to represent a blank tile in the rack</span>
