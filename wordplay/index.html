@@ -11,8 +11,8 @@
 
     <script>
       function resizeIframe(elem) {
-          console.log(elem);
-          elem.height = elem.contentWindow.document.body.scrollHeight;
+          // add 16px to account for padding
+          elem.height = elem.contentWindow.document.body.scrollHeight + 16;
       }
     </script>
   </head>
