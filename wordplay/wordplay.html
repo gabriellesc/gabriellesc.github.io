@@ -12155,7 +12155,8 @@ For example, we could filter by words containing "Q" and then by words not conta
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="What-is-the-big-O-complexity-of-the-solution?">What is the big-O complexity of the solution?<a class="anchor-link" href="#What-is-the-big-O-complexity-of-the-solution?">&#182;</a></h3><p>The solution is $O(n)$ for a set of input words of total length $n$ (with the coefficient of $n$ depending on the <a href="https://en.wikibooks.org/wiki/Regular_Expressions/Implementation">regex matcher implementation</a>). That is, $n$ is the sum of the lengths of all of the words in the set.</p>
+<h3 id="What-is-the-big-O-complexity-of-the-solution?">What is the big-O complexity of the solution?<a class="anchor-link" href="#What-is-the-big-O-complexity-of-the-solution?">&#182;</a></h3><p>The solution is $O(n)$ for a set of input words of total length $n$ (that is, $n$ is the sum of the lengths of all of the words in the set).<br>
+Alternatively, the solution is $O(m)$ for a set of input words of size $m$ (that is, there are $m$ words in the set).</p>
 <h3 id="What-is-another-way-of-solving-the-problem?">What is another way of solving the problem?<a class="anchor-link" href="#What-is-another-way-of-solving-the-problem?">&#182;</a></h3><p>Other ways of solving the problem are either directly equivalent to or less efficient than this method.<br>
 For example, we could search for each pair of doubled letters individually ($O(n)$, with a larger coefficient of $n$ than in the original solution):</p>
 
@@ -12198,7 +12199,7 @@ For example, we could search for each pair of doubled letters individually ($O(n
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Is-there-a-faster-solution?">Is there a faster solution?<a class="anchor-link" href="#Is-there-a-faster-solution?">&#182;</a></h3><p>There is no faster solution: in the worst case (no letters ever appear doubled), every letter of every word must be examined to check for a match with the regular expression.</p>
+<h3 id="Is-there-a-faster-solution?">Is there a faster solution?<a class="anchor-link" href="#Is-there-a-faster-solution?">&#182;</a></h3><p>There is no faster solution: in the worst case (no letters ever appear doubled), every letter of every word must be examined.</p>
 
 </div>
 </div>
@@ -12449,7 +12450,37 @@ For example, we could search for each pair of doubled letters individually ($O(n
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="What-is-the-big-O-complexity-of-the-solution?">What is the big-O complexity of the solution?<a class="anchor-link" href="#What-is-the-big-O-complexity-of-the-solution?">&#182;</a></h3><h3 id="What-is-another-way-of-solving-the-problem?">What is another way of solving the problem?<a class="anchor-link" href="#What-is-another-way-of-solving-the-problem?">&#182;</a></h3><h3 id="Is-there-a-faster-solution?">Is there a faster solution?<a class="anchor-link" href="#Is-there-a-faster-solution?">&#182;</a></h3>
+<h3 id="What-is-the-big-O-complexity-of-the-solution?">What is the big-O complexity of the solution?<a class="anchor-link" href="#What-is-the-big-O-complexity-of-the-solution?">&#182;</a></h3><p>The solution is $O(n)$ for an input word of length $n$.</p>
+<h3 id="What-is-another-way-of-solving-the-problem?">What is another way of solving the problem?<a class="anchor-link" href="#What-is-another-way-of-solving-the-problem?">&#182;</a></h3><p>Other ways of solving the problem are either directly equivalent to or less efficient than this method.<br>
+For example, we could search that a word contains each vowel and Y, independently ($O(n)$, with a larger coefficient of $n$ than in the original solution):</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-javascript"><pre><span></span><span class="nx">dict</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">word</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="sr">/A/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">word</span><span class="p">)</span> <span class="o">&amp;&amp;</span> 
+                     <span class="sr">/E/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">word</span><span class="p">)</span> <span class="o">&amp;&amp;</span> 
+                     <span class="sr">/I/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">word</span><span class="p">)</span> <span class="o">&amp;&amp;</span> 
+                     <span class="sr">/O/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">word</span><span class="p">)</span> <span class="o">&amp;&amp;</span> 
+                     <span class="sr">/U/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">word</span><span class="p">)</span> <span class="o">&amp;&amp;</span> 
+                     <span class="sr">/Y/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">word</span><span class="p">)));</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Is-there-a-faster-solution?">Is there a faster solution?<a class="anchor-link" href="#Is-there-a-faster-solution?">&#182;</a></h3><p>There is no faster solution: in the worst case (either the word contains all of the vowels, with a unique vowel at the end of the word, or the word contains all but one of the vowels, with a consonant at the end of the word), all $n$ letters in a word must be examined.</p>
+
 </div>
 </div>
 </div>
@@ -12463,7 +12494,7 @@ For example, we could search for each pair of doubled letters individually ($O(n
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-javascript"><pre><span></span><span class="c1">// match any number of non-vowel characters, then A, then any number of non-vowel characters or A,</span>
@@ -12481,7 +12512,7 @@ For example, we could search for each pair of doubled letters individually ($O(n
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[10]:</div>
+<div class="prompt output_prompt">Out[11]:</div>
 
 
 
@@ -12542,7 +12573,7 @@ For example, we could remove all of the letters that are not vowels or Y, then c
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-javascript"><pre><span></span><span class="c1">// frequencies (# of appearances) of letters in each word</span>
@@ -12634,7 +12665,7 @@ For example, we could remove all of the letters that are not vowels or Y, then c
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-javascript"><pre><span></span><span class="c1">// map of letters to unique primes</span>
@@ -12749,7 +12780,7 @@ For example, we could remove all of the letters that are not vowels or Y, then c
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-javascript"><pre><span></span><span class="kd">function</span> <span class="nx">cheat</span><span class="p">(</span><span class="nx">rack</span><span class="p">)</span> <span class="p">{</span>  
@@ -12858,7 +12889,7 @@ For example, we could remove all of the letters that are not vowels or Y, then c
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-javascript"><pre><span></span><span class="c1">// use &#39;_&#39; to represent a blank tile in the rack</span>
