@@ -11781,7 +11781,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-javascript"><pre><span></span><span class="kd">var</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;node-fetch&#39;</span><span class="p">);</span>
@@ -11794,7 +11794,7 @@ div#notebook {
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">resp</span> <span class="p">=&gt;</span> <span class="nx">resp</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">text</span> <span class="p">=&gt;</span> <span class="p">{</span>
         <span class="nx">dict</span> <span class="o">=</span> <span class="nx">text</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="sr">/\r*\n/g</span><span class="p">);</span>
-        <span class="nx">dict</span> <span class="o">=</span> <span class="nx">dict</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">word</span> <span class="p">=&gt;</span> <span class="nx">word</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+        <span class="nx">dict</span> <span class="o">=</span> <span class="nx">dict</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">word</span> <span class="p">=&gt;</span> <span class="nx">word</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span> <span class="c1">// remove any empty words</span>
     
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">dict</span><span class="p">.</span><span class="nx">length</span> <span class="o">+</span> <span class="s1">&#39; words in total&#39;</span><span class="p">);</span>
     <span class="p">});</span>
@@ -12172,7 +12172,7 @@ For example, we could search for each pair of doubled letters individually ($O(n
     <span class="nx">doubled</span><span class="p">;</span>
 
 <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">letter</span> <span class="k">of</span> <span class="s1">&#39;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#39;</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">regex</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="nx">letter</span> <span class="o">+</span> <span class="nx">letter</span><span class="p">);</span> <span class="c1">// construct a regex matching the doubled letter</span>
+    <span class="kd">var</span> <span class="nx">regex</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="nx">letter</span> <span class="o">+</span> <span class="nx">letter</span><span class="p">);</span> <span class="c1">// construct a regex matching the current letter, doubled</span>
     <span class="nx">doubled</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
     
     <span class="c1">// search for the doubled letter in each word</span>
@@ -12276,7 +12276,7 @@ For example, we could search for each pair of doubled letters individually ($O(n
 <h3 id="What-is-the-big-O-complexity-of-the-solution?">What is the big-O complexity of the solution?<a class="anchor-link" href="#What-is-the-big-O-complexity-of-the-solution?">&#182;</a></h3><p>The solution is $O(n)$ for a set of input words of total length $n$ (that is, $n$ is the sum of the lengths of all of the words in the set).</p>
 <h3 id="What-is-another-way-of-solving-the-problem?">What is another way of solving the problem?<a class="anchor-link" href="#What-is-another-way-of-solving-the-problem?">&#182;</a></h3><p>Other ways of solving the problem are either directly equivalent to or less efficient than this method.<br>
 For example, we could sort the words by decreasing length and then search for a palindrome from the start.
-Depending on the sorting implementation, in the worst case (none of the words are palindromes), this is $O(m\log(m) + n)$, where $m$ is the total number of input words.</p>
+With a typical comparison-based sorting algorithm, in the worst case (none of the words are palindromes), this is $O(m\log(m) + n)$, where $m$ is the total number of input words.</p>
 
 </div>
 </div>
@@ -12286,15 +12286,16 @@ Depending on the sorting implementation, in the worst case (none of the words ar
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-javascript"><pre><span></span><span class="kd">var</span> <span class="nx">sortDict</span> <span class="o">=</span> <span class="p">[...</span><span class="nx">dict</span><span class="p">];</span>
+<div class=" highlight hl-javascript"><pre><span></span><span class="c1">// make a copy of the list of words and sort it in-place by decreasing length</span>
+<span class="kd">var</span> <span class="nx">sortDict</span> <span class="o">=</span> <span class="p">[...</span><span class="nx">dict</span><span class="p">];</span>
 <span class="nx">sortDict</span><span class="p">.</span><span class="nx">sort</span><span class="p">((</span><span class="nx">wordA</span><span class="p">,</span> <span class="nx">wordB</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">wordA</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="nx">wordB</span><span class="p">.</span><span class="nx">length</span> <span class="o">?</span> <span class="o">-</span><span class="mi">1</span> <span class="o">:</span> <span class="mi">1</span><span class="p">);</span>
 
 <span class="kd">var</span> <span class="nx">maxPal</span> <span class="o">=</span> <span class="p">[],</span>
     <span class="nx">maxLen</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
     
 <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">word</span> <span class="k">of</span> <span class="nx">sortDict</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// if we have checked all the words of the same length as the longest palindrome,</span>
-    <span class="c1">// stop looking</span>
+    <span class="c1">// we have checked all the words of the same or greater length as the longest </span>
+    <span class="c1">// palindrome, so stop looking</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">word</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="nx">maxLen</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">break</span><span class="p">;</span>
     <span class="p">}</span>
@@ -12614,50 +12615,68 @@ For example, we could remove all of the letters that are not vowels or Y, then c
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-javascript"><pre><span></span><span class="c1">// frequencies (# of appearances) of letters in each word</span>
-<span class="kd">var</span> <span class="nx">freqs</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;A&#39;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-              <span class="s1">&#39;J&#39;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;K&#39;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;L&#39;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;N&#39;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;O&#39;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;P&#39;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Q&#39;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;R&#39;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-              <span class="s1">&#39;S&#39;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;T&#39;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;U&#39;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;V&#39;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span><span class="o">:</span> <span class="mi">0</span> <span class="p">};</span>
-
-<span class="c1">// maxLetter: the letter(s) that appear most frequently, mapped to a list of the </span>
-<span class="c1">// word(s) in which they appear most frequently</span>
-<span class="kd">var</span> <span class="nx">maxFreq</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> 
-    <span class="nx">maxLetter</span> <span class="o">=</span> <span class="p">{};</span>
-
-<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">word</span> <span class="k">of</span> <span class="nx">dict</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// calculate the frequency of each letter in this word</span>
+<div class=" highlight hl-javascript"><pre><span></span><span class="c1">// return the letter(s) that appears most frequently in word, and the number of appearances</span>
+<span class="kd">function</span> <span class="nx">freqLetter</span><span class="p">(</span><span class="nx">word</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">freqs</span> <span class="o">=</span> <span class="p">{};</span>
+    
+    <span class="c1">// map each letter to the number of times it appears in the word</span>
     <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">letter</span> <span class="k">of</span> <span class="nx">word</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">freqs</span><span class="p">[</span><span class="nx">letter</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="nx">freqs</span><span class="p">[</span><span class="nx">letter</span><span class="p">]</span> <span class="o">=</span> <span class="nx">freqs</span><span class="p">[</span><span class="nx">letter</span><span class="p">]</span> <span class="o">?</span> <span class="p">(</span><span class="nx">freqs</span><span class="p">[</span><span class="nx">letter</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">:</span> <span class="mi">1</span><span class="p">;</span>
     <span class="p">}</span>
-
-    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">letter</span> <span class="k">in</span> <span class="nx">freqs</span><span class="p">)</span> <span class="p">{</span>  
-        <span class="c1">// the frequency of this letter is higher than the previous highest frequency of any letter</span>
-        <span class="c1">// (i.e., this letter makes the most appearances in any word so far)</span>
+    
+    <span class="kd">var</span> <span class="nx">maxFreq</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> 
+        <span class="nx">maxLetter</span> <span class="o">=</span> <span class="p">[];</span>
+    
+    <span class="c1">// find the letter(s) with the most appearances</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">letter</span> <span class="k">in</span> <span class="nx">freqs</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="nx">freqs</span><span class="p">[</span><span class="nx">letter</span><span class="p">]</span> <span class="o">&gt;</span> <span class="nx">maxFreq</span><span class="p">)</span> <span class="p">{</span>
             <span class="nx">maxFreq</span> <span class="o">=</span> <span class="nx">freqs</span><span class="p">[</span><span class="nx">letter</span><span class="p">];</span>
-            <span class="nx">maxLetter</span> <span class="o">=</span> <span class="p">{</span> <span class="p">[</span><span class="nx">letter</span><span class="p">]</span><span class="o">:</span> <span class="p">[</span><span class="nx">word</span><span class="p">]</span> <span class="p">};</span>
-
-        <span class="c1">// the frequency of this letter is equal to the previous highest frequency of any letter</span>
-        <span class="c1">// (i.e., this letter and other letters make the most appearances so far)</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">freqs</span><span class="p">[</span><span class="nx">letter</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="nx">freqs</span><span class="p">[</span><span class="nx">letter</span><span class="p">]</span> <span class="o">==</span> <span class="nx">maxFreq</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">maxLetter</span> <span class="o">=</span> <span class="p">[</span><span class="nx">letter</span><span class="p">];</span>
             
-            <span class="c1">// this letter has also appeared with this frequency in another word</span>
-            <span class="k">if</span> <span class="p">(</span><span class="nx">maxLetter</span><span class="p">[</span><span class="nx">letter</span><span class="p">])</span> <span class="p">{</span>
-                <span class="nx">maxLetter</span><span class="p">[</span><span class="nx">letter</span><span class="p">].</span><span class="nx">push</span><span class="p">(</span><span class="nx">word</span><span class="p">);</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="nx">maxLetter</span><span class="p">[</span><span class="nx">letter</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nx">word</span><span class="p">];</span>
-            <span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">freqs</span><span class="p">[</span><span class="nx">letter</span><span class="p">]</span> <span class="o">==</span> <span class="nx">maxFreq</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">maxLetter</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">letter</span><span class="p">);</span>
         <span class="p">}</span>
+    <span class="p">}</span>
     
-        <span class="c1">// reset the frequency of this letter to 0, for the next word</span>
-        <span class="nx">freqs</span><span class="p">[</span><span class="nx">letter</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">return</span> <span class="p">{</span> <span class="nx">maxFreq</span><span class="p">,</span> <span class="nx">maxLetter</span> <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="c1">// maxLetterAll: the letter(s) that appear most frequently in any word, mapped </span>
+<span class="c1">// to a list of the word(s) in which they appear most frequently</span>
+<span class="kd">var</span> <span class="nx">maxFreqAll</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> 
+    <span class="nx">maxLetterAll</span> <span class="o">=</span> <span class="p">{};</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">word</span> <span class="k">of</span> <span class="nx">dict</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// find the most frequent letter(s) in this word</span>
+    <span class="kd">var</span> <span class="p">{</span> <span class="nx">maxFreq</span><span class="p">,</span> <span class="nx">maxLetter</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">freqLetter</span><span class="p">(</span><span class="nx">word</span><span class="p">);</span>
+    
+    <span class="c1">// this word has a letter(s) that appears more frequently than the previous most</span>
+    <span class="c1">// frequent letter(s)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">maxFreq</span> <span class="o">&gt;</span> <span class="nx">maxFreqAll</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">maxFreqAll</span> <span class="o">=</span> <span class="nx">maxFreq</span><span class="p">;</span>
+        
+        <span class="nx">maxLetterAll</span> <span class="o">=</span> <span class="p">{};</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">l</span> <span class="k">of</span> <span class="nx">maxLetter</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">maxLetterAll</span><span class="p">[</span><span class="nx">l</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nx">word</span><span class="p">];</span>
+        <span class="p">}</span>
+        
+    <span class="c1">// this word has a letter(s) that appears with the same frequency as the previous</span>
+    <span class="c1">// most frequent letter(s)</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">maxFreq</span> <span class="o">==</span> <span class="nx">maxFreqAll</span><span class="p">)</span> <span class="p">{</span>
+        
+        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">l</span> <span class="k">of</span> <span class="nx">maxLetter</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">maxLetterAll</span><span class="p">[</span><span class="nx">l</span><span class="p">])</span> <span class="p">{</span>
+                <span class="nx">maxLetterAll</span><span class="p">[</span><span class="nx">l</span><span class="p">]</span> <span class="o">=</span> <span class="p">[];</span>
+            <span class="p">}</span>
+            <span class="nx">maxLetterAll</span><span class="p">[</span><span class="nx">l</span><span class="p">].</span><span class="nx">push</span><span class="p">(</span><span class="nx">word</span><span class="p">);</span>
+        <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">maxLetter</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">maxLetterAll</span><span class="p">);</span>
 </pre></div>
 
 </div>
@@ -12692,7 +12711,15 @@ For example, we could remove all of the letters that are not vowels or Y, then c
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="What-is-the-big-O-complexity-of-the-solution?">What is the big-O complexity of the solution?<a class="anchor-link" href="#What-is-the-big-O-complexity-of-the-solution?">&#182;</a></h3><h3 id="What-is-another-way-of-solving-the-problem?">What is another way of solving the problem?<a class="anchor-link" href="#What-is-another-way-of-solving-the-problem?">&#182;</a></h3><h3 id="Is-there-a-faster-solution?">Is there a faster solution?<a class="anchor-link" href="#Is-there-a-faster-solution?">&#182;</a></h3>
+<h3 id="What-is-the-big-O-complexity-of-the-solution?">What is the big-O complexity of the solution?<a class="anchor-link" href="#What-is-the-big-O-complexity-of-the-solution?">&#182;</a></h3><h3 id="What-is-another-way-of-solving-the-problem?">What is another way of solving the problem?<a class="anchor-link" href="#What-is-another-way-of-solving-the-problem?">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Is-there-a-faster-solution?">Is there a faster solution?<a class="anchor-link" href="#Is-there-a-faster-solution?">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -12806,7 +12833,15 @@ For example, we could remove all of the letters that are not vowels or Y, then c
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="What-is-the-big-O-complexity-of-the-solution?">What is the big-O complexity of the solution?<a class="anchor-link" href="#What-is-the-big-O-complexity-of-the-solution?">&#182;</a></h3><h3 id="What-is-another-way-of-solving-the-problem?">What is another way of solving the problem?<a class="anchor-link" href="#What-is-another-way-of-solving-the-problem?">&#182;</a></h3><h3 id="Is-there-a-faster-solution?">Is there a faster solution?<a class="anchor-link" href="#Is-there-a-faster-solution?">&#182;</a></h3>
+<h3 id="What-is-the-big-O-complexity-of-the-solution?">What is the big-O complexity of the solution?<a class="anchor-link" href="#What-is-the-big-O-complexity-of-the-solution?">&#182;</a></h3><h3 id="What-is-another-way-of-solving-the-problem?">What is another way of solving the problem?<a class="anchor-link" href="#What-is-another-way-of-solving-the-problem?">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Is-there-a-faster-solution?">Is there a faster solution?<a class="anchor-link" href="#Is-there-a-faster-solution?">&#182;</a></h3>
 </div>
 </div>
 </div>
