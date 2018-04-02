@@ -12,9 +12,6 @@ nav.innerHTML = `<ul class="nav nav-tabs">
       <li role="presentation" id="mazily-nav">
         <a href="../mazily/index.html">Mazily</a>
       </li>
-      <li role="presentation" id="robotGrid-nav">
-        <a href="../robotGrid/index.html">Robot Navigation</a>
-      </li>
       <!--li role="presentation" id="spaceInvaders-nav">
         <a href="../spaceInvaders/index.html">Space Invaders</a>
       </li-->
@@ -35,6 +32,12 @@ nav.innerHTML = `<ul class="nav nav-tabs">
       </li>
       <li role="presentation" id="tappcp-nav">
         <a href="https://github.com/uoft-tapp/tapp-cp">TAPP-CP</a>
+      </li>
+      <li role="presentation" id="FRP-nav">
+        <a href="https://github.com/gabriellesc/FRP-intro/">FRP Intro</a>
+      </li>
+      <li role="presentation" id="robotGrid-nav">
+        <a href="../robotGrid/index.html">Robot Navigation</a>
       </li>
     </ul>`;
 
