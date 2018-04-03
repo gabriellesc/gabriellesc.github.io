@@ -34,7 +34,7 @@ nav.innerHTML = `<ul class="nav nav-tabs">
         <a href="https://github.com/uoft-tapp/tapp-cp">TAPP-CP</a>
       </li>
       <li role="presentation" id="FRP-nav">
-        <a href="https://github.com/gabriellesc/FRP-intro/">FRP Intro</a>
+        <a href="https://gabriellesc.github.io/FRP-intro/">FRP Intro</a>
       </li>
       <li role="presentation" id="robotGrid-nav">
         <a href="../robotGrid/index.html">Robot Navigation</a>
