@@ -10,3 +10,9 @@
 [submodule "logos/phpServer"]
 	path = logos/phpServer
 	url = https://github.com/gabriellesc/php-RClogo.git
+[submodule "reelTalk/project"]
+	path = reelTalk/project
+	url = https://github.com/gabriellesc/reel-talk.git
+[submodule "thmSlackStatusBot"]
+	path = thmSlackStatusBot
+	url = git@github.com:gabriellesc/thm-slack-status-bot.git
