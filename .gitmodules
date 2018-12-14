@@ -15,4 +15,4 @@
 	url = https://github.com/gabriellesc/reel-talk.git
 [submodule "thmSlackStatusBot"]
 	path = thmSlackStatusBot
-	url = git@github.com:gabriellesc/thm-slack-status-bot.git
+	url = https://github.com/gabriellesc/thm-slack-status-bot.git
