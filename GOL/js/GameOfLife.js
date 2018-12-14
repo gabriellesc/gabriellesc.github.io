@@ -179,7 +179,7 @@ function resizeGrid(height, width) {
 }
 
 /* Toggle the state of the cell that contains these coordinates. */
-function toggleCell(coords) {
+function toggleCell(coords) {	
     let x = Math.round(coords.x);
     let y = Math.round(coords.y);
 
@@ -187,10 +187,22 @@ function toggleCell(coords) {
     if (inds == null) // (x,y) is on the border between two cells
 	return;
 
-    env[inds.y][inds.x] = !isAlive(inds.x, inds.y, env); // update env array
+    let newState = isAlive(inds.x, inds.y, env) ? alive : dead;
+    setCellState(coords, newState);
+}
+
+/* Set the state of the cell that contains these coordinates. */
+function setCellState(coords, state) {
+    let x = Math.round(coords.x);
+    let y = Math.round(coords.y);
+
+    let inds = getCellInds(x, y);
+    if (inds == null) // (x,y) is on the border between two cells
+	return;
+
+    env[inds.y][inds.x] = state == alive; // update env array
     
-    ctx.fillStyle = isAlive(inds.x, inds.y, env) ? alive : dead;
-    
+    ctx.fillStyle = state;
     let dims = getCellCoords(x, y);
     ctx.fillRect(dims.x, dims.y, cellDim - BORDER*2, cellDim - BORDER*2);
 }
@@ -330,8 +342,10 @@ $(worldSel).on("mousemove", function(e) {
     
     // check that a pattern is selected
     let patternName = $("#pattern-menu").val();
-    if (patternName != "-"){
+    if (patternName != "-") {
 	drawPattern(patterns[patternName], windowToCanvas(this, e.clientX, e.clientY), false);
+    } else if (e.shiftKey) {
+        setCellState(windowToCanvas(this, e.clientX, e.clientY), alive);
     }
 });
 
