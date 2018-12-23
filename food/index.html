@@ -11,7 +11,11 @@
     <link href="../css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="../css/styles.css" rel="stylesheet">
 
-    <style>.grid-sizer, .grid-item { width: 22%; } .thumbnail { margin-bottom: 5px; }</style>
+    <style>
+        #grid { display: flex; flex-wrap: wrap; justify-content: space-evenly; }
+        .grid-item { width: 24%; }
+        .thumbnail { margin-bottom: 10px; }
+    </style>
   </head>
 
   <body>
@@ -21,11 +25,7 @@
 	<h2>Gabrielle's NYC Food Diary <small>Bad pictures of good foods!</small></h2>
       </div>
 
-      <div
-	 class="grid"
-	 data-masonry='{ "columnWidth": ".grid-sizer", "itemSelector": ".grid-item", "percentPosition": true, "gutter": 5 }'>
-	<div class="grid-sizer"></div>
-
+      <div id="grid">
 	<div class="grid-item">
 	  <div class="thumbnail">
 	    <img src="img/20171219.JPG">
@@ -527,7 +527,6 @@
     <!-- library scripts -->
     <script src="../js/lib/jquery-min.js"></script>
     <script src="../js/lib/bootstrap-min.js"></script>
-    <script src="../js/lib/masonry.pkgd.min.js"></script>
 
   </body>
 </html>
